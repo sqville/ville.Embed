@@ -78,7 +78,7 @@ qx.Mixin.define("ville.embed.MAtomPatch",
          case "icon":
           var source = this.getIcon();          
           if (qx.lang.String.startsWith(source, "data:text/html;") || qx.lang.String.startsWith(source, "data:text/svg+xml;") || qx.lang.String.startsWith(source, "data:text/json;")) {
-            control = new ville.embed.Image(source);
+            control = new ville.embed.Embed(source);
           } else {
             control = new qx.ui.basic.Image(this.getIcon());
            }

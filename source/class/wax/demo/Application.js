@@ -196,7 +196,7 @@ qx.Class.define("wax.demo.Application",
       profilemenu.add(aboutmenubutton1);
       profilemenubutton.setMenu(profilemenu);
 
-      var atmlogocurrentpage = new qx.ui.basic.Atom("Wax","wax/demo/Wax_demo_logo.png").set({font: "hym-app-header", gap: 6, paddingLeft: 35});
+      var atmlogocurrentpage = new qx.ui.basic.Atom("Wax","wax/demo/Wax_demo_logo.png").set({font: "hym-app-header", gap: 10, padding: 0, visibility: "hidden"});
       atmlogocurrentpage.getChildControl("icon").set({ scale: true, width: 48, height: 38 });
       mainmenupart.add(mainmenubtnbutton);
       profilepart.add(profilemenubutton);
@@ -235,16 +235,25 @@ qx.Class.define("wax.demo.Application",
        // Overview Page with links to a Detail Page
        // Table to List Page - shows how the Table Widget converts to a List Widget for smaller screens
       // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-      var dashboardpage = new qx.ui.container.Composite().set({padding: 20});
-      var overviewpage = new qx.ui.container.Composite(new qx.ui.layout.VBox(20)).set({padding: 20});
-      var tablelistpage = new qx.ui.container.Composite().set({padding: 20});
+      var dashboardpage = new qx.ui.container.Composite().set({padding: [20,30]});
+      var overviewpage = new qx.ui.container.Composite(new qx.ui.layout.VBox(20)).set({padding: [20,30]});
+      var tablelistpage = new qx.ui.container.Composite().set({padding: [20,30]});
       
       //more structure
       dashboardpage.setLayout(new qx.ui.layout.VBox(6).set({alignX: "left"}));  
 
-      // Controls
-      // First page marker 
+      // Top header
       var label1 = new qx.ui.basic.Label("iConicss").set({font: "control-header"});
+
+      // iConicss Icons
+
+      // My Personal Favoirites
+
+      // Control color and size; animate
+
+      // Use in a Button (requires patching)
+
+      // Go to url for a list of possible icons
 
       // Assemble
       dashboardpage.add(label1);
@@ -252,6 +261,13 @@ qx.Class.define("wax.demo.Application",
 
       // Second page marker  
       var label5 = new qx.ui.basic.Label("Fluent UI SVG").set({font: "control-header"});
+      
+      // A Lot of my Day Involves These
+
+      // Since SVGs scale, control size using control width and height
+
+      
+      
       overviewpage.add(label5);     
 
       // Third page marker
@@ -302,13 +318,13 @@ qx.Class.define("wax.demo.Application",
       var atmleftnavheader = new qx.ui.basic.Atom("Wax Demo", "wax/demo/Wax_demo_logo.png").set({appearance: "header-atom", anonymous: true, focusable: false, selectable: false });
       atmleftnavheader.getChildControl("icon").set({ scale : true });
       westbox.add(atmleftnavheader);
-      var tbtndashboardpage = new wax.demo.MenuButton("iConicss", testimage, true );
+      var tbtndashboardpage = new wax.demo.MenuButton("iConicss", "wax/demo/Css3_logo.svg", true );
       westbox.add(tbtndashboardpage);
 
-      var tbtnSecondPage = new wax.demo.MenuButton("Fluent SVG", "wax/demo/fluent_globe.svg", true);
+      var tbtnSecondPage = new wax.demo.MenuButton("Fluent UI SVG", "wax/demo/fluent_globe.svg", true);
       westbox.add(tbtnSecondPage);
 
-      var tbtnThirdPage = new wax.demo.MenuButton("Material", "wax/demo/material_logo.svg", true);
+      var tbtnThirdPage = new wax.demo.MenuButton("Material SVG", "wax/demo/material_logo.svg", true);
       westbox.add(tbtnThirdPage);
 
       var westboxbuttongroup = new qx.ui.form.RadioGroup();
@@ -352,9 +368,9 @@ qx.Class.define("wax.demo.Application",
       // Create Menu Buttons that will navigate the user through THE STACK Pages 
       // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
       // Populate southbox with content
-      var tbtndashboardpagehym = new wax.demo.MenuButton("iConicss", testimage, true ).set({appearance: "mainmenubutton-hym", iconPosition: "top"});
-      var tbtnoverviewpagehym = new wax.demo.MenuButton("Fluent SVG", testimage, true).set({appearance: "mainmenubutton-hym", iconPosition: "top"});
-      var tbtnlistofitemspagehym = new wax.demo.MenuButton("Material", testimage, true).set({appearance: "mainmenubutton-hym", iconPosition: "top"});
+      var tbtndashboardpagehym = new wax.demo.MenuButton("iConicss", "wax/demo/Css3_logo.svg", true ).set({appearance: "mainmenubutton-hym", iconPosition: "top"});
+      var tbtnoverviewpagehym = new wax.demo.MenuButton("Fluent SVG", "wax/demo/fluent_globe.svg", true).set({appearance: "mainmenubutton-hym", iconPosition: "top"});
+      var tbtnlistofitemspagehym = new wax.demo.MenuButton("Material", "wax/demo/material_logo.svg", true).set({appearance: "mainmenubutton-hym", iconPosition: "top"});
       var tbtnmenuhym = new wax.demo.MenuButton("Menu", menuimage, true).set({appearance: "mainmenubutton-hym", iconPosition: "top"});
       southbox.add(tbtndashboardpagehym, {flex: 1});
       southbox.add(tbtnoverviewpagehym, {flex: 1});

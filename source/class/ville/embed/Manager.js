@@ -44,11 +44,11 @@ qx.Class.define("ville.embed.Manager",
           if (clazz.CONTENT) {
             qx.lang.Object.mergeWith(this.content, clazz.CONTENT);
           }
-          if (clazz.ANIMATIONS) {
-            qx.lang.Object.mergeWith(this.animations, clazz.ANIMATIONS);
-          }
           if (clazz.CSS) {
             qx.lang.Object.mergeWith(this.css, clazz.CSS);
+          }
+          if (clazz.ANIMATIONS) {
+            qx.lang.Object.mergeWith(this.animations, clazz.ANIMATIONS);
           }
           /*if (clazz.EXTERNALRESOURCES) {
             qx.lang.Object.mergeWith(this.externalresources, clazz.EXTERNALRESOURCES);

@@ -24,6 +24,7 @@ qx.Theme.define("wax.demo.theme.Appearance",
           iconPosition: "top", 
           center: true,
           padding: [10, 6, 20, 6],
+          marginBottom: 10,
           font : "headeratom"
         }
       }
@@ -39,90 +40,6 @@ qx.Theme.define("wax.demo.theme.Appearance",
           width: 120,
           height: 94
         }
-      }
-    },
-
-    "groupbox/legend/icon" :
-    {
-      style : function() {
-        return {
-          width: 32,
-          height: 32
-        };
-      }
-    },
-    
-    "groupbox/legend" :
-    {
-      alias : "atom",
-
-      style : function(states)
-      {
-        return {
-          paddingRight : 35,
-          margin : 4
-        };
-      }
-    },
-
-    "groupbox/open" :
-    {
-      include : "image",
-      style : function(states)
-      {
-        return {
-          height: 30,
-          decorator : states.opened ? "groupbox-open" : "groupbox-closed"
-        };
-      }
-    },
-
-    "groupbox-connected" : {
-      alias : "groupbox",
-      style : function(states)
-      {
-        return {
-          decorator  : "white-box",
-          contentPadding: 10
-        };
-      }
-    },
-
-    "groupbox-connected/legend" : {
-      include : "groupbox/legend",
-      style : function(states)
-      {
-        return {
-          font: "area-header",
-          paddingTop: 8,
-          paddingBottom: 8,
-          paddingLeft: 12
-        }
-      }
-    },
-
-    "groupbox-connected/frame" :
-    {
-      include : "groupbox/frame",
-      
-      style : function(states)
-      {
-        return {
-          marginTop : 30,
-          decorator  : "connected-top-box"
-        };
-      }
-    },
-
-    "groupbox-connected/open" :
-    {
-      include : "groupbox/open",
-      
-      style : function(states)
-      {
-        return {
-          height: 60
-        };
       }
     },
 
@@ -304,6 +221,17 @@ qx.Theme.define("wax.demo.theme.Appearance",
        };
      }
    },
+
+   "mainmenubutton-hym/icon" : {
+
+    style : function() {
+        return {
+          scale: true,
+          width: 28,
+          height: 28
+        };
+      }
+    },
 
    "hym-page-button" :
    {

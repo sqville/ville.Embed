@@ -22,15 +22,15 @@
  * 
  * 
  */
-qx.Class.define("ville.embed.package.BasicSvg",
+qx.Class.define("ville.embed.package.FluentUISvg",
 {
   extend : qx.core.Object,
 
   statics :
   {
     META : {
-      name : "Basic SVG Images",
-      description : "Basic SVG images for testing purposes"
+      name : "Fluent UI SVG Images",
+      description : "Fluent UI SVG images for testing purposes"
     },
   
     // Named icons/graphics configurations
