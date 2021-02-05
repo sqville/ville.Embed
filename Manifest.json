@@ -1,0 +1,36 @@
+{
+ "$schema": "https://qooxdoo.org/schema/Manifest-1-0-0.json",
+  "info" :
+  {
+    "name" : "ville.Embed",
+
+    "summary" : "A new desktop ui control for the Qooxdoo JavaScript Framework",
+    "description" : "",
+
+    "homepage" : "",
+
+    "license" : "MIT license",
+    "authors" : [
+  {
+    "name": "Chris Eskew",
+    "email": "(sqville)"
+  }
+],
+
+    "version" : "0.9.0"
+  },
+
+  "provides" :
+  {
+    "namespace"   : "ville.embed",
+    "encoding"    : "utf-8",
+    "class"       : "source/class",
+    "resource"    : "source/resource",
+    "translation" : "source/translation"
+  },
+
+  "requires": {
+    "@qooxdoo/framework": "^6.0.0-beta-20210201-1340",
+    "@qooxdoo/compiler" : "^1.0.0-beta-20210201-1340"
+  }
+}
