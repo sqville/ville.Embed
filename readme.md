@@ -18,9 +18,8 @@
 **ville.Embed** is a [Qooxdoo](https://qooxdoo.org/) control designed to make images, icons and graphics more dynamic.
 
 **Benefits**
-* Use pure CSS icons in your project - [iConicss](https://github.com/Viglino/iconicss) included
-* Embed SVG icons in your project
-* Use external CSS files
+* Use pure CSS icons in your project using the amazing [iConicss](https://github.com/Viglino/iconicss) icon set
+* Embed SVG icons in your project using code, or a combination of code and HTML5's template tag
 
 **Screen Shot**
 <img src="Screen_Capture_01.PNG" alt="iConicss - Pure CSS Icons for your Qooxdoo project">
@@ -35,7 +34,7 @@ $ qx package update
 $ qx package list
 $ qx package install sqville/ville.Embed
 ```
-:
+Getting started with iConicss icon set:
 ```sh
 Work in progress
 ```
