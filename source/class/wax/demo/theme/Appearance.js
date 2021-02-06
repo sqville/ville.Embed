@@ -43,6 +43,51 @@ qx.Theme.define("wax.demo.theme.Appearance",
       }
     },
 
+     /*
+    ---------------------------------------------------------------------------
+      wax.demo.Button
+    ---------------------------------------------------------------------------
+    */
+
+    "testbutton" :
+    {
+      include : "button",
+
+      style : function(states)
+      {
+        //var iprops;
+        //if (states.hovered)
+       // console.log(states);
+        
+        return {
+          padding : 16,
+          gap : 16
+          //iconProps : states.hovered ? {animation:"grow"} : {}
+        }
+      }
+    },
+
+     /*
+    ---------------------------------------------------------------------------
+      wax.demo.Atom
+    ---------------------------------------------------------------------------
+    */
+
+   "icss-atom" :
+   {
+     include : "atom",
+
+     style : function(states)
+     {
+       return {
+        center: true, 
+        padding : 16,
+        gap : 16,
+        iconProps : { iconAlign: "center" }
+       }
+     }
+   },
+
     /*
     ---------------------------------------------------------------------------
       wax.MENUBUTTON

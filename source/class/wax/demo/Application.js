@@ -196,7 +196,7 @@ qx.Class.define("wax.demo.Application",
       profilemenu.add(aboutmenubutton1);
       profilemenubutton.setMenu(profilemenu);
 
-      var atmlogocurrentpage = new qx.ui.basic.Atom("Wax","wax/demo/Wax_demo_logo.png").set({font: "hym-app-header", gap: 10, padding: 0, visibility: "hidden"});
+      var atmlogocurrentpage = new qx.ui.basic.Atom("Wax","wax/demo/Wax_demo_logo.svg").set({font: "hym-app-header", gap: 10, padding: 0, visibility: "hidden"});
       atmlogocurrentpage.getChildControl("icon").set({ scale: true, width: 48, height: 38 });
       mainmenupart.add(mainmenubtnbutton);
       profilepart.add(profilemenubutton);
@@ -236,42 +236,177 @@ qx.Class.define("wax.demo.Application",
        // Table to List Page - shows how the Table Widget converts to a List Widget for smaller screens
       // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
       var dashboardpage = new qx.ui.container.Composite().set({padding: [20,30]});
-      var overviewpage = new qx.ui.container.Composite(new qx.ui.layout.VBox(20)).set({padding: [20,30]});
+      var overviewpage = new qx.ui.container.Composite(new qx.ui.layout.VBox(10)).set({padding: [20,30]});
       var tablelistpage = new qx.ui.container.Composite().set({padding: [20,30]});
       
       //more structure
-      dashboardpage.setLayout(new qx.ui.layout.VBox(6).set({alignX: "left"}));  
-
-      // Top header
-      var label1 = new qx.ui.basic.Label("iConicss").set({font: "control-header"});
+      dashboardpage.setLayout(new qx.ui.layout.VBox(10).set({alignX: "left"}));  
 
       // iConicss Icons
+      // Top header
+      var lbliconicssheader = new qx.ui.basic.Label("iConicss (Pure CSS Icons)").set({font: "control-header"});
 
-      // My Personal Favoirites
+      //simple description
+      var lbliconicsssimpledesc = new qx.ui.basic.Label("iConicss by Viglino, is an icon set implemented in pure HTML and CSS. Below is just a subset of icons. Visit <b><a href='https://viglino.github.io/iconicss/?&page=icons' target='_blank'>iConicss Github site</a></b> for the full list of available icons.").set({rich: true, wrap: true});
 
-      // Control color and size; animate
+      // Basic usage
+      var lblsubheadsimple =  new qx.ui.basic.Label("Basic usage:").set({font: "headeratom", marginTop: 40});
+      var lblsimpleembed = new qx.ui.basic.Label("Here, at its most <u>basic</u>, is a lone Embed object (named \"cube-o\"), sized at 3 (\"em\" per the template) and colored <span style='color: blue;'>blue</span>:").set({rich: true, wrap: true});
+      var embedCubeo = new ville.embed.Embed({ name: "cube-o", size: 3, color: "blue" });
+      var lblsimpleembedcode = new qx.ui.basic.Label("<span style='color:blue;'>new</span> <span style='color:green;'>ville.embed.Embed</span>({ name: <span style='color:maroon;'>\"cube-o\"</span>, size: <span style='color:green;'>3</span>, color: <span style='color:maroon;'>\"blue\"</span> });").set({rich: true, wrap: true, font: "monospace", backgroundColor: "#f2f2f2", padding: 6});
 
       // Use in a Button (requires patching)
+      var lblsubheadbutton =  new qx.ui.basic.Label("Use in another widget:").set({font: "headeratom", marginTop: 40});
+      var lblmoreembed = new qx.ui.basic.Label("To use the new widget in a Button <b>(qx.ui.form.Button)</b>, you need to first patch the Button's underlying Atom <b>(qx.ui.basic.Atom)</b>. Once patched, use the appropriate naming convention so that the Atom control knows to use the new ville.embed.Embed object instead of the qx.ui.basic.Image object:").set({rich: true, wrap: true});
+      qx.Class.patch(qx.ui.basic.Atom, ville.embed.MAtomPatch);
+      var btnembedcubeobutton = new qx.ui.form.Button('Click Me','data:text/json;{ "name": "cube-o", "size":3, "color":"blue" }').set({appearance: "testbutton", maxWidth: 200, alignX: "left", alignY: "middle"});
+      var lblbuttonembedcode = new qx.ui.basic.Label("<span style='color:green;'>/* Patch Atom before creating the Button */</span><br>qx.Class.patch(qx.ui.basic.Atom, ville.embed.MAtomPatch);<br><span style='color:blue;'>new</span> <span style='color:green;'>qx.ui.form.Button(</span><span style='color:maroon;'>'Click Me','data:text/json;{ \"name\": \"cube-o\", \"size\": 3, \"color\": \"blue\" }'</span>);").set({rich: true, wrap: true, font: "monospace", backgroundColor: "#f2f2f2", padding: 6});
+      
+      btnembedcubeobutton.addListener("mouseover",function(e) {
+        var icondom = this.getChildControl("icon").getContentElement().getDomElement();
+        qx.bom.element.AnimationCss.animate(icondom, ville.embed.Manager.getInstance().animations["grow"], undefined);
+      });      
+      btnembedcubeobutton.addListener("mouseout",function(e) {
+        var icondom = this.getChildControl("icon").getContentElement().getDomElement();
+        qx.bom.element.AnimationCss.animateReverse(icondom, ville.embed.Manager.getInstance().animations["grow"], undefined);
+      });
 
-      // Go to url for a list of possible icons
+
+      // Some of my Favorite Icons
+      var lblsubheaderFavs =  new qx.ui.basic.Label("A few of my favorite icons:").set({font: "headeratom", marginTop: 40});
+      var dashboardiconflow = new qx.ui.container.Composite();
+      var dashboardiconflowlayout = new qx.ui.layout.Flow(16,20,"left");
+      dashboardiconflow.setLayout(dashboardiconflowlayout);
+      //icons in Atoms
+      var atmcoffeegrain = new qx.ui.basic.Atom("coffee-grain", 'data:text/json;{ "name": "coffee-grain", "size":3 }').set({iconPosition: "top", appearance: "icss-atom"});
+      var atmcoffee = new qx.ui.basic.Atom("coffee", 'data:text/json;{ "name": "coffee", "size": 3 }').set({iconPosition: "top", appearance: "icss-atom"});
+      var atmshapes = new qx.ui.basic.Atom("shapes", 'data:text/json;{ "name": "shapes", "size": 3 }').set({iconPosition: "top", appearance: "icss-atom"});
+      var atmconnection = new qx.ui.basic.Atom("connection", 'data:text/json;{ "name": "connection", "size": 3 }').set({iconPosition: "top", appearance: "icss-atom"});
+      var atmclouddownload = new qx.ui.basic.Atom("cloud-download", 'data:text/json;{ "name": "cloud-download", "size": 3 }').set({iconPosition: "top", appearance: "icss-atom"});
+      var atmfolderclose = new qx.ui.basic.Atom("folder-close", 'data:text/json;{ "name": "folder-close", "size": 3 }').set({iconPosition: "top", appearance: "icss-atom"});
+      var atmtrumpet = new qx.ui.basic.Atom("trumpet", 'data:text/json;{ "name": "trumpet", "size": 3 }').set({iconPosition: "top", appearance: "icss-atom"});
+      var atmfootball = new qx.ui.basic.Atom("football", 'data:text/json;{ "name": "football", "size": 3 }').set({iconPosition: "top", appearance: "icss-atom"});
+      var atmrocket = new qx.ui.basic.Atom("rocket", 'data:text/json;{ "name": "rocket", "size": 3 }').set({iconPosition: "top", appearance: "icss-atom"});
+      var atmgear = new qx.ui.basic.Atom("gear", 'data:text/json;{ "name": "gear", "size": 3 }').set({iconPosition: "top", appearance: "icss-atom"});
+      var atmdrone = new qx.ui.basic.Atom("drone", 'data:text/json;{ "name": "drone", "size": 3 }').set({iconPosition: "top", appearance: "icss-atom"});
+      var atmhtml5 = new qx.ui.basic.Atom("html5", 'data:text/json;{ "name": "html5", "size": 3 }').set({iconPosition: "top", appearance: "icss-atom"});
+      var atmcss3 = new qx.ui.basic.Atom("css3", 'data:text/json;{ "name": "css3", "size": 3 }').set({iconPosition: "top", appearance: "icss-atom"});
+      var atmjs = new qx.ui.basic.Atom("js", 'data:text/json;{ "name": "js", "size": 3 }').set({iconPosition: "top", appearance: "icss-atom"});
+      var atmgoogledrivec = new qx.ui.basic.Atom("google-drive-c", 'data:text/json;{ "name": "google-drive-c", "size": 3 }').set({iconPosition: "top", appearance: "icss-atom"});
+      var atmvisualcode = new qx.ui.basic.Atom("visual-code", 'data:text/json;{ "name": "visual-code", "size": 3 }').set({iconPosition: "top", appearance: "icss-atom"});
+      var atmwolverinec = new qx.ui.basic.Atom("wolverine-c", 'data:text/json;{ "name": "wolverine-c", "size": 3 }').set({iconPosition: "top", appearance: "icss-atom"});
+      var atmsuno = new qx.ui.basic.Atom("sun-o", 'data:text/json;{ "name": "sun-o", "size": 3 }').set({iconPosition: "top", appearance: "icss-atom"});
+      var atmbinocular = new qx.ui.basic.Atom("binocular", 'data:text/json;{ "name": "binocular", "size": 3 }').set({iconPosition: "top", appearance: "icss-atom"});
+      var atmbombshell = new qx.ui.basic.Atom("bombshell", 'data:text/json;{ "name": "bombshell", "size": 3 }').set({iconPosition: "top", appearance: "icss-atom"});
+      var atmfoodpot = new qx.ui.basic.Atom("food-pot", 'data:text/json;{ "name": "food-pot", "size": 3 }').set({iconPosition: "top", appearance: "icss-atom"});
+      var atmxsquare = new qx.ui.basic.Atom("x-square", 'data:text/json;{ "name": "x-square", "size": 3, "color": "red" }').set({iconPosition: "top", appearance: "icss-atom"});
+      
+      dashboardiconflow.add(atmcoffeegrain);
+      dashboardiconflow.add(atmcoffee);
+      dashboardiconflow.add(atmshapes);
+      dashboardiconflow.add(atmconnection);
+      dashboardiconflow.add(atmclouddownload);
+      dashboardiconflow.add(atmfolderclose);
+      dashboardiconflow.add(atmtrumpet);
+      dashboardiconflow.add(atmfootball);
+      dashboardiconflow.add(atmrocket);
+      dashboardiconflow.add(atmgear);
+      dashboardiconflow.add(atmdrone);
+      dashboardiconflow.add(atmhtml5);
+      dashboardiconflow.add(atmcss3);
+      dashboardiconflow.add(atmjs);
+      dashboardiconflow.add(atmgoogledrivec);
+      dashboardiconflow.add(atmvisualcode);
+      dashboardiconflow.add(atmwolverinec);
+      dashboardiconflow.add(atmsuno);
+      dashboardiconflow.add(atmbinocular);
+      dashboardiconflow.add(atmbombshell);
+      dashboardiconflow.add(atmfoodpot);
+      dashboardiconflow.add(atmxsquare);
 
       // Assemble
-      dashboardpage.add(label1);
+      dashboardpage.add(lbliconicssheader);
+      dashboardpage.add(lbliconicsssimpledesc);
+      dashboardpage.add(lblsubheadsimple);
+      dashboardpage.add(lblsimpleembed);
+      dashboardpage.add(embedCubeo);
+      dashboardpage.add(lblsimpleembedcode);
+      dashboardpage.add(lblsubheadbutton);
+      dashboardpage.add(lblmoreembed);
+      dashboardpage.add(btnembedcubeobutton);
+      dashboardpage.add(lblbuttonembedcode);
+      dashboardpage.add(lblsubheaderFavs);
+      dashboardpage.add(dashboardiconflow);
 
 
       // Second page marker  
-      var label5 = new qx.ui.basic.Label("Fluent UI SVG").set({font: "control-header"});
+      var lblfluentuiheader = new qx.ui.basic.Label("Fluent UI Web Icons (SVG)").set({font: "control-header"});
       
-      // A Lot of my Day Involves These
+       //simple description
+       var lblfluentsimpledesc = new qx.ui.basic.Label("Microsoft's Fluent UI web icons: <b><a href='https://developer.microsoft.com/en-us/fluentui#/controls/web/icon' target='_blank'>Fluent UI Web Icons</a></b> for the full list of available icons.").set({rich: true, wrap: true});
 
-      // Since SVGs scale, control size using control width and height
+       // Basic usage
+       var lblsubheadfuisimple =  new qx.ui.basic.Label("Basic usage:").set({font: "headeratom", marginTop: 40});
+       var lblfuisimpleembed = new qx.ui.basic.Label("Here, at its most <u>basic</u>, is a lone Embed object (named \"fui-airtickets\"), sized 60 x 60, and colored <span style='color: blue;'>blue</span>:").set({rich: true, wrap: true});
+       var embedfuiairticket = new ville.embed.Embed({ name: "fui-airtickets", color: "blue", width: 60, height: 60, allowGrowX: false });
+       var lblsimplefuiembedcode = new qx.ui.basic.Label("<span style='color:blue;'>new</span> <span style='color:green;'>ville.embed.Embed</span>({ name: <span style='color:maroon;'>\"fui-airtickets\"</span>, width: <span style='color:green;'>60</span>, height: <span style='color:green;'>60</span>, color: <span style='color:maroon;'>\"blue\"</span> });").set({rich: true, wrap: true, font: "monospace", backgroundColor: "#f2f2f2", padding: 6});
+ 
+       // Use in a Button (requires patching)
+       var lblsubheadfuibutton =  new qx.ui.basic.Label("Use in another widget:").set({font: "headeratom", marginTop: 40});
+       var lblmorefuiembed = new qx.ui.basic.Label("To use the new widget in a Button <b>(qx.ui.form.Button)</b>, you need to first patch the Button's underlying Atom <b>(qx.ui.basic.Atom)</b>. Once patched, use the appropriate naming convention so that the Atom control knows to use the new ville.embed.Embed object instead of the qx.ui.basic.Image object:").set({rich: true, wrap: true});
+       var btnembedfuiairticketsbutton = new qx.ui.form.Button('Click Me','data:text/json;{ "name": "fui-airtickets", "color":"blue", "width": 60, "height": 60 }').set({appearance: "testbutton", maxWidth: 200, alignX: "left", alignY: "middle"});
+       var lblbuttonfuiembedcode = new qx.ui.basic.Label("<span style='color:green;'>/* Patch Atom before creating the Button */</span><br>qx.Class.patch(qx.ui.basic.Atom, ville.embed.MAtomPatch);<br><span style='color:blue;'>new</span> <span style='color:green;'>qx.ui.form.Button(</span><span style='color:maroon;'>'Click Me','data:text/json;{ \"name\": \"fui-airtickets\", \"color\": \"blue\", \"width\": 60, \"height\": 60 }'</span>);").set({rich: true, wrap: true, font: "monospace", backgroundColor: "#f2f2f2", padding: 6});
+       
+       btnembedfuiairticketsbutton.addListener("mouseover",function(e) {
+         var icondom = this.getChildControl("icon").getContentElement().getDomElement();
+         qx.bom.element.AnimationCss.animate(icondom, ville.embed.Manager.getInstance().animations["grow"], undefined);
+       });      
+       btnembedfuiairticketsbutton.addListener("mouseout",function(e) {
+         var icondom = this.getChildControl("icon").getContentElement().getDomElement();
+         qx.bom.element.AnimationCss.animateReverse(icondom, ville.embed.Manager.getInstance().animations["grow"], undefined);
+       });
 
-      
-      
-      overviewpage.add(label5);     
+      // Some of my Favorite Icons
+      var lblsubheaderfuiFavs =  new qx.ui.basic.Label("A few of my favorite icons:").set({font: "headeratom", marginTop: 40});
+      var fuiiconflow = new qx.ui.container.Composite();
+      var fuiiconflowlayout = new qx.ui.layout.Flow(16,20,"left");
+      fuiiconflow.setLayout(fuiiconflowlayout);
+      var atmaccess = new qx.ui.basic.Atom("Access", 'data:text/json;{ "name": "fui-access", "color": "#AB2325", "width": 60, "height": 60 }').set({iconPosition: "top", appearance: "icss-atom"});
+      var atmword = new qx.ui.basic.Atom("Word", 'data:text/json;{ "name": "fui-word", "color": "#1748A4", "width": 60, "height": 60 }').set({iconPosition: "top", appearance: "icss-atom"});
+      var atmexcel = new qx.ui.basic.Atom("Excel", 'data:text/json;{ "name": "fui-excel", "color": "#12743B", "width": 60, "height": 60 }').set({iconPosition: "top", appearance: "icss-atom"});
+      var atmppt = new qx.ui.basic.Atom("PowerPoint", 'data:text/json;{ "name": "fui-ppt", "color": "#EE3111", "width": 60, "height": 60, "allowGrowX": false }').set({iconPosition: "top", appearance: "icss-atom"});
+      var atmpub = new qx.ui.basic.Atom("Publisher", 'data:text/json;{ "name": "fui-pub", "color": "#007462", "width": 60, "height": 60 }').set({iconPosition: "top", appearance: "icss-atom"});
+      var atmonenote = new qx.ui.basic.Atom("OneNote", 'data:text/json;{ "name": "fui-onenote", "color": "#420F6F", "width": 60, "height": 60 }').set({iconPosition: "top", appearance: "icss-atom"});
+      var atmfuikey = new qx.ui.basic.Atom("Permissions Icon", 'data:text/json;{ "name": "fui-key", "width": 60, "height": 60, "allowGrowX": false }').set({iconPosition: "top", appearance: "icss-atom"});
+      var atmfuirelease = new qx.ui.basic.Atom("Release Definition", 'data:text/json;{ "name": "fui-release", "width": 60, "height": 60, "allowGrowX": false }').set({iconPosition: "top", appearance: "icss-atom"});
+      var atmfuishapes = new qx.ui.basic.Atom("Shapes", 'data:text/json;{ "name": "fui-shapes", "width": 60, "height": 60, "allowGrowX": false }').set({iconPosition: "top", appearance: "icss-atom"});
+
+      fuiiconflow.add(atmaccess);
+      fuiiconflow.add(atmword);
+      fuiiconflow.add(atmexcel);
+      fuiiconflow.add(atmppt);
+      fuiiconflow.add(atmpub);
+      fuiiconflow.add(atmonenote);
+      fuiiconflow.add(atmfuikey);
+      fuiiconflow.add(atmfuirelease);
+      fuiiconflow.add(atmfuishapes);
+
+      overviewpage.add(lblfluentuiheader);     
+      overviewpage.add(lblfluentsimpledesc); 
+      overviewpage.add(lblsubheadfuisimple); 
+      overviewpage.add(lblfuisimpleembed); 
+      overviewpage.add(embedfuiairticket);
+      overviewpage.add(lblsimplefuiembedcode);
+      overviewpage.add(lblsubheadfuibutton);
+      overviewpage.add(lblmorefuiembed);
+      overviewpage.add(btnembedfuiairticketsbutton);
+      overviewpage.add(lblbuttonfuiembedcode);
+      overviewpage.add(lblsubheaderfuiFavs);
+      overviewpage.add(fuiiconflow);
+
 
       // Third page marker
-      var label6 = new qx.ui.basic.Label("Material").set({font: "control-header"});
+      var label6 = new qx.ui.basic.Label("Material Icons (SVG)").set({font: "control-header"});
       var tablelistvbox = new qx.ui.layout.VBox();
       tablelistpage.setLayout(tablelistvbox);
       tablelistpage.add(label6);
@@ -321,10 +456,10 @@ qx.Class.define("wax.demo.Application",
       var tbtndashboardpage = new wax.demo.MenuButton("iConicss", "wax/demo/Css3_logo.svg", true );
       westbox.add(tbtndashboardpage);
 
-      var tbtnSecondPage = new wax.demo.MenuButton("Fluent UI SVG", "wax/demo/fluent_globe.svg", true);
+      var tbtnSecondPage = new wax.demo.MenuButton("Fluent UI (SVG)", "wax/demo/fluent_globe.svg", true);
       westbox.add(tbtnSecondPage);
 
-      var tbtnThirdPage = new wax.demo.MenuButton("Material SVG", "wax/demo/material_logo.svg", true);
+      var tbtnThirdPage = new wax.demo.MenuButton("Material (SVG)", "wax/demo/material_logo.svg", true);
       westbox.add(tbtnThirdPage);
 
       var westboxbuttongroup = new qx.ui.form.RadioGroup();
@@ -369,7 +504,7 @@ qx.Class.define("wax.demo.Application",
       // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
       // Populate southbox with content
       var tbtndashboardpagehym = new wax.demo.MenuButton("iConicss", "wax/demo/Css3_logo.svg", true ).set({appearance: "mainmenubutton-hym", iconPosition: "top"});
-      var tbtnoverviewpagehym = new wax.demo.MenuButton("Fluent SVG", "wax/demo/fluent_globe.svg", true).set({appearance: "mainmenubutton-hym", iconPosition: "top"});
+      var tbtnoverviewpagehym = new wax.demo.MenuButton("Fluent UI", "wax/demo/fluent_globe.svg", true).set({appearance: "mainmenubutton-hym", iconPosition: "top"});
       var tbtnlistofitemspagehym = new wax.demo.MenuButton("Material", "wax/demo/material_logo.svg", true).set({appearance: "mainmenubutton-hym", iconPosition: "top"});
       var tbtnmenuhym = new wax.demo.MenuButton("Menu", menuimage, true).set({appearance: "mainmenubutton-hym", iconPosition: "top"});
       southbox.add(tbtndashboardpagehym, {flex: 1});
@@ -451,7 +586,7 @@ qx.Class.define("wax.demo.Application",
       tbtnoverviewpagehym.addListener("changeValue", function(e) {
         if (e.getData()) {
           centerbox.setSelection([overviewpage]);
-          atmlogocurrentpage.set({show: "both", label:"Fluent SVG"});
+          atmlogocurrentpage.set({show: "both", label:"Fluent UI"});
         }
       }, this);
 

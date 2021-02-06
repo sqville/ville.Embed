@@ -29,6 +29,10 @@
     "translation" : "source/translation"
   },
 
+  "externalResources": {
+    "css": ["ville/embed/iconicss.min.css"]
+  },
+
   "requires": {
     "@qooxdoo/framework": "^6.0.0-beta-20210201-1340",
     "@qooxdoo/compiler" : "^1.0.0-beta-20210201-1340"

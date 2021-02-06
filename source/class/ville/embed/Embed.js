@@ -2,54 +2,18 @@
 
    Ville Software (SQville)
 
-   Copyright:
+   Copyright: 2021 sqville
 
    License:
      MIT: https://opensource.org/licenses/MIT
      See the LICENSE file in the project's top-level directory for details.
 
    Authors:
-     * Chris Eskew (sqville)
+     * Chris Eskew (sqville) chris.eskew@sqville.com
 
 ************************************************************************ */
 
 /**
- * The label class brings typical text content to the widget system.
- *
- * It supports simple text nodes and complex HTML (rich). The default
- * content mode is for text only. The mode is changeable through the property
- * {@link #rich}.
- *
- * The label supports heightForWidth when used in HTML mode. This means
- * that multi line HTML automatically computes the correct preferred height.
- *
- * *Example*
- *
- * Here is a little example of how to use the widget.
- *
- * <pre class='javascript'>
- *   // a simple text label without wrapping and markup support
- *   var label1 = new qx.ui.basic.Label("Simple text label");
- *   this.getRoot().add(label1, {left:20, top:10});
- *
- *   // a HTML label with automatic line wrapping
- *   var label2 = new qx.ui.basic.Label().set({
- *     value: "A <b>long label</b> text with auto-wrapping. This also may contain <b style='color:red'>rich HTML</b> markup.",
- *     rich : true,
- *     width: 120
- *   });
- *   this.getRoot().add(label2, {left:20, top:50});
- * </pre>
- *
- * The first label in this example is a basic text only label. As such no
- * automatic wrapping is supported. The second label is a long label containing
- * HTML markup with automatic line wrapping.
- *
- * *External Documentation*
- *
- * <a href='http://qooxdoo.org/docs/#desktop/widget/label.md' target='_blank'>
- * Documentation of this widget in the qooxdoo manual.</a>
- *
  * NOTE: Instances of this class must be disposed of after use
  *
  */
@@ -191,7 +155,16 @@ qx.Class.define("ville.embed.Embed",
         init : null,
         nullable : true
     },
-    
+
+    /** Control the text alignment */
+    iconAlign :
+    {
+      check : ["left", "center", "right", "justify"],
+      nullable : true,
+      themeable : true,
+      apply : "_applyIconAlign",
+      event : "changeIconAlign"
+    },
     
     /**
      * The tag to use for this element
@@ -327,6 +300,11 @@ qx.Class.define("ville.embed.Embed",
       PROPERTY APPLIERS
     ---------------------------------------------------------------------------
     */
+
+    // property apply
+    _applyIconAlign : function(value, old) {
+      this.getContentElement().setStyle("textAlign", value);
+    },
 
     // property apply
     _applyAnimation : function(value, old)

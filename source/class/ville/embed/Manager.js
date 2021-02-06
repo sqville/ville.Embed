@@ -68,7 +68,7 @@ qx.Class.define("ville.embed.Manager",
     /**
      * Default timeout in ms for the error handling of the closure loading.
      */
-    PACKAGES : [ville.embed.package.IconIcss, ville.embed.package.BasicSvg]
+    PACKAGES : [ville.embed.package.IconIcss, ville.embed.package.FluentUISvg]
 
   },
 

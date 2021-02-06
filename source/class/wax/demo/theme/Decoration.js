@@ -50,7 +50,7 @@ qx.Theme.define("wax.demo.theme.Decoration",
     {
       style :
       {
-        backgroundImage: "wax/baseline-expand_more-24px.svg",
+        backgroundImage: "wax/demo/baseline-expand_more-24px.svg",
         backgroundRepeat: "no-repeat",
         backgroundPositionX: "right",
         backgroundPositionY: "center"
@@ -61,7 +61,7 @@ qx.Theme.define("wax.demo.theme.Decoration",
     {
       style :
       {
-        backgroundImage: "wax/chevron_right-24px.svg",
+        backgroundImage: "wax/demo/chevron_right-24px.svg",
         backgroundRepeat: "no-repeat",
         backgroundPositionX: "right",
         backgroundPositionY: "center"

@@ -28,6 +28,15 @@ qx.Theme.define("wax.demo.theme.Font",
       bold : true
     },
 
+    //override
+    "monospace" :
+    {
+      size : 14,
+      family : [ "DejaVu Sans Mono", "Courier New", "monospace" ],
+      color: "font",
+      lineHeight: 1.8
+    },
+
     "mainmenubutton" :
     {
       include : "default",
