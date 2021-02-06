@@ -57,14 +57,14 @@ Add "hulk-c" embed entry. Make sure your entry has template and class values. Se
       "icss-single-element" : '<i class="{{class}}" style="font-size:{{size}}em; color:inherit;"></i>'
     },
 ```
-**Step 3** - Creat the ville.embed.Embed object in your code and add it to your application (it's a widget):
+**Step 3** - Create the ville.embed.Embed object in your code and add it to your application (it's a widget):
 ```sh
   var embedHulk = new ville.embed.Embed({ name: "hulk-c", size: 3 });
 ```
 
-**Patch qx.ui.basic.Atom to get iConicss icons in a Butoon:**
+**Patch qx.ui.basic.Atom to get iConicss icons in a Button:**
 
-**Step 1** - Include a Mixin that patches qx.ui.basic.Atom so that the Atom can recognize when to create a ville.embed.Embed instead on an Image. **IMPORTANT NOTE:** This is changing the core of a shared framework object. Please conduct regression testing before releaseing code past Dev: 
+**Step 1** - Include a Mixin that patches qx.ui.basic.Atom so that the Atom can recognize when to create a ville.embed.Embed instead of an Image. **IMPORTANT NOTE:** This is changing the core of a shared framework object. Please conduct regression testing before releaseing code past Dev: 
 ```sh
   qx.Class.patch(qx.ui.basic.Atom, ville.embed.MAtomPatch);
 ```
