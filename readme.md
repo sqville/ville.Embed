@@ -15,27 +15,27 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-**ville.Embed** is a [Qooxdoo](https://qooxdoo.org/) control.
+**ville.Embed** is a [Qooxdoo](https://qooxdoo.org/) control designed to make images, icons and graphics more dynamic.
 
 **Benefits**
 * Use pure CSS icons in your project - [iConicss](https://github.com/Viglino/iconicss) included
 * Embed SVG icons in your project
 * Use external CSS files
-* Use animations
 
 **Screen Shot**
-<img src="ville_Clean_Form.PNG" alt="Screen shot example">
+<img src="Screen_Capture_01.PNG" alt="iConicss - Pure CSS Icons for your Qooxdoo project">
+<img src="Screen_Capture_02.PNG" alt="Fluent UI Web Icons - SVG Icons for your Qooxdoo project">
 
 
 <!-- GETTING STARTED -->
 ## Using the Control in your Application
 To use the control in your application, go into the application root directory and install the library into your project:
 ```sh
-$ qx contrib update
-$ qx contrib list
-$ qx contrib install sqville/ville.Embed
+$ qx package update
+$ qx package list
+$ qx package install sqville/ville.Embed
 ```
-now you just have to modify your compile.json to enable the theme:
+:
 ```sh
 Work in progress
 ```
