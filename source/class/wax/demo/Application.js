@@ -406,10 +406,48 @@ qx.Class.define("wax.demo.Application",
 
 
       // Third page marker
-      var label6 = new qx.ui.basic.Label("Material Icons (SVG)").set({font: "control-header"});
-      var tablelistvbox = new qx.ui.layout.VBox();
+      var tablelistvbox = new qx.ui.layout.VBox(10);
       tablelistpage.setLayout(tablelistvbox);
-      tablelistpage.add(label6);
+
+      // Third page marker  
+      var lblmaterialheader = new qx.ui.basic.Label("Material Design Icons (SVG)").set({font: "control-header"});
+            
+      //simple description
+      var lblmaterialsimpledesc = new qx.ui.basic.Label("Material Design icons: <b><a href='https://material.io/resources/icons/?style=baseline' target='_blank'>Material Design Icons</a></b> for the full list of available icons.").set({rich: true, wrap: true});
+
+      // Basic usage
+      var lblsubheadmaterialsimple =  new qx.ui.basic.Label("Basic usage:").set({font: "headeratom", marginTop: 40});
+      var lblmaterialsimpleembed = new qx.ui.basic.Label("Same as Fluent UI Web Icons, just with different named embeds.").set({rich: true, wrap: true});
+
+      // Use in a Button (requires patching)
+      var lblsubheadmaterialbutton =  new qx.ui.basic.Label("Use in another widget:").set({font: "headeratom", marginTop: 40});
+      var lblmorematerialembed = new qx.ui.basic.Label("Same as Fluent UI Web Icons, just with different named embeds.").set({rich: true, wrap: true});
+
+      // Some of my Favorite Icons
+      var lblsubheadermaterialFavs =  new qx.ui.basic.Label("A few examples:").set({font: "headeratom", marginTop: 40});
+      var materialiconflow = new qx.ui.container.Composite();
+      var materialiconflowlayout = new qx.ui.layout.Flow(16,20,"left");
+      materialiconflow.setLayout(materialiconflowlayout);
+      var atmevent = new qx.ui.basic.Atom("Event", 'data:text/json;{ "name": "material-event", "width": 60, "height": 60 }').set({iconPosition: "top", appearance: "icss-atom"});
+      var atmbusiness = new qx.ui.basic.Atom("Business", 'data:text/json;{ "name": "material-business", "width": 60, "height": 60 }').set({iconPosition: "top", appearance: "icss-atom"});
+      var atmbiotech = new qx.ui.basic.Atom("Biotech", 'data:text/json;{ "name": "material-biotech", "width": 60, "height": 60 }').set({iconPosition: "top", appearance: "icss-atom"});
+      var atmbolt = new qx.ui.basic.Atom("Bolt", 'data:text/json;{ "name": "material-bolt", "width": 60, "height": 60 }').set({iconPosition: "top", appearance: "icss-atom"});
+      
+      materialiconflow.add(atmevent);
+      materialiconflow.add(atmbusiness);
+      materialiconflow.add(atmbiotech);
+      materialiconflow.add(atmbolt);
+
+      tablelistpage.add(lblmaterialheader);
+      tablelistpage.add(lblmaterialsimpledesc);
+      tablelistpage.add(lblsubheadmaterialsimple);
+      tablelistpage.add(lblmaterialsimpleembed);
+      tablelistpage.add(lblsubheadmaterialbutton);
+      tablelistpage.add(lblmorematerialembed);
+      tablelistpage.add(lblsubheadermaterialFavs);
+      tablelistpage.add(materialiconflow);
+
+
 
       // Menu Page for phonegap only
       var menupage = new qx.ui.container.Composite(new qx.ui.layout.VBox(10, null, "separator-vertical")).set({padding: [60, 0, 0, 0]});

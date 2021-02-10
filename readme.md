@@ -76,7 +76,7 @@ Add "hulk-c" embed entry. Make sure your entry has template and class values. Se
 <!-- ROADMAP -->
 ## Roadmap
 
-See the [open issues](https://github.com/github_username/repo_name/issues) for a list of proposed features (and known issues).
+TBD
 
 
 <!-- LICENSE -->

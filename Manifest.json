@@ -17,7 +17,7 @@
   }
 ],
 
-    "version" : "0.9.0"
+    "version" : "1.0.0"
   },
 
   "provides" :
@@ -34,7 +34,7 @@
   },
 
   "requires": {
-    "@qooxdoo/framework": "^6.0.0-beta-20210201-1340",
-    "@qooxdoo/compiler" : "^1.0.0-beta-20210201-1340"
+    "@qooxdoo/framework": "^6.0.0",
+    "@qooxdoo/compiler" : "^1.0.0"
   }
 }
