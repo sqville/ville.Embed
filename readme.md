@@ -73,6 +73,10 @@ Add "hulk-c" embed entry. Make sure your entry has template and class values. Se
   var btnHulkButton = new qx.ui.form.Button('Hulk Smash!','data:text/json;{ "name": "hulk-c", "size":3 }');
 ```
 
+<!-- DEMO -->
+## Demo
+See this control in action using the ville [Wax Demo App:](http://qooxdoo.org/qxl.packagebrowser/qxl.packagebrowser/demos/sqville/ville.Embed/waxdemo/)
+
 <!-- ROADMAP -->
 ## Roadmap
 
