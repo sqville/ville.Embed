@@ -55,14 +55,18 @@ qx.Theme.define("wax.demo.theme.Appearance",
 
       style : function(states)
       {
-        //var iprops;
-        //if (states.hovered)
-       // console.log(states);
+        /*var iprops;
+        if (states.hovered)
+          iprops = {animation:"grow"};
+        else if (!states.hovered && states.abandoned)
+          iprops = {animation:"shrink"};
+        else
+          iprops = undefined;*/
         
         return {
           padding : 16,
           gap : 16
-          //iconProps : states.hovered ? {animation:"grow"} : {}
+          //iconProps : iprops
         }
       }
     },

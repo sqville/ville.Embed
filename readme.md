@@ -75,7 +75,7 @@ Add "hulk-c" embed entry. Make sure your entry has template and class values. Se
 
 <!-- DEMO -->
 ## Demo
-See this control in action using the ville [Wax Demo App:](http://qooxdoo.org/qxl.packagebrowser/qxl.packagebrowser/demos/sqville/ville.Embed/waxdemo/)
+See this control in action using the ville [Wax Demo App](http://qooxdoo.org/qxl.packagebrowser/qxl.packagebrowser/demos/sqville/ville.Embed/waxdemo/)
 
 <!-- ROADMAP -->
 ## Roadmap
