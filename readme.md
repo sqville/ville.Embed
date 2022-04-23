@@ -34,7 +34,18 @@ $ qx package update
 $ qx package list
 $ qx package install sqville/ville.Embed
 ```
-**Getting started with iConicss icon set:**
+
+## NEW APPROACH - Each icon/embed is it's own Qooxdoo object
+Why a new approach? The old way was too complex, required patching of a framework class (a bit risky), and prone to including unused code in builds. This new approach aims to be better in this regards.
+
+**To illustrate** - To create an icon using iConicss's CSS based icon set all I need to do is create the icon's object giving it a size and color (optional). To use it in a button just include the ville.embed.MAtom Mixin and set the Button's new embed property (example below): 
+```sh
+  var cubeoicon = new ville.embed.CubeO(3, "green");
+  qx.Class.include(qx.ui.basic.Atom, ville.embed.MAtom);
+  var btnFormButton = new qx.ui.form.Button('Embeded Cube').set({ embed : cubeoicon });
+```
+
+**OLD APPROACH - Getting started with iConicss icon set:**
 
 **Step 1** - Make sure iConicss's minified css file is identified as an external resource in your project's Manifest.js file
 ```sh
