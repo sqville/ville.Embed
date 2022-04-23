@@ -235,10 +235,18 @@ qx.Class.define("wax.demo.Application",
        // Overview Page with links to a Detail Page
        // Table to List Page - shows how the Table Widget converts to a List Widget for smaller screens
       // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+      var newapproachpage = new qx.ui.container.Composite().set({padding: [20,30]});
       var dashboardpage = new qx.ui.container.Composite().set({padding: [20,30]});
       var overviewpage = new qx.ui.container.Composite(new qx.ui.layout.VBox(10)).set({padding: [20,30]});
       var tablelistpage = new qx.ui.container.Composite().set({padding: [20,30]});
       
+      newapproachpage.setLayout(new qx.ui.layout.VBox(10).set({alignX: "left"})); 
+      var lblnewapproachheader = new qx.ui.basic.Label("New Approach").set({font: "control-header"});
+      //simple description
+      var lblnewapproachsimpledesc = new qx.ui.basic.Label("Theres a new approach. Each icon is its own object.").set({rich: true, wrap: true});
+
+
+
       //more structure
       dashboardpage.setLayout(new qx.ui.layout.VBox(10).set({alignX: "left"}));  
 
