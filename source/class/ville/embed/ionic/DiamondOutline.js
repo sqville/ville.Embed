@@ -45,7 +45,7 @@
       this.setHeight(height);
     }
 
-    if (color !== null) {
+    if (color) {
       this.setColor(color);
     }
 
