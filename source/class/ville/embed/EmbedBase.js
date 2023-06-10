@@ -32,9 +32,9 @@
     * @param value {String} HTML, SVG or JSON content to use
     * 
     */
-   construct : function()
+   construct ()
    {
-     this.base(arguments);
+     super();
    },
  
    /*
@@ -167,7 +167,7 @@
  
  
      // overridden
-     _getContentHint : function()
+     _getContentHint ()
      {
        if (this.__invalidContentSize)
        {
@@ -183,12 +183,13 @@
  
  
      // overridden
-     _hasHeightForWidth : function() {
+     _hasHeightForWidth () 
+     {
        return this.getRich();
      },
  
      // overridden
-     _getContentHeightForWidth : function(width)
+     _getContentHeightForWidth (width)
      {
        if (!this.getRich()) {
          return null;
@@ -198,49 +199,12 @@
  
  
      // overridden
-     _createContentElement : function() {
+     _createContentElement () 
+     {
          var element = new qx.html.Label;
          element.setRich(true);
          return element;
      },
- 
-     /*
-     ---------------------------------------------------------------------------
-       WIDGET API
-     ---------------------------------------------------------------------------
-    
- 
-     render : function(usercontent)
-     {
-       var contenttype = typeof usercontent;
-       var name = this.getName();
-       var templatename = this.getTemplateName();
-       var embeddedcontent = this.__embedmanager.embeds[name];
-       var template = this.__embedmanager.templates[templatename];
-       //if the embed indicates a content entry then merge the content with the embed entries; content overrides matching fields
-       if (this.__embedmanager.embeds[this.getName()].content)
-         embeddedcontent = qx.lang.Object.mergeWith(embeddedcontent, this.__embedmanager.content[this.__embedmanager.embeds[this.getName()].content]);
-       if (contenttype == "string")
-         embeddedcontent = qx.lang.Object.mergeWith(embeddedcontent, this.__embedmanager.content[content]);
-       else
-         embeddedcontent = qx.lang.Object.mergeWith(usercontent, embeddedcontent);
-       
-         //check document for template tags
-       if (name && templatename && !template) {
-         var tempelement = document.getElementById(templatename);
-         if (tempelement) {
-           template = tempelement.innerHTML;
-         }
-         else {
-           //template = "<small>" + templatename + " is missing a template entry</small>";
-           //throw new Error(templatename + " is missing a TEMPLATE entry in its package class, or a <template id='"+templatename+"'></template> tag in your projects index.html file.");
-           console.log(templatename + " is missing a TEMPLATE entry in its package class, or a <template id='"+templatename+"'></template> tag in your projects index.html file.");
-           template = "";
-         }
-       }
-       this.setValue(qx.bom.Template.render(template, embeddedcontent));
-     },
-      */
  
       /*
      ---------------------------------------------------------------------------
@@ -249,12 +213,13 @@
      */
  
      // property apply
-     _applyIconAlign : function(value, old) {
+     _applyIconAlign (value, old) 
+     {
        this.getContentElement().setStyle("textAlign", value);
      },
  
      // property apply
-     _applyRich : function(value)
+     _applyRich (value)
      {
        // Sync with content element
        this.getContentElement().setRich(value);
@@ -267,22 +232,22 @@
      },
  
      // property apply
-     _applyValue : function(value, old)
-       {
-         // Sync with content element
-         if (value) {
-           this.getContentElement().setValue(value);
-           //console.log(value);
-         }
+     _applyValue (value, old)
+    {
+      // Sync with content element
+      if (value) {
+        this.getContentElement().setValue(value);
+        //console.log(value);
+      }
+
+      // Mark text size cache as invalid
+      this.__invalidContentSize = true;
+
+      // Update layout
+      qx.ui.core.queue.Layout.add(this);
+    },
  
-         // Mark text size cache as invalid
-         this.__invalidContentSize = true;
- 
-         // Update layout
-         qx.ui.core.queue.Layout.add(this);
-       },
- 
-     _applyFill : function(value, old)
+     _applyFill (value, old)
      {
        if (value) {
          this.getContentElement().setStyle("color", qx.theme.manager.Color.getInstance().resolve(value));
@@ -290,13 +255,13 @@
      },
      
      // property apply
-     _applyCssClass : function (value, old) {
+     _applyCssClass (value, old) {
        this.getContentElement().removeClass(old);
        this.getContentElement().addClass(value);
      },
  
      // property apply
-     _applyColor : function(value, old) {
+     _applyColor (value, old) {
          this.getContentElement().setStyle("color", value||"");
      },
  
@@ -325,7 +290,7 @@
       * @param width {Integer?null} Optional width constraint
       * @return {Map} Map with <code>width</code> and <code>height</code> keys
       */
-     __computeContentSize : function(width)
+     __computeContentSize (width)
      {
        var Label = qx.bom.Label;
        //var font = this.getFont();
@@ -341,15 +306,13 @@
      }
    },
  
- 
- 
    /*
    *****************************************************************************
       DESTRUCTOR
    *****************************************************************************
    */
  
-   destruct : function()
+   destruct ()
    {
     /*
      if (qx.core.Environment.get("qx.dynlocale")) {

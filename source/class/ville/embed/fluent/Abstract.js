@@ -21,20 +21,19 @@
  {
    extend : ville.embed.EmbedBase,
  
-   /*
-   *****************************************************************************
-      CONSTRUCTOR
-   *****************************************************************************
-   */
- 
-   /**
-    * @param none
-    * 
-    */
-   construct : function()
+   construct ()
    {
-     this.base(arguments);
-     //set default template for this group
-     this.setTemplate('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2048 2048" style="fill:currentColor;"><path d="{{pathd}}"></path></svg>');
+    super();
+   },
+
+   members :
+   {
+    render (pathd)
+    {
+      return `
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2048 2048" style="fill: currentColor;">
+       <path d="${pathd}"></path>
+      </svg>`
+    }
    }
  });

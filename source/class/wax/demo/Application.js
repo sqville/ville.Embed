@@ -10,7 +10,7 @@
 
 /**
  * This is the main application class of your custom application "wax"
- *
+ * @external(ville/embed/iconicss.min.css)
  * @asset(wax/demo/*)
  */
 qx.Class.define("wax.demo.Application",

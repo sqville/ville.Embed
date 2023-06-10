@@ -53,28 +53,29 @@ qx.Mixin.define("ville.embed.MAtom",
   	
   },
 
-
   /*
   *****************************************************************************
      MEMBERS
   *****************************************************************************
   */
-
   members :
   {
   	
   	// property apply
-    _applyIconProps : function(value, old) {
+    _applyIconProps (value, old) 
+    {
       this.getChildControl("icon").set(value);
     },
 
     // property apply
-    _applyEmbedProps : function(value, old) {
+    _applyEmbedProps (value, old) 
+    {
       this.getEmbed().set(value);
     },
 
     // property apply
-    _applyEmbed : function(value, old) {
+    _applyEmbed (value, old) 
+    {
       value.setAnonymous(true);
       this._addAt(value, 0);
       if (this.getShow() === "label") {

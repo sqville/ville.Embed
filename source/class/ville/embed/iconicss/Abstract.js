@@ -2,7 +2,7 @@
 
    Ville Software (SQville)
 
-   Copyright: 2021 sqville
+   Copyright: 2023 sqville
 
    License:
      MIT: https://opensource.org/licenses/MIT
@@ -14,31 +14,20 @@
 ************************************************************************ */
 
 /**
- * NOTE: Instances of this class must be disposed of after use
- *
+ * CSS Rule source can be referrenced in the resource css file noted below
+ * (ville/embed/iconicss.css)
+ * 
  */
+
  qx.Class.define("ville.embed.iconicss.Abstract",
  {
    extend : ville.embed.EmbedBase,
  
-   /*
-   *****************************************************************************
-      CONSTRUCTOR
-   *****************************************************************************
-   */
- 
-   /**
-    * @param none
-    * 
-    */
-   construct : function()
+   construct ()
    {
-     this.base(arguments);
-     //set default template for this group
-     this.setTemplate('<i class="{{class}}" style="font-size:{{size}}em; color:inherit;"></i>');
-     //this.setTemplate('<i class="${class}" style="font-size:${size}em; color:inherit;"></i>');
+    super();
 
-     //add CSS rules to global stylesheet
+    //add CSS rules to global stylesheet
     var sheet = qx.ui.style.Stylesheet.getInstance();
     sheet.addRule("i[class*='icss-']", "position: relative; display:inline-block; font-style: normal; background-color:currentColor; box-sizing: border-box; vertical-align: middle;");
     sheet.addRule("i[class*='icss-']:before", "content: ''; border-width: 0; position: absolute; box-sizing: border-box;");
@@ -47,11 +36,11 @@
 
    members : 
    {
-     // overridden
+    // overridden
     _applySize : function(value, old)
     {
       if (value) {
-        this.setValue(qx.bom.Template.render(this.getTemplate(), {class : this.getCssClass(), size : value}));
+        this.setValue(`<i class="${this.getCssClass()}" style="font-size:${value}em; color:${this.getColor()};"></i>`);
       }
     }
    }

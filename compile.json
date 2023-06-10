@@ -10,7 +10,8 @@
     },
     {
       "type": "build",
-      "outputPath": "compiled/build"
+      "outputPath": "compiled/build",
+      "inline-external-scripts": true
     }
   ],
   "defaultTarget": "source",
@@ -18,7 +19,7 @@
 
   "applications": [
     {
-      "class": "wax.demo.Application",
+      "class": "wax.demo.ApplicationTest",
       "theme": "wax.demo.theme.Theme",
       "name": "waxdemo",
       "title": "WaxDemo"
