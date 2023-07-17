@@ -47,7 +47,7 @@ qx.Class.define("wax.demo.ApplicationTest",
       var airticketsicon = new ville.embed.fluent.AirTickets(60, 60, "blue");
       var airticketsicon2 = new ville.embed.fluent.AirTickets2().set({width: 50, height: 50, textColor: "red"});
 
-      var button1 = new qx.ui.form.Button('Embeded SVG').set({ embed : airticketsicon2 });
+      var button1 = new qx.ui.form.Button('Embeded SVG').set({ appearance: "testbutton", embed : airticketsicon2 });
 
       // Create a button with an SVG embed for the icon
       var cubeoicon = new ville.embed.iconicss.CubeO(3, "green");
