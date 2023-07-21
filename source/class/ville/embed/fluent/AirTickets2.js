@@ -2,19 +2,11 @@
 
 SQville
 
-   License:
-     MIT: https://opensource.org/licenses/MIT
-     See the LICENSE file in the project's top-level directory for details.
-
    Authors:
      * Chris Eskew (sqville) sqville@gmail.com
 
 ************************************************************************ */
 
-/**
- * NOTE: Instances of this class must be disposed of after use
- *
- */
  qx.Class.define("ville.embed.fluent.AirTickets2",
  {
    extend : ville.embed.fluent.Abstract2,

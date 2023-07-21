@@ -53,13 +53,19 @@ qx.Class.define("wax.demo.ApplicationTest",
       var cubeoicon = new ville.embed.iconicss.CubeO(3, "green");
       var button2 = new qx.ui.form.Button('Embeded Cube').set({ embed : cubeoicon });
 
+      // Calendar Month for fluent theme
+      var iconCalendarMonthRegular = new ville.embed.fluent.CalendarMonthRegular().set({width: 20, height: 20, textColor: "red"});
+      var button3 = new qx.ui.form.Button('Default').set({ appearance: "testbutton", embed : iconCalendarMonthRegular });
+
       // Document is the application root
       var doc = this.getRoot();
 
       // Add button to document at fixed coordinates
-      doc.add(button1, {left: 100, top: 50});
+      doc.add(button1, {left: 50, top: 40});
 
-      doc.add(button2, {left: 100, top: 250});
+      doc.add(button2, {left: 50, top: 150});
+
+      doc.add(button3, {left: 50, top: 280});
     }
   }
 });
