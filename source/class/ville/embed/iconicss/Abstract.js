@@ -37,7 +37,7 @@
    members : 
    {
     // overridden
-    _applySize : function(value, old)
+    _applySize (value, old)
     {
       if (value) {
         this.setValue(`<i class="${this.getCssClass()}" style="font-size:${value}em; color:${this.getColor()};"></i>`);
