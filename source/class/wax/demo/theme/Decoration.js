@@ -213,8 +213,11 @@ qx.Theme.define("wax.demo.theme.Decoration",
    
    "progressbar-trans" :
    {
-       radius : 0,
-       width: 0
+    style:
+    {
+      radius : 0,
+      width: 0
+    }
    },
 
 
@@ -243,6 +246,51 @@ qx.Theme.define("wax.demo.theme.Decoration",
        style : "solid",
        color : "orange"
      }
+   },
+
+   "clippy-arrow-left" :
+   {
+    style :
+     {
+       clipPath : "polygon(40% 0%, 40% 20%, 100% 20%, 100% 80%, 40% 80%, 40% 100%, 0% 50%)"
+     }
    }
+
+   /*
+    ---------------------------------------------------------------------------
+      FreeStyleCss tests
+
+
+      { 		
+          before : 
+          {
+            "width" : "3px",
+            "height" : "13px",
+            "left" : "5px",
+            "transform" : "rotate(45deg)",
+            "transition" : "background-color .8s ease",
+            "position" : "absolute",
+            "top" : "0px",
+            "background-color" : "gray",
+            "content" : "''"
+          },
+          after :
+          {
+            "width" : "3px",
+            "height" : "13px",
+            "left" : "5px",
+            "transform" : "rotate(-45deg)",
+            "transition" : "background-color .8s ease",
+            "position" : "absolute",
+            "top" : "0px",
+            "background-color" : "gray",
+            "content" : "''"
+          }
+        }
+    ---------------------------------------------------------------------------
+    */
+
+    
+
   }
 });

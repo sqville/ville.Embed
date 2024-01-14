@@ -36,6 +36,9 @@ qx.Class.define("wax.demo.ApplicationTest",
 
       // *** Mixin ville.upload Appearances and Decorations with current theme
       qx.Class.include(qx.ui.basic.Atom, ville.embed.MAtom);
+
+      // *** FreeStyleCss testing
+      qx.Class.include(qx.ui.decoration.Decorator, ville.embed.MClipPath);
  
       /*
       -------------------------------------------------------------------------
@@ -57,6 +60,8 @@ qx.Class.define("wax.demo.ApplicationTest",
       var iconCalendarMonthRegular = new ville.embed.fluent.CalendarMonthRegular().set({width: 20, height: 20, textColor: "red"});
       var button3 = new qx.ui.form.Button('Default').set({ appearance: "testbutton", embed : iconCalendarMonthRegular });
 
+      var button4 = new qx.ui.form.Button("Clip path Button").set({ appearance: "clippy" });
+
       // Document is the application root
       var doc = this.getRoot();
 
@@ -66,6 +71,8 @@ qx.Class.define("wax.demo.ApplicationTest",
       doc.add(button2, {left: 50, top: 150});
 
       doc.add(button3, {left: 50, top: 280});
+
+      doc.add(button4, {left: 50, top: 360});
     }
   }
 });

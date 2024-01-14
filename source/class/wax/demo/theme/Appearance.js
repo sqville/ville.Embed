@@ -69,6 +69,33 @@ qx.Theme.define("wax.demo.theme.Appearance",
       }
     },
 
+    "clippy" :
+    {
+      include : "button",
+
+      style : function(states)
+      {
+        return {
+          icon : "data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="
+        }
+      }
+    },
+
+    "clippy/icon" :
+    {
+      include : "image",
+
+      style : function(states)
+      {
+        return {
+          width : 24,
+          height : 24,
+          backgroundColor : "black",
+          decorator : "clippy-arrow-left"
+        }
+      }
+    },
+
      /*
     ---------------------------------------------------------------------------
       wax.demo.Atom

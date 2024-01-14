@@ -26,19 +26,12 @@ qx.Mixin.define("ville.embed.MFreestyleCss",
   */
 
   properties :
-  {
-    /*
-    ---------------------------------------------------------------------------
-      PROPERTY: CSS ICON NAME
-    ---------------------------------------------------------------------------
-    */
-    
+  {    
     /** name of freesytle css block*/
     freestyleCss :
     {
       nullable : true,
       check : "String",
-      init : "",
       apply : "_applyFreestyleCss"
     }    
   },
@@ -56,9 +49,12 @@ qx.Mixin.define("ville.embed.MFreestyleCss",
     _styleFreestyleCss : function(styles)
     {
 	  var iconname = this.getFreestyleCss();
-	  if (iconname.length > 0) {
+	  console.log(iconname);
+	  //if (iconname.length > 0) {
+	  if (!iconname) {
 	  	
-	  	var sudostylemap = ville.embed.Image.CSSICONS[iconname]; 
+	  	//var sudostylemap = ville.embed.Image.CSSICONS[iconname]; 
+		var sudostylemap = iconname;
 	  	
 	  	//establish env specific property names
 	  	// Border Radius
@@ -106,7 +102,7 @@ qx.Mixin.define("ville.embed.MFreestyleCss",
     {
     	//work down include chain before updating styles
     	if (sudostylemap.hasOwnProperty("include")){
-		  	var nextstylemap = sqv.theme.clean.Image.CSSICONS[sudostylemap["include"]];
+		  	var nextstylemap = ville.embed.Image.CSSICONS[sudostylemap["include"]];
 		  	delete sudostylemap["include"];
 		  	arrmaps.unshift(sudostylemap);
 		  	if (nextstylemap.hasOwnProperty("include"))
@@ -130,7 +126,7 @@ qx.Mixin.define("ville.embed.MFreestyleCss",
     {
       //work down include chain before updating styles
       if (sudostylemap.hasOwnProperty("include")){
-				var nextstylemap = sqv.theme.clean.Image.CSSICONS[sudostylemap["include"]];
+				var nextstylemap = ville.embed.Image.CSSICONS[sudostylemap["include"]];
 				if (nextstylemap.hasOwnProperty("include")) {
 					sudostylemap["include"] = nextstylemap["include"];
 					this._mergeRecursive(sudostylemap, nextstylemap);
