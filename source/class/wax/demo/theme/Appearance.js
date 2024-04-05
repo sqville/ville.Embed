@@ -97,19 +97,22 @@ qx.Theme.define("wax.demo.theme.Appearance",
       }
     },
 
-    "clippy" :
+    "clippybutton" :
     {
       include : "button",
+      alias: "button",
 
       style : function(states)
       {
         return {
-          icon : "data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="
+          //icon : "data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="
+          icon : "",
+          iconProps : states.hovered ? { backgroundColor : "blue" } : { backgroundColor : "black" }
         }
       }
     },
 
-    "clippy/icon" :
+    "clippybutton/icon" :
     {
       include : "image",
 
@@ -119,9 +122,57 @@ qx.Theme.define("wax.demo.theme.Appearance",
           width : 24,
           height : 24,
           backgroundColor : "black",
-          decorator : "clippy-arrow-left"
+          clipPath : "polygon(40% 0%, 40% 20%, 100% 20%, 100% 80%, 40% 80%, 40% 100%, 0% 50%)"
         }
       }
+    },
+
+     /*
+    ---------------------------------------------------------------------------
+      wax.demo.ComboBox
+    ---------------------------------------------------------------------------
+    */
+
+    // override
+    "combobox/button": {
+      alias: "button-frame",
+      include: "button-frame",
+
+      style(states) {
+        var decorator = "button-box-right-borderless";
+
+        if (states.hovered && !states.pressed && !states.checked) {
+          decorator = "button-box-hovered-right-borderless";
+        } else if (states.hovered && (states.pressed || states.checked)) {
+          decorator = "button-box-pressed-hovered-right-borderless";
+        } else if (states.pressed || states.checked) {
+          decorator = "button-box-pressed-right-borderless";
+        }
+
+        return {
+          icon: "",
+          decorator: decorator,
+          padding: [0, 0, 0, 1],
+          width: 20,
+          iconProps : states.hovered ? { color : "blue" } : { color : "black" }
+        };
+      }
+    },
+    
+    "combobox/button/icon" :
+    {
+    	include : "image",
+    	
+    	style : function(states)
+    	{        
+        return {
+          html : wax.demo.theme.Image.ChevronDownRegular,
+          width : 16,
+          height : 16,
+          backgroundColor : "transparent"
+          //decorator : "ville-icon-chevron-down"
+    		};
+    	}
     },
 
      /*

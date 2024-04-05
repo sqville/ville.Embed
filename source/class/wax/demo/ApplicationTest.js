@@ -34,10 +34,13 @@ qx.Class.define("wax.demo.ApplicationTest",
         qx.log.appender.Console;
       }
 
-      // *** Mixin ville.upload Appearances and Decorations with current theme
+      // *** Mixins to enable embed features
       qx.Class.include(qx.ui.basic.Atom, ville.embed.MEmbed);
 
-      // *** Icons using CSS clip-path
+      // Adds "html" and "clippath" properties for embeding svg content via appearance themes
+      qx.Class.include(qx.ui.basic.Image, ville.embed.MImage);
+
+      // *** Icons using CSS clip-path in a decorator entry
       qx.Class.include(qx.ui.decoration.Decorator, ville.embed.MClipPath);
  
       /*
@@ -60,7 +63,19 @@ qx.Class.define("wax.demo.ApplicationTest",
       var iconCalendarMonth = new ville.embed.fluent.CalendarMonth().set({ width: 40, height: 40 });
       var button3 = new qx.ui.form.Button("Fluent Calendar Month").set({ appearance: "testbutton", embed : iconCalendarMonth });
 
-      var button4 = new qx.ui.form.Button("Clip path Button").set({ appearance: "clippy" });
+      var button4 = new qx.ui.form.Button("Clip path Button").set({ appearance: "clippybutton" });
+
+
+      // ComboBox to show use of MImage mixin
+      var comboBox1 = new qx.ui.form.ComboBox().set({width: 250, allowStretchX: false, allowStretchY: false});
+      // fill the combo box with some stuff
+      for (var i = 1; i < 6; i++) {
+        var tempItem = new qx.ui.form.ListItem(
+          "2^ " + i + " = " + Math.pow(2, i)
+        );
+        //.set({appearance: "combobox-listitem"});
+        comboBox1.add(tempItem);
+      }
 
       //var fontimage = new qx.ui.basic.Image("@testthis");
 
@@ -74,9 +89,11 @@ qx.Class.define("wax.demo.ApplicationTest",
 
       doc.add(button2, {left: 50, top: 150});
 
-      doc.add(button3, {left: 50, top: 280});
+      doc.add(button3, {left: 50, top: 250});
 
-      doc.add(button4, {left: 50, top: 360});
+      doc.add(button4, {left: 50, top: 350});
+
+      doc.add(comboBox1, {left: 350, top: 150});
     }
   }
 });
