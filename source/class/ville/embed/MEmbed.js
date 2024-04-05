@@ -1,20 +1,10 @@
 /* ************************************************************************
-   Ville Software
-   http://sqville.com
-   Copyright:
-     None
-   License:
-     MIT
+   SQville
    Authors:
-     * Chris Eskew (chris.eskew@sqville.com)
+     * Chris Eskew (sqville) sqville@gmail.com
 ************************************************************************ */
 
-
-/**
- * A mixin that enables the font property, and thus, font handling abilities to the Image object
- * This mixin is needed to enable font icons to show up using the Font object
- */
-qx.Mixin.define("ville.embed.MAtom",
+qx.Mixin.define("ville.embed.MEmbed",
 {
     
   /*
@@ -78,7 +68,7 @@ qx.Mixin.define("ville.embed.MAtom",
     {
       value.setAnonymous(true);
       this._addAt(value, 0);
-      if (this.getShow() === "label") {
+      if (this.getIcon() != null) {
         value.exclude();
       }
     }

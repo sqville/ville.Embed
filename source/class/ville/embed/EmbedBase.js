@@ -44,31 +44,7 @@
    */
  
    properties :
-   {     
-     /** Name of icon or graphic to use
-      * 
-      */
-     name :
-     {
-       check : "String",
-       apply : "_applyName",
-       event : "changeName",
-       init : null,
-       nullable : true,
-       themeable : true
-     },
- 
-     /** template used by named embed  
-      * 
-      */
-     template :
-     {
-       check : "String",
-       init : null,
-       nullable : true,
-       themeable : true
-     },
-     
+   {          
      /**
       * Switches between rich HTML and text content. The text mode (<code>false</code>) supports
       * advanced features like ellipsis when the available space is not
@@ -122,11 +98,11 @@
       */
      cssClass :
      {
-         check : "String",
-         init : "",
-         nullable : true,
-         themeable : true,
-         apply : "_applyCssClass"
+        check : "String",
+        init : "",
+        nullable : true,
+        themeable : true,
+        apply : "_applyCssClass"
      },
  
      /**
@@ -134,25 +110,14 @@
       */
      color :
      {
-         nullable : true,
-         check : "Color",
-         apply : "_applyColor",
-         event : "changeColor",
-         themeable : true,
-         inheritable : true
-     },
- 
-     /** Color of the svg fill property */
-     fill :
-     {
-       check : "Color",
-       nullable : true,
-       themeable : true,
-       apply : "_applyFill",
-       event : "changeFill"
+        nullable : true,
+        check : "Color",
+        apply : "_applyColor",
+        event : "changeColor",
+        themeable : true,
+        inheritable : true
      }
-   },
- 
+    },
  
    /*
    *****************************************************************************
@@ -246,14 +211,7 @@
       // Update layout
       qx.ui.core.queue.Layout.add(this);
     },
- 
-     _applyFill (value, old)
-     {
-       if (value) {
-         this.getContentElement().setStyle("color", qx.theme.manager.Color.getInstance().resolve(value));
-       }
-     },
-     
+      
      // property apply
      _applyCssClass (value, old) {
        this.getContentElement().removeClass(old);

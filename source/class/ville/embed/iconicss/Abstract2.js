@@ -17,29 +17,54 @@
  * 
  */
 
- qx.Class.define("ville.embed.iconicss.Abstract",
+ qx.Class.define("ville.embed.iconicss.Abstract2",
  {
-   extend : ville.embed.EmbedBase,
+  type: "abstract", 
+    
+  extend : qx.ui.embed.Html,
  
-   construct ()
-   {
+  construct ()
+  {
     super();
+
+    this.setWidth(12);
+    this.setHeight(12);
+
+    this.setAllowStretchX(true);
+    this.setAllowStretchY(true);
 
     //add CSS rules to global stylesheet
     var sheet = qx.ui.style.Stylesheet.getInstance();
     sheet.addRule("i[class*='icss-']", "position: relative; display:inline-block; font-style: normal; background-color:currentColor; box-sizing: border-box; vertical-align: middle;");
     sheet.addRule("i[class*='icss-']:before", "content: ''; border-width: 0; position: absolute; box-sizing: border-box;");
     sheet.addRule("i[class*='icss-']:after", "content: ''; border-width: 0; position: absolute; box-sizing: border-box;");
-   },
+  },
+
+  properties :
+  {
+    // overridden
+    appearance: 
+    {
+      refine: true,
+      init: "icon"
+    },
+    
+    /** Font size of the widget */
+    size :
+    {
+      check : "Integer",
+      init : 1,
+      apply : "_applySize"
+    }
+  },
 
    members : 
-   {
-    // overridden
+  {
     _applySize (value, old)
     {
       if (value) {
-        this.setValue(`<i class="${this.getCssClass()}" style="font-size:${value}em; color:${this.getColor()};"></i>`);
+        this.setHtml(`<i class="${this.getCssClass()}" style="font-size:${value}em; color:${this.getTextColor()};"></i>`);
       }
     }
-   }
+  }
  });

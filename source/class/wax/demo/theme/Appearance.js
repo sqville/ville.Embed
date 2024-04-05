@@ -43,11 +43,41 @@ qx.Theme.define("wax.demo.theme.Appearance",
       }
     },
 
+    "icon" :
+    {
+      include: "label",
+      
+      style : function(states)
+      {
+        return {
+          backgroundColor : "transparent"
+        };
+      }
+    },
+
      /*
     ---------------------------------------------------------------------------
       wax.demo.Button
     ---------------------------------------------------------------------------
     */
+
+    "testiconicssbutton" :
+    {
+      include : "button",
+
+      style : function(states, styles)
+      {
+        var iprops;
+        if (states.hovered)
+          iprops = { textColor : "blue" };
+        else
+        iprops = { textColor : "black" };
+        
+        return {
+          embedProps : iprops
+        }
+      }
+    },
 
     "testbutton" :
     {
@@ -57,11 +87,9 @@ qx.Theme.define("wax.demo.theme.Appearance",
       {
         var iprops;
         if (states.hovered)
-          iprops = { textColor: "blue" };
-        else if (!states.hovered && states.abandoned)
-          iprops = { textColor: "red" };
+          iprops = { iconStyle : "filled" };
         else
-          iprops = { textColor: "red" };
+        iprops = { iconStyle : "regular" };
         
         return {
           embedProps : iprops

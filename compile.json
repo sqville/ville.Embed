@@ -22,7 +22,8 @@
       "class": "wax.demo.ApplicationTest",
       "theme": "wax.demo.theme.Theme",
       "name": "waxdemo",
-      "title": "WaxDemo"
+      "title": "WaxDemo",
+      "bootPath": "source/boot"
     }
   ]
 }

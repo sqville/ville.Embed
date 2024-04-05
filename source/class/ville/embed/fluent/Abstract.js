@@ -14,26 +14,77 @@
 ************************************************************************ */
 
 /**
- * NOTE: Instances of this class must be disposed of after use
+ * NOTE: None
  *
  */
  qx.Class.define("ville.embed.fluent.Abstract",
  {
-   extend : ville.embed.EmbedBase,
+  type: "abstract", 
+  
+  extend : qx.ui.embed.Html,
  
    construct ()
    {
     super();
    },
 
+   properties :
+  {
+    // overridden
+    appearance: 
+    {
+      refine: true,
+      init: "icon"
+    },
+    
+    viewBox :
+    {
+      check : "String",
+      init : "0 0 20 20",
+      themeable : true
+    },
+
+    iconStyle :
+    {
+      check : ["regular", "filled"],
+      init: "regular",
+      apply: "_applyIconStyle",
+      event: "changeIconStyle",
+      nullable : true,
+      themeable : true
+    },
+  	
+  },
+
    members :
    {
-    render (pathd)
+    _htmlregular : null,
+
+    _htmlfilled : null,
+    
+    pathit (pathd)
     {
       return `
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2048 2048" style="fill: currentColor;">
-       <path d="${pathd}"></path>
+       <path d="${pathd}"></path>`
+    },
+
+    svgit (pathtags)
+    {
+      var viewbox = this.getViewBox();
+      return `
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="${viewbox}" fill="currentColor">
+       ${pathtags}
       </svg>`
+    },
+
+    // property apply
+    _applyIconStyle(value, old) {
+      if (this._htmlregular != null) {
+        if (value == "regular")
+          this.setHtml(this._htmlregular);
+        else if (value == "filled" & this._htmlfilled != null)
+          this.setHtml(this._htmlfilled);
+      }
     }
    }
  });

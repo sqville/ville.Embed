@@ -65,6 +65,12 @@ qx.Class.define("wax.demo.Application",
         // support additional cross-browser console. Press F7 to toggle visibility
         qx.log.appender.Console;
       }
+
+      // *** Mixin ville.upload Appearances and Decorations with current theme
+      //qx.Class.include(qx.ui.basic.Atom, ville.embed.MAtom);
+
+      // *** Icons using CSS clip-path
+      //qx.Class.include(qx.ui.decoration.Decorator, ville.embed.MClipPath);
       
       // >>> START of Base Scaffolding >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
       // >>> Base Scaffolding are objects common to all Wax - Franklin based apps  >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
