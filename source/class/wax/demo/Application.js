@@ -66,8 +66,8 @@ qx.Class.define("wax.demo.Application",
         qx.log.appender.Console;
       }
 
-      // *** Mixin ville.upload Appearances and Decorations with current theme
-      //qx.Class.include(qx.ui.basic.Atom, ville.embed.MAtom);
+      // *** Mixins to enable embed features
+      qx.Class.include(qx.ui.basic.Atom, ville.embed.MEmbed);
 
       // *** Icons using CSS clip-path
       //qx.Class.include(qx.ui.decoration.Decorator, ville.embed.MClipPath);
@@ -136,20 +136,11 @@ qx.Class.define("wax.demo.Application",
       var winAboutWax = this.__createDetailWindow();
 
       winAboutWax.getLayout().set({spacing: 20});
-      winAboutWax.set({caption: "About Wax", contentPadding: 0, status: "Github repo coming soon"});
-      var txtaboutwax = "Wax aims to be a rapid application development and prototyping tool/system. There's a spectrum of rapid-app-dev tools (or low-code tools) - Outsystems, Appian and Ionic on the high-end, Foundation, Gatsbyjs and SemanticUI on the other. Wax is currently not yet on this spectrum, but it does have an approach and supporting assets to begin the process of becoming a highly effective and useful app-dev/app-prototyping asset.<br><br><br>";
-      txtaboutwax += "<span style='font-size: 16px;'>THE APPROACH (so far):</span><br><br>";
-      txtaboutwax += "<b>Build Qooxdoo skeletons (and lots of them) that function on multiple devices or use case scenarios.</b> A typical use case - After meeting with the client and gathering initial requirements, the prototype developer generates an application using a skeleton (chosen from a long list of skeletons) that best meets the initial requirements. Just like website templates found on the web, Qooxdoo skeletons would encompass enough functionality to help produce a high fidelity prototype in a matter of a few days. There is the potential that a skeleton could also include mock data (json) and non-Qooxdoo scripts to set up a cloud backend (not yet proven out). Skeletons could even include non-Qooxdoo templates for native mobile frameworks such as React Native, Flutter and Felgo (easy to do since skeleton templates are just static files with mustache-like tags).<br><br>";
-      txtaboutwax += "<b>Cut and paste components from a well-stocked and possibly specially-tailored demo browser application.</b> Just as we do today, we cut and paste code from examples into our apps. Properly constructed skeletons and documented demos could facilitate the rapid integration of components into any application (not yet proven out). Wax skeletons, and resulting applications would be divided out logically into three areas: Scaffolding, Wiring and Appearance. Scaffolding includes object creation, placement and initial configuration. Wiring involves application flow (mostly via event listener creation and assignment). Appearance is simple look and feel via theming and animations. Skeletons would include an appropriate amount of Appearance and animation code, but when the goal is to rapidly produce a high fidelity prototype Scaffolding and Wiring would be the top focus.<br><br>";
-      txtaboutwax += "<b>Use other frameworks for native mobile applications, and sync changes made in the main Qooxdoo app with the produced (from a skeleton) native mobile framework project.</b> Converting Qooxdoo produced code to React Native code, for example, is relatively easy. Object hierarchy is taken from getObjectRegistry method of the Application (taken from Inspector application). UI objects and their properties can be easily mapped and organized (proven out to a small degree). The difficult part is how to best get the changes to (and from) the native mobile project. Using qooxdoo compiler would be ideal, but the compiler does not have access to the apps object hierarchy. The approach Wax would take is to mimic the manual means of producing code. The manual means goes something like this: Include InspectorModel.js file in a project. Add a control (Button) to execute the reading of the ObjectRegistry and translation to the target framework. Write the translation to the console (or a TextArea object). Cut and paste resulting code to the other project.  A more automated approach would be to include an Electronjs project/app in the skeleton for the user to run at any given time. Electronjs would then sync the resulting translation to the target native mobile project. This Electronjs, automated approach has not yet been proven out.<br><br><br>";
-      txtaboutwax += "<span style='font-size: 16px;'>CONCLUSION:</span><br><br>";
-      txtaboutwax += "Is Wax, or even the concept of Wax, a worthwhile endeavor? Can the needed productivity gains be met in order to call itself a rapid app-dev tool? Is the noted approach the right way forward? It completely leaves out any type of changes being made, or needed, to qooxdoo compiler. Red flag, or just using the simplest approach is the best approach, approach? This is all a head-scratcher for sure. Too many unknowns without enough time. Welcome to software solution development :-)<br><br><br>";
-      txtaboutwax += "<span style='font-size: 16px;'>SPECIAL NOTE:</span><br><br>";
-      txtaboutwax += "Skeletons and the demo browser are not new concepts to Qooxdoo. These features have been around since the beginning. The purpose of this writeup is to convey good-intent, thoughts and ideas on how to improve peoples work lives, and not meant to be critical or take credit for anything in anyway. The past and current qooxdoo core team have done, and are doing, phenomenal work. My thanks go out to them for making me look better than I really am - Cheers.";
+      winAboutWax.set({ width: 430, height: 460, contentPadding: 0});
+      var txtaboutwax = 'Project Github page: <a target="_blank" href="https://github.com/sqville/ville.Embed">https://github.com/sqville/ville.Embed</a>';
       //var aboutbox = new qx.ui.container.Composite(new qx.ui.layout.VBox(10));
       var aboutscroll = new qx.ui.container.Scroll().set({ allowStretchY: true, padding: 0, margin: 0, contentPadding: [0,24,0,24]});
       var waxatom = new qx.ui.basic.Atom(txtaboutwax,"wax/demo/ville_Wax.png").set({rich: true, iconPosition: "top", gap: 30, paddingTop: 30});
-      waxatom.getChildControl("icon").set({scale: true, width: 300, height: 106});
       waxatom.getChildControl("label").set({wrap: true});
       aboutscroll.add(waxatom);
 
@@ -157,11 +148,7 @@ qx.Class.define("wax.demo.Application",
       var btnClosewinAbout = new qx.ui.form.Button("Close Window").set({marginBottom: 18, maxWidth: 300, alignX: "center", alignY: "middle"});
       //winAboutWax.add(new qx.ui.core.Spacer(30, 20), {flex: 1});
       winAboutWax.add(btnClosewinAbout);
-      /*winAboutWax.addListener("execute", function(e) {
-        winAboutWax.restore();
-        winAboutWax.center();
-        winAboutWax.show();
-      }, this);*/
+
       btnClosewinAbout.addListener("execute", function(e) {
         winAboutWax.close();
       }, this);
@@ -172,7 +159,7 @@ qx.Class.define("wax.demo.Application",
 
       aboutmenubutton1.addListener("execute", function(e) {
         winAboutWax.restore();
-        winAboutWax.maximize();
+        //winAboutWax.maximize();
         winAboutWax.center();
         winAboutWax.show();
       }, this);
@@ -265,34 +252,56 @@ qx.Class.define("wax.demo.Application",
 
       // Basic usage
       var lblsubheadsimple =  new qx.ui.basic.Label("Basic usage:").set({font: "headeratom", marginTop: 40});
-      var lblsimpleembed = new qx.ui.basic.Label("Here, at its most <u>basic</u>, is a lone Embed object (named \"cube-o\"), sized at 3 (\"em\" per the template) and colored <span style='color: blue;'>blue</span>:").set({rich: true, wrap: true});
-      var embedCubeo = new ville.embed.Embed({ name: "cube-o", size: 3, color: "blue" });
-      var lblsimpleembedcode = new qx.ui.basic.Label("<span style='color:blue;'>new</span> <span style='color:green;'>ville.embed.Embed</span>({ name: <span style='color:maroon;'>\"cube-o\"</span>, size: <span style='color:green;'>3</span>, color: <span style='color:maroon;'>\"blue\"</span> });").set({rich: true, wrap: true, font: "monospace", backgroundColor: "#f2f2f2", padding: 6});
+      var lblsimpleembed = new qx.ui.basic.Label("Here, at its most <u>basic</u>, is a lone Embed iConicss object, sized at 3 (\"em\" per the template) and colored <span style='color: blue;'>blue</span>:").set({rich: true, wrap: true});
+      var embedCubeo = new ville.embed.iconicss.CubeO(3, "blue");
+      var lblsimpleembedcode = new qx.ui.basic.Label("var <span style='color:green;'>cubeoicon</span> = <span style='color:blue;'>new</span> <span style='color:green;'>ville.embed.iconicss.CubeO</span>(<span style='color:green;'>3</span>, <span style='color:maroon;'>\"blue\"</span>);").set({rich: true, wrap: true, font: "monospace", backgroundColor: "#f2f2f2", padding: 6});
 
       // Use in a Button (requires patching)
       var lblsubheadbutton =  new qx.ui.basic.Label("Use in another widget:").set({font: "headeratom", marginTop: 40});
-      var lblmoreembed = new qx.ui.basic.Label("To use the new widget in a Button <b>(qx.ui.form.Button)</b>, you need to first patch the Button's underlying Atom <b>(qx.ui.basic.Atom)</b>. Once patched, use the appropriate naming convention so that the Atom control knows to use the new ville.embed.Embed object instead of the qx.ui.basic.Image object:").set({rich: true, wrap: true});
-      qx.Class.patch(qx.ui.basic.Atom, ville.embed.MAtomPatch);
-      var btnembedcubeobutton = new qx.ui.form.Button('Click Me','data:text/json;{ "name": "cube-o", "size":3, "color":"blue" }').set({appearance: "testbutton", maxWidth: 200, alignX: "left", alignY: "middle"});
-      var lblbuttonembedcode = new qx.ui.basic.Label("<span style='color:green;'>/* Patch Atom before creating the Button */</span><br>qx.Class.patch(qx.ui.basic.Atom, ville.embed.MAtomPatch);<br><span style='color:blue;'>new</span> <span style='color:green;'>qx.ui.form.Button(</span><span style='color:maroon;'>'Click Me','data:text/json;{ \"name\": \"cube-o\", \"size\": 3, \"color\": \"blue\" }'</span>);").set({rich: true, wrap: true, font: "monospace", backgroundColor: "#f2f2f2", padding: 6});
+      var lblmoreembed = new qx.ui.basic.Label("To use the new widget in a Button <b>(qx.ui.form.Button)</b>, you need to first enhance the Button's underlying Atom <b>(qx.ui.basic.Atom)</b>. Once enhanced, add the icon object to the Atom based control:").set({rich: true, wrap: true});
+      var cubeoicon = new ville.embed.iconicss.CubeO(2);
+      var btnembedcubeobutton = new qx.ui.form.Button('Click Me').set({appearance: "testiconicssbutton", embed : cubeoicon, allowGrowX: false, padding: [10, 14], gap: 10, alignX: "left", alignY: "middle"});
+      var lblbuttonembedcode = new qx.ui.basic.Label("<span style='color:green;'>/* Include the Embed Mixin before creating the Button */</span><br>qx.Class.include(<span style='color:green;'>qx.ui.form.Button, ville.embed.MEmbed</span>);<br><span style='color:blue;'>new</span> <span style='color:green;'>qx.ui.form.Button(</span><span style='color:maroon;'>'Click Me'</span>).set({ embed : <span style='color:green;'>cubeoicon</span> });").set({rich: true, wrap: true, font: "monospace", backgroundColor: "#f2f2f2", padding: 6});
+      
+      var animationGrow = {
+        duration: 150,
+        keyFrames : 
+        {
+          0 : {scale: 1},
+          100 : {scale: 1.1}
+        },
+        keep : 100,
+        timing: "ease-out"
+      };
       
       btnembedcubeobutton.addListener("mouseover",function(e) {
-        var icondom = this.getChildControl("icon").getContentElement().getDomElement();
-        qx.bom.element.AnimationCss.animate(icondom, ville.embed.Manager.getInstance().animations["grow"], undefined);
+        var icondom = cubeoicon.getContentElement().getDomElement();
+        qx.bom.element.AnimationCss.animate(icondom, animationGrow, undefined);
       });      
       btnembedcubeobutton.addListener("mouseout",function(e) {
-        var icondom = this.getChildControl("icon").getContentElement().getDomElement();
-        qx.bom.element.AnimationCss.animateReverse(icondom, ville.embed.Manager.getInstance().animations["grow"], undefined);
+        var icondom = cubeoicon.getContentElement().getDomElement();
+        qx.bom.element.AnimationCss.animateReverse(icondom, animationGrow, undefined);
       });
-
-
+      
       // Some of my Favorite Icons
       var lblsubheaderFavs =  new qx.ui.basic.Label("A few of my favorite icons:").set({font: "headeratom", marginTop: 40});
       var dashboardiconflow = new qx.ui.container.Composite();
       var dashboardiconflowlayout = new qx.ui.layout.Flow(16,20,"left");
       dashboardiconflow.setLayout(dashboardiconflowlayout);
+      
       //icons in Atoms
-      var atmcoffeegrain = new qx.ui.basic.Atom("coffee-grain", 'data:text/json;{ "name": "coffee-grain", "size":3 }').set({iconPosition: "top", appearance: "icss-atom"});
+      var atmcoffeegrain = new qx.ui.basic.Atom("coffee-grain").set({ appearance: "icss-atom", embed: new ville.embed.iconicss.CoffeeGrain(3) });
+      var atmcoffee = new qx.ui.basic.Atom("coffee").set({ appearance: "icss-atom", embed: new ville.embed.iconicss.Coffee(3) });
+      var atmfootball = new qx.ui.basic.Atom("football").set({ appearance: "icss-atom", embed: new ville.embed.iconicss.Football(3) });
+      var atmshapes = new qx.ui.basic.Atom("shapes").set({ appearance: "icss-atom", embed: new ville.embed.iconicss.Shapes(3) });
+      var atmrocket = new qx.ui.basic.Atom("rocket").set({ appearance: "icss-atom", embed: new ville.embed.iconicss.Rocket(3) });
+      //var atmhtml5 = new qx.ui.basic.Atom("html5").set({ appearance: "icss-atom", embed: new ville.embed.iconicss.Football(3) });
+      //var atmcss3 = new qx.ui.basic.Atom("css3").set({ appearance: "icss-atom", embed: new ville.embed.iconicss.Football(3) });
+      //var atmjs = new qx.ui.basic.Atom("js").set({ appearance: "icss-atom", embed: new ville.embed.iconicss.Football(3) });
+      //var atmvisualcode = new qx.ui.basic.Atom("visual-code").set({ appearance: "icss-atom", embed: new ville.embed.iconicss.Football(3) });
+      var atmwolverinec = new qx.ui.basic.Atom("wolverine").set({ appearance: "icss-atom", embed: new ville.embed.iconicss.Wolverine(3) });
+      var atmsuno = new qx.ui.basic.Atom("sun-o").set({ appearance: "icss-atom", embed: new ville.embed.iconicss.SunO(3) });
+      /*
       var atmcoffee = new qx.ui.basic.Atom("coffee", 'data:text/json;{ "name": "coffee", "size": 3 }').set({iconPosition: "top", appearance: "icss-atom"});
       var atmshapes = new qx.ui.basic.Atom("shapes", 'data:text/json;{ "name": "shapes", "size": 3 }').set({iconPosition: "top", appearance: "icss-atom"});
       var atmconnection = new qx.ui.basic.Atom("connection", 'data:text/json;{ "name": "connection", "size": 3 }').set({iconPosition: "top", appearance: "icss-atom"});
@@ -315,28 +324,37 @@ qx.Class.define("wax.demo.Application",
       var atmfoodpot = new qx.ui.basic.Atom("food-pot", 'data:text/json;{ "name": "food-pot", "size": 3 }').set({iconPosition: "top", appearance: "icss-atom"});
       var atmxsquare = new qx.ui.basic.Atom("x-square", 'data:text/json;{ "name": "x-square", "size": 3, "color": "red" }').set({iconPosition: "top", appearance: "icss-atom"});
       
-      dashboardiconflow.add(atmcoffeegrain);
-      dashboardiconflow.add(atmcoffee);
-      dashboardiconflow.add(atmshapes);
+      
+      
+      
       dashboardiconflow.add(atmconnection);
       dashboardiconflow.add(atmclouddownload);
       dashboardiconflow.add(atmfolderclose);
       dashboardiconflow.add(atmtrumpet);
-      dashboardiconflow.add(atmfootball);
-      dashboardiconflow.add(atmrocket);
+      
+      
       dashboardiconflow.add(atmgear);
       dashboardiconflow.add(atmdrone);
-      dashboardiconflow.add(atmhtml5);
-      dashboardiconflow.add(atmcss3);
-      dashboardiconflow.add(atmjs);
+     
       dashboardiconflow.add(atmgoogledrivec);
-      dashboardiconflow.add(atmvisualcode);
-      dashboardiconflow.add(atmwolverinec);
-      dashboardiconflow.add(atmsuno);
+      
       dashboardiconflow.add(atmbinocular);
       dashboardiconflow.add(atmbombshell);
       dashboardiconflow.add(atmfoodpot);
       dashboardiconflow.add(atmxsquare);
+
+    */
+      dashboardiconflow.add(atmcoffee);
+      dashboardiconflow.add(atmcoffeegrain);
+      dashboardiconflow.add(atmfootball);
+      dashboardiconflow.add(atmshapes);
+      dashboardiconflow.add(atmrocket);
+      //dashboardiconflow.add(atmhtml5);
+      //dashboardiconflow.add(atmcss3);
+      //dashboardiconflow.add(atmjs);
+      //dashboardiconflow.add(atmvisualcode);
+      dashboardiconflow.add(atmwolverinec);
+      dashboardiconflow.add(atmsuno);
 
       // Assemble
       dashboardpage.add(lbliconicssheader);
@@ -362,15 +380,16 @@ qx.Class.define("wax.demo.Application",
        // Basic usage
        var lblsubheadfuisimple =  new qx.ui.basic.Label("Basic usage:").set({font: "headeratom", marginTop: 40});
        var lblfuisimpleembed = new qx.ui.basic.Label("Here, at its most <u>basic</u>, is a lone Embed object (named \"fui-airtickets\"), sized 60 x 60, and colored <span style='color: blue;'>blue</span>:").set({rich: true, wrap: true});
-       var embedfuiairticket = new ville.embed.Embed({ name: "fui-airtickets", color: "blue", width: 60, height: 60, allowGrowX: false });
+       //var embedfuiairticket = new ville.embed.Embed({ name: "fui-airtickets", color: "blue", width: 60, height: 60, allowGrowX: false });
        var lblsimplefuiembedcode = new qx.ui.basic.Label("<span style='color:blue;'>new</span> <span style='color:green;'>ville.embed.Embed</span>({ name: <span style='color:maroon;'>\"fui-airtickets\"</span>, width: <span style='color:green;'>60</span>, height: <span style='color:green;'>60</span>, color: <span style='color:maroon;'>\"blue\"</span> });").set({rich: true, wrap: true, font: "monospace", backgroundColor: "#f2f2f2", padding: 6});
  
        // Use in a Button (requires patching)
        var lblsubheadfuibutton =  new qx.ui.basic.Label("Use in another widget:").set({font: "headeratom", marginTop: 40});
        var lblmorefuiembed = new qx.ui.basic.Label("To use the new widget in a Button <b>(qx.ui.form.Button)</b>, you need to first patch the Button's underlying Atom <b>(qx.ui.basic.Atom)</b>. Once patched, use the appropriate naming convention so that the Atom control knows to use the new ville.embed.Embed object instead of the qx.ui.basic.Image object:").set({rich: true, wrap: true});
-       var btnembedfuiairticketsbutton = new qx.ui.form.Button('Click Me','data:text/json;{ "name": "fui-airtickets", "color":"blue", "width": 60, "height": 60 }').set({appearance: "testbutton", maxWidth: 200, alignX: "left", alignY: "middle"});
+       //var btnembedfuiairticketsbutton = new qx.ui.form.Button('Click Me','data:text/json;{ "name": "fui-airtickets", "color":"blue", "width": 60, "height": 60 }').set({appearance: "testbutton", maxWidth: 200, alignX: "left", alignY: "middle"});
        var lblbuttonfuiembedcode = new qx.ui.basic.Label("<span style='color:green;'>/* Patch Atom before creating the Button */</span><br>qx.Class.patch(qx.ui.basic.Atom, ville.embed.MAtomPatch);<br><span style='color:blue;'>new</span> <span style='color:green;'>qx.ui.form.Button(</span><span style='color:maroon;'>'Click Me','data:text/json;{ \"name\": \"fui-airtickets\", \"color\": \"blue\", \"width\": 60, \"height\": 60 }'</span>);").set({rich: true, wrap: true, font: "monospace", backgroundColor: "#f2f2f2", padding: 6});
        
+       /*
        btnembedfuiairticketsbutton.addListener("mouseover",function(e) {
          var icondom = this.getChildControl("icon").getContentElement().getDomElement();
          qx.bom.element.AnimationCss.animate(icondom, ville.embed.Manager.getInstance().animations["grow"], undefined);
@@ -379,12 +398,14 @@ qx.Class.define("wax.demo.Application",
          var icondom = this.getChildControl("icon").getContentElement().getDomElement();
          qx.bom.element.AnimationCss.animateReverse(icondom, ville.embed.Manager.getInstance().animations["grow"], undefined);
        });
+       */
 
       // Some of my Favorite Icons
       var lblsubheaderfuiFavs =  new qx.ui.basic.Label("A few of my favorite icons:").set({font: "headeratom", marginTop: 40});
       var fuiiconflow = new qx.ui.container.Composite();
       var fuiiconflowlayout = new qx.ui.layout.Flow(16,20,"left");
       fuiiconflow.setLayout(fuiiconflowlayout);
+      /*
       var atmaccess = new qx.ui.basic.Atom("Access", 'data:text/json;{ "name": "fui-access", "color": "#AB2325", "width": 60, "height": 60 }').set({iconPosition: "top", appearance: "icss-atom"});
       var atmword = new qx.ui.basic.Atom("Word", 'data:text/json;{ "name": "fui-word", "color": "#1748A4", "width": 60, "height": 60 }').set({iconPosition: "top", appearance: "icss-atom"});
       var atmexcel = new qx.ui.basic.Atom("Excel", 'data:text/json;{ "name": "fui-excel", "color": "#12743B", "width": 60, "height": 60 }').set({iconPosition: "top", appearance: "icss-atom"});
@@ -404,16 +425,17 @@ qx.Class.define("wax.demo.Application",
       fuiiconflow.add(atmfuikey);
       fuiiconflow.add(atmfuirelease);
       fuiiconflow.add(atmfuishapes);
+      */
 
       overviewpage.add(lblfluentuiheader);     
       overviewpage.add(lblfluentsimpledesc); 
       overviewpage.add(lblsubheadfuisimple); 
       overviewpage.add(lblfuisimpleembed); 
-      overviewpage.add(embedfuiairticket);
+      //overviewpage.add(embedfuiairticket);
       overviewpage.add(lblsimplefuiembedcode);
       overviewpage.add(lblsubheadfuibutton);
       overviewpage.add(lblmorefuiembed);
-      overviewpage.add(btnembedfuiairticketsbutton);
+      //overviewpage.add(btnembedfuiairticketsbutton);
       overviewpage.add(lblbuttonfuiembedcode);
       overviewpage.add(lblsubheaderfuiFavs);
       overviewpage.add(fuiiconflow);
@@ -442,6 +464,7 @@ qx.Class.define("wax.demo.Application",
       var materialiconflow = new qx.ui.container.Composite();
       var materialiconflowlayout = new qx.ui.layout.Flow(16,20,"left");
       materialiconflow.setLayout(materialiconflowlayout);
+      /*
       var atmevent = new qx.ui.basic.Atom("Event", 'data:text/json;{ "name": "material-event", "width": 60, "height": 60 }').set({iconPosition: "top", appearance: "icss-atom"});
       var atmbusiness = new qx.ui.basic.Atom("Business", 'data:text/json;{ "name": "material-business", "width": 60, "height": 60 }').set({iconPosition: "top", appearance: "icss-atom"});
       var atmbiotech = new qx.ui.basic.Atom("Biotech", 'data:text/json;{ "name": "material-biotech", "width": 60, "height": 60 }').set({iconPosition: "top", appearance: "icss-atom"});
@@ -451,6 +474,7 @@ qx.Class.define("wax.demo.Application",
       materialiconflow.add(atmbusiness);
       materialiconflow.add(atmbiotech);
       materialiconflow.add(atmbolt);
+      */
 
       tablelistpage.add(lblmaterialheader);
       tablelistpage.add(lblmaterialsimpledesc);
@@ -460,6 +484,7 @@ qx.Class.define("wax.demo.Application",
       tablelistpage.add(lblmorematerialembed);
       tablelistpage.add(lblsubheadermaterialFavs);
       tablelistpage.add(materialiconflow);
+      
 
 
 
@@ -734,11 +759,9 @@ qx.Class.define("wax.demo.Application",
     __createDetailWindow : function()
     {
       // Create the Window
-      var win = new qx.ui.window.Window("Detail Window").set({ appearance: "wax-window", allowMaximize : true, allowMinimize : false, modal: true, movable: true });
+      var win = new qx.ui.window.Window().set({ appearance: "wax-window", allowMaximize : true, allowMinimize : false, modal: true, movable: true });
       win.setLayout(new qx.ui.layout.VBox(4));
-      win.setShowStatusbar(true);
-      win.setStatus("Generic Message"); 
-      win.getChildControl("title").set({padding: [10,0,0,10]});
+      //win.getChildControl("title").set({padding: [10,0,0,10]});
 
       return win;
     }

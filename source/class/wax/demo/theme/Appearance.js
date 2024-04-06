@@ -191,7 +191,7 @@ qx.Theme.define("wax.demo.theme.Appearance",
         center: true, 
         padding : 16,
         gap : 16,
-        iconProps : { iconAlign: "center" }
+        iconPosition: "top"
        }
      }
    },
@@ -414,7 +414,7 @@ qx.Theme.define("wax.demo.theme.Appearance",
       style : function(states)
       {
         return {
-         showMaximize : false,
+         showMaximize : true,
          showMinimize : false
         };
       }

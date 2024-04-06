@@ -19,7 +19,7 @@
 
   "applications": [
     {
-      "class": "wax.demo.ApplicationTest",
+      "class": "wax.demo.Application",
       "theme": "wax.demo.theme.Theme",
       "name": "waxdemo",
       "title": "WaxDemo",

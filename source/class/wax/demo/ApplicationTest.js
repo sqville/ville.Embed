@@ -61,10 +61,9 @@ qx.Class.define("wax.demo.ApplicationTest",
 
       // Calendar Month for fluent theme
       var iconCalendarMonth = new ville.embed.fluent.CalendarMonth().set({ width: 40, height: 40 });
-      var button3 = new qx.ui.form.Button("Fluent Calendar Month").set({ appearance: "testbutton", embed : iconCalendarMonth });
+      var button3 = new qx.ui.form.Button("Fluent Calendar Month Regular and Filled").set({ appearance: "testbutton", embed : iconCalendarMonth });
 
       var button4 = new qx.ui.form.Button("Clip path Button").set({ appearance: "clippybutton" });
-
 
       // ComboBox to show use of MImage mixin
       var comboBox1 = new qx.ui.form.ComboBox().set({width: 250, allowStretchX: false, allowStretchY: false});
@@ -93,7 +92,7 @@ qx.Class.define("wax.demo.ApplicationTest",
 
       doc.add(button4, {left: 50, top: 350});
 
-      doc.add(comboBox1, {left: 350, top: 150});
+      doc.add(comboBox1, {left: 350, top: 350});
     }
   }
 });
