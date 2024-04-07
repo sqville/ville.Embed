@@ -375,38 +375,41 @@ qx.Class.define("wax.demo.Application",
       var lblfluentuiheader = new qx.ui.basic.Label("Fluent UI Web Icons (SVG)").set({font: "control-header"});
       
        //simple description
-       var lblfluentsimpledesc = new qx.ui.basic.Label("Microsoft's Fluent UI web icons: <b><a href='https://developer.microsoft.com/en-us/fluentui#/controls/web/icon' target='_blank'>Fluent UI Web Icons</a></b> for the full list of available icons.").set({rich: true, wrap: true});
+       var lblfluentsimpledesc = new qx.ui.basic.Label("Microsoft's Fluent UI web icons: <b><a href='https://react.fluentui.dev/?path=/docs/icons-overview--default' target='_blank'>Fluent UI Web Icons</a></b> for the full list of available icons.").set({rich: true, wrap: true});
 
        // Basic usage
        var lblsubheadfuisimple =  new qx.ui.basic.Label("Basic usage:").set({font: "headeratom", marginTop: 40});
-       var lblfuisimpleembed = new qx.ui.basic.Label("Here, at its most <u>basic</u>, is a lone Embed object (named \"fui-airtickets\"), sized 60 x 60, and colored <span style='color: blue;'>blue</span>:").set({rich: true, wrap: true});
-       //var embedfuiairticket = new ville.embed.Embed({ name: "fui-airtickets", color: "blue", width: 60, height: 60, allowGrowX: false });
-       var lblsimplefuiembedcode = new qx.ui.basic.Label("<span style='color:blue;'>new</span> <span style='color:green;'>ville.embed.Embed</span>({ name: <span style='color:maroon;'>\"fui-airtickets\"</span>, width: <span style='color:green;'>60</span>, height: <span style='color:green;'>60</span>, color: <span style='color:maroon;'>\"blue\"</span> });").set({rich: true, wrap: true, font: "monospace", backgroundColor: "#f2f2f2", padding: 6});
+       var lblfuisimpleembed = new qx.ui.basic.Label("Here, at its most <u>basic</u>, is a lone Embed object, sized 40 x 40, and colored <span style='color: blue;'>blue</span>:").set({rich: true, wrap: true});
+       var embedfuiairplanetakeoffalone = new ville.embed.fluent.AirplaneTakeOff().set({ width: 40, height: 40, textColor: "blue" });
+       var lblsimplefuiembedcode = new qx.ui.basic.Label("var <span style='color:green;'>fuiairplanetakeoff</span> = <span style='color:blue;'>new</span> <span style='color:green;'>ville.embed.fluent.AirplaneTakeOff</span>().set({ width: 40, height: 40, textColor: \"blue\" });").set({rich: true, wrap: true, font: "monospace", backgroundColor: "#f2f2f2", padding: 6});
  
        // Use in a Button (requires patching)
        var lblsubheadfuibutton =  new qx.ui.basic.Label("Use in another widget:").set({font: "headeratom", marginTop: 40});
-       var lblmorefuiembed = new qx.ui.basic.Label("To use the new widget in a Button <b>(qx.ui.form.Button)</b>, you need to first patch the Button's underlying Atom <b>(qx.ui.basic.Atom)</b>. Once patched, use the appropriate naming convention so that the Atom control knows to use the new ville.embed.Embed object instead of the qx.ui.basic.Image object:").set({rich: true, wrap: true});
-       //var btnembedfuiairticketsbutton = new qx.ui.form.Button('Click Me','data:text/json;{ "name": "fui-airtickets", "color":"blue", "width": 60, "height": 60 }').set({appearance: "testbutton", maxWidth: 200, alignX: "left", alignY: "middle"});
-       var lblbuttonfuiembedcode = new qx.ui.basic.Label("<span style='color:green;'>/* Patch Atom before creating the Button */</span><br>qx.Class.patch(qx.ui.basic.Atom, ville.embed.MAtomPatch);<br><span style='color:blue;'>new</span> <span style='color:green;'>qx.ui.form.Button(</span><span style='color:maroon;'>'Click Me','data:text/json;{ \"name\": \"fui-airtickets\", \"color\": \"blue\", \"width\": 60, \"height\": 60 }'</span>);").set({rich: true, wrap: true, font: "monospace", backgroundColor: "#f2f2f2", padding: 6});
+       var lblmorefuiembed = new qx.ui.basic.Label("To use the new widget in a Button <b>(qx.ui.form.Button)</b>, you need to first enhance the Button's underlying Atom <b>(qx.ui.basic.Atom)</b>. Once enhanced, add the icon object to the Atom based control:").set({rich: true, wrap: true});
+       var embedfuiairplanetakeoff = new ville.embed.fluent.AirplaneTakeOff().set({ width: 30, height: 30, textColor: "blue" });
+       var btnembedfuiairplanebutton = new qx.ui.form.Button('Click Me').set({appearance: "testbutton", embed: embedfuiairplanetakeoff, allowGrowX: false, padding: [10, 14], gap: 10, alignX: "left", alignY: "middle"});
+       var lblbuttonfuiembedcode = new qx.ui.basic.Label("<span style='color:green;'>/* Include the Embed Mixin before creating the Button */</span><br>qx.Class.include(<span style='color:green;'>qx.ui.basic.Atom, ville.embed.MEmbed</span>);<br><span style='color:blue;'>new</span> <span style='color:green;'>qx.ui.form.Button(</span><span style='color:maroon;'>'Click Me'</span>).set({ embed : <span style='color:green;'>fuiairplanetakeoff</span> });").set({rich: true, wrap: true, font: "monospace", backgroundColor: "#f2f2f2", padding: 6});
        
-       /*
-       btnembedfuiairticketsbutton.addListener("mouseover",function(e) {
-         var icondom = this.getChildControl("icon").getContentElement().getDomElement();
-         qx.bom.element.AnimationCss.animate(icondom, ville.embed.Manager.getInstance().animations["grow"], undefined);
+       
+       btnembedfuiairplanebutton.addListener("mouseover",function(e) {
+         var icondom = embedfuiairplanetakeoff.getContentElement().getDomElement();
+         qx.bom.element.AnimationCss.animate(icondom, animationGrow, undefined);
        });      
-       btnembedfuiairticketsbutton.addListener("mouseout",function(e) {
-         var icondom = this.getChildControl("icon").getContentElement().getDomElement();
-         qx.bom.element.AnimationCss.animateReverse(icondom, ville.embed.Manager.getInstance().animations["grow"], undefined);
+       btnembedfuiairplanebutton.addListener("mouseout",function(e) {
+         var icondom = embedfuiairplanetakeoff.getContentElement().getDomElement();
+         qx.bom.element.AnimationCss.animateReverse(icondom, animationGrow, undefined);
        });
-       */
+       
+       
 
       // Some of my Favorite Icons
       var lblsubheaderfuiFavs =  new qx.ui.basic.Label("A few of my favorite icons:").set({font: "headeratom", marginTop: 40});
       var fuiiconflow = new qx.ui.container.Composite();
       var fuiiconflowlayout = new qx.ui.layout.Flow(16,20,"left");
       fuiiconflow.setLayout(fuiiconflowlayout);
+      
+      var atmbeach = new qx.ui.basic.Atom("Beach").set({iconPosition: "top", appearance: "icss-atom", embed: new ville.embed.fluent.Beach().set({ width: 40, height: 40 })});
       /*
-      var atmaccess = new qx.ui.basic.Atom("Access", 'data:text/json;{ "name": "fui-access", "color": "#AB2325", "width": 60, "height": 60 }').set({iconPosition: "top", appearance: "icss-atom"});
       var atmword = new qx.ui.basic.Atom("Word", 'data:text/json;{ "name": "fui-word", "color": "#1748A4", "width": 60, "height": 60 }').set({iconPosition: "top", appearance: "icss-atom"});
       var atmexcel = new qx.ui.basic.Atom("Excel", 'data:text/json;{ "name": "fui-excel", "color": "#12743B", "width": 60, "height": 60 }').set({iconPosition: "top", appearance: "icss-atom"});
       var atmppt = new qx.ui.basic.Atom("PowerPoint", 'data:text/json;{ "name": "fui-ppt", "color": "#EE3111", "width": 60, "height": 60, "allowGrowX": false }').set({iconPosition: "top", appearance: "icss-atom"});
@@ -416,7 +419,6 @@ qx.Class.define("wax.demo.Application",
       var atmfuirelease = new qx.ui.basic.Atom("Release Definition", 'data:text/json;{ "name": "fui-release", "width": 60, "height": 60, "allowGrowX": false }').set({iconPosition: "top", appearance: "icss-atom"});
       var atmfuishapes = new qx.ui.basic.Atom("Shapes", 'data:text/json;{ "name": "fui-shapes", "width": 60, "height": 60, "allowGrowX": false }').set({iconPosition: "top", appearance: "icss-atom"});
 
-      fuiiconflow.add(atmaccess);
       fuiiconflow.add(atmword);
       fuiiconflow.add(atmexcel);
       fuiiconflow.add(atmppt);
@@ -426,16 +428,17 @@ qx.Class.define("wax.demo.Application",
       fuiiconflow.add(atmfuirelease);
       fuiiconflow.add(atmfuishapes);
       */
+      fuiiconflow.add(atmbeach);
 
       overviewpage.add(lblfluentuiheader);     
       overviewpage.add(lblfluentsimpledesc); 
       overviewpage.add(lblsubheadfuisimple); 
       overviewpage.add(lblfuisimpleembed); 
-      //overviewpage.add(embedfuiairticket);
+      overviewpage.add(embedfuiairplanetakeoffalone);
       overviewpage.add(lblsimplefuiembedcode);
       overviewpage.add(lblsubheadfuibutton);
       overviewpage.add(lblmorefuiembed);
-      //overviewpage.add(btnembedfuiairticketsbutton);
+      overviewpage.add(btnembedfuiairplanebutton);
       overviewpage.add(lblbuttonfuiembedcode);
       overviewpage.add(lblsubheaderfuiFavs);
       overviewpage.add(fuiiconflow);

@@ -1,5 +1,5 @@
 <!-- ABOUT THE PROJECT -->
-## About The Project
+## Ville.Embed
 
 **ville.Embed** is a [Qooxdoo](https://qooxdoo.org/) control designed to make images, icons and graphics more dynamic.
 
@@ -22,14 +22,16 @@ $ qx package install sqville/ville.Embed
 **To illustrate** - To create an icon using iConicss's CSS based icon set just create the icon's named object giving it a size (required) and color (optional). To use it in a button just include the ville.embed.MEmbed Mixin and set the Button's new embed property (example below): 
 ```sh
   var cubeoicon = new ville.embed.iconicss.CubeO(3, "green");
-  qx.Class.include(qx.ui.basic.Atom, ville.embed.MEmbed); //Placed one-time at the top of your applicaition code
+  //Placed one-time at the top of your applicaition code
+  qx.Class.include(qx.ui.basic.Atom, ville.embed.MEmbed);
   var btnFormButton = new qx.ui.form.Button('Embeded Cube').set({ embed : cubeoicon });
 ```
 
 To create an icon using an SVG based icon set just create the icon's named object giving it a width (required), height (required) and color (optional):
 ```sh
-  var airticketsicon = new ville.embed.fluent.AirTickets(60, 60, "blue");
-  qx.Class.include(qx.ui.basic.Atom, ville.embed.MEmbed); //Placed one-time at the top of your applicaition code
+  var airticketsicon = new ville.embed.fluent.AirTickets().set({ width: 40, height: 40 });
+  //Placed one-time at the top of your applicaition code
+  qx.Class.include(qx.ui.basic.Atom, ville.embed.MEmbed); 
   var btnFormButton = new qx.ui.form.Button('Embeded SVG').set({ embed : airticketsicon });
 ```
 

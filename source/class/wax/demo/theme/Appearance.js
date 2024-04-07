@@ -50,7 +50,9 @@ qx.Theme.define("wax.demo.theme.Appearance",
       style : function(states)
       {
         return {
-          backgroundColor : "transparent"
+          backgroundColor : "transparent",
+          allowStretchX: false,
+          allowStretchY: false
         };
       }
     },

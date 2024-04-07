@@ -23,12 +23,12 @@
   
   extend : qx.ui.embed.Html,
  
-   construct ()
-   {
+  construct ()
+  {
     super();
-   },
+  },
 
-   properties :
+  properties :
   {
     // overridden
     appearance: 
