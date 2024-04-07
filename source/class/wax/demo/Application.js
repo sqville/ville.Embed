@@ -100,7 +100,7 @@ qx.Class.define("wax.demo.Application",
       //}
 
       // West Scroll area to fit all menu items
-      var scrollwest = new qx.ui.container.Scroll().set({scrollbarX: "off", minWidth: 230, padding: 0, margin: 0, contentPadding: [0,0,0,0]});
+      var scrollwest = new qx.ui.container.Scroll().set({scrollbarX: "off", minWidth: 220, padding: 0, margin: 0, contentPadding: [0,0,0,10]});
 
       // Center Scroll area to fit all content
       var scroll = new qx.ui.container.Scroll().set({padding: 0, margin: 0, contentPadding: [0,0,0,0]});
@@ -180,12 +180,13 @@ qx.Class.define("wax.demo.Application",
 
       // Assemble all base pieces  
       scrollwest.add(westbox);
-      scroll.add(centerbox);
+      //scroll.add(centerbox);
       appcompdock.add(northhbox, {edge:"north"});
       appcompdock.add(scrollwest, {edge:"west"});
-      appcompdock.add(scroll, {edge:"center"});
+      //appcompdock.add(scroll, {edge:"center"});
+      appcompdock.add(centerbox, {edge:"center"});
       approot.add(appcompdock, {edge: 0});
-      profilemenu.add(switchmenubutton1);
+      //profilemenu.add(switchmenubutton1);
       profilemenu.add(aboutmenubutton1);
       profilemenubutton.setMenu(profilemenu);
 
@@ -241,7 +242,11 @@ qx.Class.define("wax.demo.Application",
 
 
       //more structure
-      dashboardpage.setLayout(new qx.ui.layout.VBox(10).set({alignX: "left"}));  
+      dashboardpage.setLayout(new qx.ui.layout.VBox(10).set({alignX: "left"}));
+      
+      var dashboardscrollstackpage = new qx.ui.container.Scroll().set({padding: 0, margin: 0, contentPadding: [0,0,0,0]});
+
+      dashboardscrollstackpage.add(dashboardpage);
 
       // iConicss Icons
       // Top header
@@ -295,64 +300,14 @@ qx.Class.define("wax.demo.Application",
       var atmfootball = new qx.ui.basic.Atom("football").set({ appearance: "icss-atom", embed: new ville.embed.iconicss.Football(3) });
       var atmshapes = new qx.ui.basic.Atom("shapes").set({ appearance: "icss-atom", embed: new ville.embed.iconicss.Shapes(3) });
       var atmrocket = new qx.ui.basic.Atom("rocket").set({ appearance: "icss-atom", embed: new ville.embed.iconicss.Rocket(3) });
-      //var atmhtml5 = new qx.ui.basic.Atom("html5").set({ appearance: "icss-atom", embed: new ville.embed.iconicss.Football(3) });
-      //var atmcss3 = new qx.ui.basic.Atom("css3").set({ appearance: "icss-atom", embed: new ville.embed.iconicss.Football(3) });
-      //var atmjs = new qx.ui.basic.Atom("js").set({ appearance: "icss-atom", embed: new ville.embed.iconicss.Football(3) });
-      //var atmvisualcode = new qx.ui.basic.Atom("visual-code").set({ appearance: "icss-atom", embed: new ville.embed.iconicss.Football(3) });
       var atmwolverinec = new qx.ui.basic.Atom("wolverine").set({ appearance: "icss-atom", embed: new ville.embed.iconicss.Wolverine(3) });
       var atmsuno = new qx.ui.basic.Atom("sun-o").set({ appearance: "icss-atom", embed: new ville.embed.iconicss.SunO(3) });
-      /*
-      var atmcoffee = new qx.ui.basic.Atom("coffee", 'data:text/json;{ "name": "coffee", "size": 3 }').set({iconPosition: "top", appearance: "icss-atom"});
-      var atmshapes = new qx.ui.basic.Atom("shapes", 'data:text/json;{ "name": "shapes", "size": 3 }').set({iconPosition: "top", appearance: "icss-atom"});
-      var atmconnection = new qx.ui.basic.Atom("connection", 'data:text/json;{ "name": "connection", "size": 3 }').set({iconPosition: "top", appearance: "icss-atom"});
-      var atmclouddownload = new qx.ui.basic.Atom("cloud-download", 'data:text/json;{ "name": "cloud-download", "size": 3 }').set({iconPosition: "top", appearance: "icss-atom"});
-      var atmfolderclose = new qx.ui.basic.Atom("folder-close", 'data:text/json;{ "name": "folder-close", "size": 3 }').set({iconPosition: "top", appearance: "icss-atom"});
-      var atmtrumpet = new qx.ui.basic.Atom("trumpet", 'data:text/json;{ "name": "trumpet", "size": 3 }').set({iconPosition: "top", appearance: "icss-atom"});
-      var atmfootball = new qx.ui.basic.Atom("football", 'data:text/json;{ "name": "football", "size": 3 }').set({iconPosition: "top", appearance: "icss-atom"});
-      var atmrocket = new qx.ui.basic.Atom("rocket", 'data:text/json;{ "name": "rocket", "size": 3 }').set({iconPosition: "top", appearance: "icss-atom"});
-      var atmgear = new qx.ui.basic.Atom("gear", 'data:text/json;{ "name": "gear", "size": 3 }').set({iconPosition: "top", appearance: "icss-atom"});
-      var atmdrone = new qx.ui.basic.Atom("drone", 'data:text/json;{ "name": "drone", "size": 3 }').set({iconPosition: "top", appearance: "icss-atom"});
-      var atmhtml5 = new qx.ui.basic.Atom("html5", 'data:text/json;{ "name": "html5", "size": 3 }').set({iconPosition: "top", appearance: "icss-atom"});
-      var atmcss3 = new qx.ui.basic.Atom("css3", 'data:text/json;{ "name": "css3", "size": 3 }').set({iconPosition: "top", appearance: "icss-atom"});
-      var atmjs = new qx.ui.basic.Atom("js", 'data:text/json;{ "name": "js", "size": 3 }').set({iconPosition: "top", appearance: "icss-atom"});
-      var atmgoogledrivec = new qx.ui.basic.Atom("google-drive-c", 'data:text/json;{ "name": "google-drive-c", "size": 3 }').set({iconPosition: "top", appearance: "icss-atom"});
-      var atmvisualcode = new qx.ui.basic.Atom("visual-code", 'data:text/json;{ "name": "visual-code", "size": 3 }').set({iconPosition: "top", appearance: "icss-atom"});
-      var atmwolverinec = new qx.ui.basic.Atom("wolverine-c", 'data:text/json;{ "name": "wolverine-c", "size": 3 }').set({iconPosition: "top", appearance: "icss-atom"});
-      var atmsuno = new qx.ui.basic.Atom("sun-o", 'data:text/json;{ "name": "sun-o", "size": 3 }').set({iconPosition: "top", appearance: "icss-atom"});
-      var atmbinocular = new qx.ui.basic.Atom("binocular", 'data:text/json;{ "name": "binocular", "size": 3 }').set({iconPosition: "top", appearance: "icss-atom"});
-      var atmbombshell = new qx.ui.basic.Atom("bombshell", 'data:text/json;{ "name": "bombshell", "size": 3 }').set({iconPosition: "top", appearance: "icss-atom"});
-      var atmfoodpot = new qx.ui.basic.Atom("food-pot", 'data:text/json;{ "name": "food-pot", "size": 3 }').set({iconPosition: "top", appearance: "icss-atom"});
-      var atmxsquare = new qx.ui.basic.Atom("x-square", 'data:text/json;{ "name": "x-square", "size": 3, "color": "red" }').set({iconPosition: "top", appearance: "icss-atom"});
-      
-      
-      
-      
-      dashboardiconflow.add(atmconnection);
-      dashboardiconflow.add(atmclouddownload);
-      dashboardiconflow.add(atmfolderclose);
-      dashboardiconflow.add(atmtrumpet);
-      
-      
-      dashboardiconflow.add(atmgear);
-      dashboardiconflow.add(atmdrone);
-     
-      dashboardiconflow.add(atmgoogledrivec);
-      
-      dashboardiconflow.add(atmbinocular);
-      dashboardiconflow.add(atmbombshell);
-      dashboardiconflow.add(atmfoodpot);
-      dashboardiconflow.add(atmxsquare);
 
-    */
       dashboardiconflow.add(atmcoffee);
       dashboardiconflow.add(atmcoffeegrain);
       dashboardiconflow.add(atmfootball);
       dashboardiconflow.add(atmshapes);
       dashboardiconflow.add(atmrocket);
-      //dashboardiconflow.add(atmhtml5);
-      //dashboardiconflow.add(atmcss3);
-      //dashboardiconflow.add(atmjs);
-      //dashboardiconflow.add(atmvisualcode);
       dashboardiconflow.add(atmwolverinec);
       dashboardiconflow.add(atmsuno);
 
@@ -372,6 +327,9 @@ qx.Class.define("wax.demo.Application",
 
 
       // Second page marker  
+      var overviewscrollstackpage = new qx.ui.container.Scroll().set({padding: 0, margin: 0, contentPadding: [0,0,0,0]});
+      overviewscrollstackpage.add(overviewpage);
+
       var lblfluentuiheader = new qx.ui.basic.Label("Fluent UI Web Icons (SVG)").set({font: "control-header"});
       
        //simple description
@@ -409,25 +367,7 @@ qx.Class.define("wax.demo.Application",
       fuiiconflow.setLayout(fuiiconflowlayout);
       
       var atmbeach = new qx.ui.basic.Atom("Beach").set({iconPosition: "top", appearance: "icss-atom", embed: new ville.embed.fluent.Beach().set({ width: 40, height: 40 })});
-      /*
-      var atmword = new qx.ui.basic.Atom("Word", 'data:text/json;{ "name": "fui-word", "color": "#1748A4", "width": 60, "height": 60 }').set({iconPosition: "top", appearance: "icss-atom"});
-      var atmexcel = new qx.ui.basic.Atom("Excel", 'data:text/json;{ "name": "fui-excel", "color": "#12743B", "width": 60, "height": 60 }').set({iconPosition: "top", appearance: "icss-atom"});
-      var atmppt = new qx.ui.basic.Atom("PowerPoint", 'data:text/json;{ "name": "fui-ppt", "color": "#EE3111", "width": 60, "height": 60, "allowGrowX": false }').set({iconPosition: "top", appearance: "icss-atom"});
-      var atmpub = new qx.ui.basic.Atom("Publisher", 'data:text/json;{ "name": "fui-pub", "color": "#007462", "width": 60, "height": 60 }').set({iconPosition: "top", appearance: "icss-atom"});
-      var atmonenote = new qx.ui.basic.Atom("OneNote", 'data:text/json;{ "name": "fui-onenote", "color": "#420F6F", "width": 60, "height": 60 }').set({iconPosition: "top", appearance: "icss-atom"});
-      var atmfuikey = new qx.ui.basic.Atom("Permissions Icon", 'data:text/json;{ "name": "fui-key", "width": 60, "height": 60, "allowGrowX": false }').set({iconPosition: "top", appearance: "icss-atom"});
-      var atmfuirelease = new qx.ui.basic.Atom("Release Definition", 'data:text/json;{ "name": "fui-release", "width": 60, "height": 60, "allowGrowX": false }').set({iconPosition: "top", appearance: "icss-atom"});
-      var atmfuishapes = new qx.ui.basic.Atom("Shapes", 'data:text/json;{ "name": "fui-shapes", "width": 60, "height": 60, "allowGrowX": false }').set({iconPosition: "top", appearance: "icss-atom"});
-
-      fuiiconflow.add(atmword);
-      fuiiconflow.add(atmexcel);
-      fuiiconflow.add(atmppt);
-      fuiiconflow.add(atmpub);
-      fuiiconflow.add(atmonenote);
-      fuiiconflow.add(atmfuikey);
-      fuiiconflow.add(atmfuirelease);
-      fuiiconflow.add(atmfuishapes);
-      */
+  
       fuiiconflow.add(atmbeach);
 
       overviewpage.add(lblfluentuiheader);     
@@ -448,6 +388,9 @@ qx.Class.define("wax.demo.Application",
       var tablelistvbox = new qx.ui.layout.VBox(10);
       tablelistpage.setLayout(tablelistvbox);
 
+      var tablelistscrollstackpage = new qx.ui.container.Scroll().set({padding: 0, margin: 0, contentPadding: [0,0,0,0]});
+      tablelistscrollstackpage.add(tablelistpage);
+
       // Third page marker  
       var lblmaterialheader = new qx.ui.basic.Label("Material Design Icons (SVG)").set({font: "control-header"});
             
@@ -467,17 +410,21 @@ qx.Class.define("wax.demo.Application",
       var materialiconflow = new qx.ui.container.Composite();
       var materialiconflowlayout = new qx.ui.layout.Flow(16,20,"left");
       materialiconflow.setLayout(materialiconflowlayout);
+      
+      var embedmuiacctcircle = new ville.embed.material.AccountCircle().set({ width: 40, height: 40 });
+      var atmacctcircle = new qx.ui.basic.Atom("Account Circle").set({ iconPosition: "top", appearance: "icss-atom", embed: embedmuiacctcircle });
       /*
-      var atmevent = new qx.ui.basic.Atom("Event", 'data:text/json;{ "name": "material-event", "width": 60, "height": 60 }').set({iconPosition: "top", appearance: "icss-atom"});
+     
       var atmbusiness = new qx.ui.basic.Atom("Business", 'data:text/json;{ "name": "material-business", "width": 60, "height": 60 }').set({iconPosition: "top", appearance: "icss-atom"});
       var atmbiotech = new qx.ui.basic.Atom("Biotech", 'data:text/json;{ "name": "material-biotech", "width": 60, "height": 60 }').set({iconPosition: "top", appearance: "icss-atom"});
       var atmbolt = new qx.ui.basic.Atom("Bolt", 'data:text/json;{ "name": "material-bolt", "width": 60, "height": 60 }').set({iconPosition: "top", appearance: "icss-atom"});
       
-      materialiconflow.add(atmevent);
+      
       materialiconflow.add(atmbusiness);
       materialiconflow.add(atmbiotech);
       materialiconflow.add(atmbolt);
       */
+      materialiconflow.add(atmacctcircle);
 
       tablelistpage.add(lblmaterialheader);
       tablelistpage.add(lblmaterialsimpledesc);
@@ -507,15 +454,19 @@ qx.Class.define("wax.demo.Application",
       menupage.add(btnSettings);
       menupage.add(btnLogout);
 
+      var menuscrollstackpage = new qx.ui.container.Scroll().set({padding: 0, margin: 0, contentPadding: [0,0,0,0]});
+
+      menuscrollstackpage.add(menupage);
+
     
       // Assemble - THE STACK 
-      centerbox.add(dashboardpage);
-      centerbox.add(overviewpage);
-      centerbox.add(tablelistpage);
-      centerbox.add(menupage);
+      centerbox.add(dashboardscrollstackpage);
+      centerbox.add(overviewscrollstackpage);
+      centerbox.add(tablelistscrollstackpage);
+      centerbox.add(menuscrollstackpage);
 
       // Show the default page
-      centerbox.setSelection([dashboardpage]);
+      centerbox.setSelection([dashboardscrollstackpage]);
 
       btnAbout.addListener("execute", function(e) {
         winAboutWax.restore();
@@ -531,7 +482,8 @@ qx.Class.define("wax.demo.Application",
       // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
       // Populate westBox with content
       var atmleftnavheader = new qx.ui.basic.Atom("Wax Demo", "wax/demo/Wax_demo_logo.png").set({appearance: "header-atom", anonymous: true, focusable: false, selectable: false });
-      atmleftnavheader.getChildControl("icon").set({ scale : true });
+      atmleftnavheader.setShow("label");
+      //atmleftnavheader.getChildControl("icon").set({ scale : true });
       westbox.add(atmleftnavheader);
       var tbtndashboardpage = new wax.demo.MenuButton("iConicss", "wax/demo/Css3_logo.svg", true );
       westbox.add(tbtndashboardpage);
@@ -547,7 +499,7 @@ qx.Class.define("wax.demo.Application",
       
       // CLONE the above controls
       var atmmenuleftnavheader = atmleftnavheader.clone();
-      atmmenuleftnavheader.getChildControl("icon").set({ scale : true });
+      //atmmenuleftnavheader.getChildControl("icon").set({ scale : true });
       var tbtnmenudashboardpage = tbtndashboardpage.clone();
       tbtnmenudashboardpage.getChildControl("icon").set({ scale : true });
       var tbtnmenuSecondPage = tbtnSecondPage.clone();
@@ -605,21 +557,21 @@ qx.Class.define("wax.demo.Application",
       // Turn on all wax.demo.MenuButton listeners
       tbtndashboardpage.addListener("changeValue", function(e) {
         if (e.getData()) {
-          centerbox.setSelection([dashboardpage]);
+          centerbox.setSelection([dashboardscrollstackpage]);
           mainmenubuttongroup.setSelection([tbtnmenudashboardpage]);
         }
       }, this);
 
       tbtnSecondPage.addListener("changeValue", function(e) {
         if (e.getData()) {
-          centerbox.setSelection([overviewpage]);
+          centerbox.setSelection([overviewscrollstackpage]);
           mainmenubuttongroup.setSelection([tbtnmenuSecondPage]);
         }
       }, this);
 
       tbtnThirdPage.addListener("changeValue", function(e) {
         if (e.getData()) {
-          centerbox.setSelection([tablelistpage]);
+          centerbox.setSelection([tablelistscrollstackpage]);
           mainmenubuttongroup.setSelection([tbtnmenuThirdPage]);
         }
       }, this);
@@ -627,7 +579,7 @@ qx.Class.define("wax.demo.Application",
       // Popup menu buttons
       tbtnmenudashboardpage.addListener("changeValue", function(e) {
         if (e.getData()) {
-          centerbox.setSelection([dashboardpage]);
+          centerbox.setSelection([dashboardscrollstackpage]);
           westboxbuttongroup.setSelection([tbtndashboardpage]);
           mainmenupopup.hide();
         }
@@ -635,44 +587,44 @@ qx.Class.define("wax.demo.Application",
 
       tbtnmenuSecondPage.addListener("changeValue", function(e) {
         if (e.getData()) {
-          centerbox.setSelection([overviewpage]);
+          centerbox.setSelection([overviewscrollstackpage]);
           westboxbuttongroup.setSelection([tbtnSecondPage]);
 
-          dashboardpage.setVisibility("excluded");
+          //dashboardpage.setVisibility("excluded");
 
-          mainmenupopup.hide();
+          //mainmenupopup.hide();
         }
       }, this);
 
       tbtnmenuThirdPage.addListener("changeValue", function(e) {
         if (e.getData()) {
-          centerbox.setSelection([tablelistpage]);
+          centerbox.setSelection([tablelistscrollstackpage]);
           westboxbuttongroup.setSelection([tbtnThirdPage]);
 
-          dashboardpage.setVisibility("excluded");
+          //dashboardpage.setVisibility("excluded");
 
-          mainmenupopup.hide();
+          //mainmenupopup.hide();
         }
       }, this);
 
       // if Hybrid Mobile
       tbtndashboardpagehym.addListener("changeValue", function(e) {
         if (e.getData()) {
-          centerbox.setSelection([dashboardpage]);
+          centerbox.setSelection([dashboardscrollstackpage]);
           atmlogocurrentpage.set({show: "both", label:"iConicss"});
         }
       }, this);
 
       tbtnoverviewpagehym.addListener("changeValue", function(e) {
         if (e.getData()) {
-          centerbox.setSelection([overviewpage]);
+          centerbox.setSelection([overviewscrollstackpage]);
           atmlogocurrentpage.set({show: "both", label:"Fluent UI"});
         }
       }, this);
 
       tbtnlistofitemspagehym.addListener("changeValue", function(e) {
         if (e.getData()) {
-          centerbox.setSelection([tablelistpage]);
+          centerbox.setSelection([tablelistscrollstackpage]);
           atmlogocurrentpage.set({show: "both", label:"Material"});
         }
       }, this);
@@ -691,7 +643,7 @@ qx.Class.define("wax.demo.Application",
         scrollwest.setVisibility("excluded");
         profilemenubutton.setVisibility("hidden");
         mainmenupart.setVisibility("hidden");
-        centerbox.setSelection([menupage]);
+        centerbox.setSelection([menuscrollstackpage]);
         atmlogocurrentpage.set({visibility: "visible", label:"Menu"});
         mainmenubuttongrouphym.setSelection([tbtnmenuhym]);
       }, this);
@@ -703,7 +655,7 @@ qx.Class.define("wax.demo.Application",
         profilemenubutton.setVisibility("visible");
         atmlogocurrentpage.setVisibility("hidden");
         mainmenupart.setVisibility("visible");
-        centerbox.setSelection([dashboardpage]);
+        centerbox.setSelection([dashboardscrollstackpage]);
         mainmenubuttongroup.setSelection([tbtnmenudashboardpage]);
         westboxbuttongroup.setSelection([tbtndashboardpage]);
       }, this);

@@ -264,7 +264,7 @@ qx.Theme.define("wax.demo.theme.Appearance",
      {
        return {
          center : false,
-         minWidth : 220,
+         minWidth : 200,
          gap : 14
        };
      }
@@ -275,8 +275,8 @@ qx.Theme.define("wax.demo.theme.Appearance",
     style : function() {
         return {
           scale: true,
-          width: 32,
-          height: 32
+          width: 28,
+          height: 28
         };
       }
     },
