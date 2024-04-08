@@ -18,9 +18,9 @@ $ qx package list
 $ qx package install sqville/ville.Embed
 ```
 
-## APPROACH - Each icon/embed is it's own Qooxdoo object
+## Approach - Each icon/embed is it's own Qooxdoo object
 **To illustrate** - To create an icon using iConicss's CSS based icon set just create the icon's named object giving it a size (required) and color (optional). To use it in a button just include the ville.embed.MEmbed Mixin and set the Button's new embed property (example below): 
-```sh
+```js
   var cubeoicon = new ville.embed.iconicss.CubeO(3, "green");
   //Placed one-time at the top of your applicaition code
   qx.Class.include(qx.ui.basic.Atom, ville.embed.MEmbed);
@@ -28,7 +28,7 @@ $ qx package install sqville/ville.Embed
 ```
 
 To create an icon using an SVG based icon set just create the icon's named object giving it a width (required), height (required) and color (optional):
-```sh
+```js
   var airticketsicon = new ville.embed.fluent.AirTickets().set({ width: 40, height: 40 });
   //Placed one-time at the top of your applicaition code
   qx.Class.include(qx.ui.basic.Atom, ville.embed.MEmbed); 
@@ -37,7 +37,7 @@ To create an icon using an SVG based icon set just create the icon's named objec
 
 <!-- DEMO -->
 ## Demo
-See this control in action using the ville [Wax Demo App](http://qooxdoo.org/qxl.packagebrowser/qxl.packagebrowser/demos/sqville/ville.Embed/waxdemo/)
+[Demo](https://sqville.github.io/ville.Embed/published/)
 
 
 <!-- LICENSE -->
