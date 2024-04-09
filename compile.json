@@ -14,7 +14,7 @@
       "inline-external-scripts": false
     }
   ],
-  "defaultTarget": "source",
+  "defaultTarget": "build",
   "locales": ["en"],
 
   "applications": [

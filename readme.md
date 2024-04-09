@@ -70,8 +70,8 @@ To create an icon using an SVG based icon set just create the icon's named objec
 ```
 
 <!-- DEMO -->
-## Demo
-[Demo](https://sqville.github.io/ville.Embed/published/)
+## Demos
+[Demo1 - Icon packages](https://sqville.github.io/ville.Embed/published/demo1/)
 
 
 <!-- LICENSE -->
