@@ -62,7 +62,7 @@ To create an icon using an SVG based icon set just create the icon's named objec
           width : 16,
           height : 16,
           backgroundColor : "transparent",
-          // clipPath : "polygon(40% 0%, 40% 20%, 100% 20%, 100% 80%, 40% 80%, 40% 100%, 0% 50%"
+          // clipPath : "polygon(40% 0%, 40% 20%, 100% 20%, 100% 80%, 40% 80%, 40% 100%, 0% 50%)"
     		};
     	}
     },

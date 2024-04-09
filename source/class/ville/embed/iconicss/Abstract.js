@@ -13,7 +13,6 @@
 
 /**
  * CSS Rule source can be referrenced in the resource css file noted below
- * @external(ville/embed/iconicss.css)
  */
 
  qx.Class.define("ville.embed.iconicss.Abstract",
@@ -27,12 +26,10 @@
     this.setRich(true);
 
     //add CSS rules to global stylesheet
-    /*
     var sheet = qx.ui.style.Stylesheet.getInstance();
     sheet.addRule("i[class*='icss-']", "position: relative; display:inline-block; font-style: normal; background-color:currentColor; box-sizing: border-box; vertical-align: middle;");
     sheet.addRule("i[class*='icss-']:before", "content: ''; border-width: 0; position: absolute; box-sizing: border-box;");
     sheet.addRule("i[class*='icss-']:after", "content: ''; border-width: 0; position: absolute; box-sizing: border-box;");
-    */
   
   },
 

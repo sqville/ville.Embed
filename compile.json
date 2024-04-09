@@ -11,7 +11,7 @@
     {
       "type": "build",
       "outputPath": "compiled/build",
-      "inline-external-scripts": true
+      "inline-external-scripts": false
     }
   ],
   "defaultTarget": "source",

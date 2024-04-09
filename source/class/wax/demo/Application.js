@@ -10,7 +10,6 @@
 
 /**
  * This is the main application class of your custom application "wax"
- * @external(ville/embed/iconicss.min.css)
  * @asset(wax/demo/*)
  */
 qx.Class.define("wax.demo.Application",
@@ -366,9 +365,24 @@ qx.Class.define("wax.demo.Application",
       var fuiiconflowlayout = new qx.ui.layout.Flow(16,20,"left");
       fuiiconflow.setLayout(fuiiconflowlayout);
       
-      var atmbeach = new qx.ui.basic.Atom("Beach").set({iconPosition: "top", appearance: "icss-atom", embed: new ville.embed.fluent.Beach().set({ width: 40, height: 40 })});
-  
+      var emdbeach = new ville.embed.fluent.Beach().set({ width: 40, height: 40 });
+      var atmbeach = new qx.ui.basic.Atom("Beach").set({iconPosition: "top", appearance: "icss-atom", embed: emdbeach });
+      var atmcalendarmonth = new qx.ui.basic.Atom("CalendarMonth").set({iconPosition: "top", appearance: "icss-atom", embed: new ville.embed.fluent.CalendarMonth().set({ width: 40, height: 40 }) });
+      var atmcopy = new qx.ui.basic.Atom("Copy").set({iconPosition: "top", appearance: "icss-atom", embed: new ville.embed.fluent.Copy().set({ width: 40, height: 40 }) });
+      var atmcut = new qx.ui.basic.Atom("Cut").set({iconPosition: "top", appearance: "icss-atom", embed: new ville.embed.fluent.Cut().set({ width: 40, height: 40 }) });
+      var atmpaste = new qx.ui.basic.Atom('Paste (with iconType : "filled")').set({ iconPosition: "top", appearance: "icss-atom", embed: new ville.embed.fluent.Paste().set({ width: 40, height: 40, iconStyle: "filled" }) });
+      var atmdismiss = new qx.ui.basic.Atom("Dismiss").set({iconPosition: "top", appearance: "icss-atom", embed: new ville.embed.fluent.Dismiss().set({ width: 40, height: 40 }) });
+      var atmoptions = new qx.ui.basic.Atom("Options").set({iconPosition: "top", appearance: "icss-atom", embed: new ville.embed.fluent.Options().set({ width: 40, height: 40 }) });
+      var atmpanelleftheader = new qx.ui.basic.Atom("Panel Left Header").set({iconPosition: "top", appearance: "icss-atom", embed: new ville.embed.fluent.PanelLeftHeader().set({ width: 40, height: 40 }) });
+
       fuiiconflow.add(atmbeach);
+      fuiiconflow.add(atmcalendarmonth);
+      fuiiconflow.add(atmcopy);
+      fuiiconflow.add(atmcut);
+      fuiiconflow.add(atmpaste);
+      fuiiconflow.add(atmdismiss);
+      fuiiconflow.add(atmoptions);
+      fuiiconflow.add(atmpanelleftheader);
 
       overviewpage.add(lblfluentuiheader);     
       overviewpage.add(lblfluentsimpledesc); 
