@@ -39,6 +39,7 @@ To create an icon using an SVG based icon set just create the icon's named objec
 ```js
   // Placed one-time at the top of your applicaition code
   qx.Class.include(qx.ui.basic.Image, ville.embed.MImage); 
+  
   // Appearance entry changes. Example: ComboBox
     "combobox/button": {
       ...
