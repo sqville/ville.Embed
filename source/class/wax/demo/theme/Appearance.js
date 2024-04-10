@@ -142,9 +142,17 @@ qx.Theme.define("wax.demo.theme.Appearance",
 
       style(states) {
         var decorator = "button-box-right-borderless";
+        var iconprops = { 
+          backgroundColor : "black",
+          clipPath : wax.demo.theme.Image.CPGiftOpenRegular
+        };
 
         if (states.hovered && !states.pressed && !states.checked) {
           decorator = "button-box-hovered-right-borderless";
+          iconprops = { 
+            backgroundColor : "blue",
+            clipPath : wax.demo.theme.Image.CPGiftOpenFilled
+          };
         } else if (states.hovered && (states.pressed || states.checked)) {
           decorator = "button-box-pressed-hovered-right-borderless";
         } else if (states.pressed || states.checked) {
@@ -154,9 +162,9 @@ qx.Theme.define("wax.demo.theme.Appearance",
         return {
           icon: "",
           decorator: decorator,
-          padding: [0, 0, 0, 1],
-          width: 20,
-          iconProps : states.hovered ? { color : "blue" } : { color : "black" }
+          padding: [1, 0, 0, 5],
+          width: 32,
+          iconProps : iconprops
         };
       }
     },
@@ -168,11 +176,8 @@ qx.Theme.define("wax.demo.theme.Appearance",
     	style : function(states)
     	{        
         return {
-          html : wax.demo.theme.Image.ChevronDownRegular,
-          width : 16,
-          height : 16,
-          backgroundColor : "transparent"
-          //decorator : "ville-icon-chevron-down"
+          width : 24,
+          height : 24
     		};
     	}
     },

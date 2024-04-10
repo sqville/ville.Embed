@@ -50,12 +50,6 @@ qx.Class.define("wax.demo.ApplicationTest",
       */
 
       // Create a button with an SVG embed for the icon
-      //var airticketsicon = new ville.embed.fluent.AirTickets(60, 60, "blue");
-      //var airticketsicon2 = new ville.embed.fluent.AirTickets2(50, 50, "red");
-
-      //var button1 = new qx.ui.form.Button('Embeded SVG').set({ embed : airticketsicon2 });
-
-      // Create a button with an SVG embed for the icon
       var cubeoicon = new ville.embed.iconicss.CubeO(2);
       var button2 = new qx.ui.form.Button("iConicss cube-o").set({ appearance: "testiconicssbutton", embed : cubeoicon, padding : [8, 14], gap : 12 });
 
@@ -66,7 +60,9 @@ qx.Class.define("wax.demo.ApplicationTest",
       var button4 = new qx.ui.form.Button("Clip path Button").set({ appearance: "clippybutton" });
 
       // ComboBox to show use of MImage mixin
-      var comboBox1 = new qx.ui.form.ComboBox().set({width: 250, allowStretchX: false, allowStretchY: false});
+      var lblcbclippath = new qx.ui.basic.Label("ComboBox button icon using clipPath:");
+      var comboBox1 = new qx.ui.form.ComboBox().set({width: 250});
+      //comboBox1.getChildControl("textfield").setHeight(60);
       // fill the combo box with some stuff
       for (var i = 1; i < 6; i++) {
         var tempItem = new qx.ui.form.ListItem(
@@ -76,23 +72,48 @@ qx.Class.define("wax.demo.ApplicationTest",
         comboBox1.add(tempItem);
       }
 
-      //var fontimage = new qx.ui.basic.Image("@testthis");
+      var svgimage1 = new qx.ui.basic.Image().set({ width: 100, height: 100, html: wax.demo.theme.Image.GiftOpenRegular });
 
+      var animationGrow = {
+        duration: 150,
+        keyFrames : 
+        {
+          0 : {scale: 1, color: "currentColor"},
+          100 : {scale: 1.1, color: "blue"}
+        },
+        keep : 100,
+        timing: "ease-out"
+      };
+      
+      svgimage1.addListener("mouseover",function(e) {
+        this.setHtml(wax.demo.theme.Image.GiftOpenFilled);
+        var icondom = this.getContentElement().getDomElement();
+        qx.bom.element.AnimationCss.animate(icondom, animationGrow, undefined);
+      });      
+      svgimage1.addListener("mouseout",function(e) {
+        this.setHtml(wax.demo.theme.Image.GiftOpenRegular);
+        var icondom = this.getContentElement().getDomElement();
+        qx.bom.element.AnimationCss.animateReverse(icondom, animationGrow, undefined);
+      });
+
+      var clippathimage = new qx.ui.basic.Image().set({ width: 30, height: 30, backgroundColor: "black", clipPath: wax.demo.theme.Image.CPGiftOpenRegular });
+      
       // Document is the application root
       var doc = this.getRoot();
 
-      // Add button to document at fixed coordinates
-      //doc.add(button1, {left: 50, top: 40});
+      doc.add(button2, {left: 50, top: 70});
 
-      //doc.add(fontimage, {left : 250, top: 40});
+      doc.add(button3, {left: 50, top: 170});
 
-      doc.add(button2, {left: 50, top: 150});
+      doc.add(button4, {left: 50, top: 270});
 
-      doc.add(button3, {left: 50, top: 250});
+      doc.add(lblcbclippath, {left: 280, top: 255});
 
-      doc.add(button4, {left: 50, top: 350});
+      doc.add(comboBox1, {left: 280, top: 280});
 
-      doc.add(comboBox1, {left: 350, top: 350});
+      doc.add(svgimage1, {left: 50, top: 350});
+
+      doc.add(clippathimage, {left: 180, top: 350});
     }
   }
 });

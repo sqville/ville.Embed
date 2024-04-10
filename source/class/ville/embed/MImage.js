@@ -6,7 +6,6 @@ qx.Mixin.define("ville.embed.MImage",
     html: {
       check: "String",
       apply: "_applyHtml",
-      event: "changeHtml",
       themeable: true,
       nullable: true
     },

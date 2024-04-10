@@ -14,12 +14,12 @@
       "inline-external-scripts": false
     }
   ],
-  "defaultTarget": "build",
+  "defaultTarget": "source",
   "locales": ["en"],
 
   "applications": [
     {
-      "class": "wax.demo.Application",
+      "class": "wax.demo.ApplicationTest",
       "theme": "wax.demo.theme.Theme",
       "name": "waxdemo",
       "title": "WaxDemo",
