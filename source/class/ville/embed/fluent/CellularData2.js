@@ -1,0 +1,53 @@
+/* ************************************************************************
+   License:
+     MIT: https://opensource.org/licenses/MIT
+   Authors:
+     * Chris Eskew (SQville) sqville@gmail.com
+************************************************************************ */
+qx.Class.define("ville.embed.fluent.CellularData2",
+{
+  extend : ville.embed.fluent.Abstract,
+
+  /*
+  *****************************************************************************
+     CONSTRUCTOR
+  *****************************************************************************
+  */
+
+  /**
+   * @param size {Integer} The size of the icon in px. Sets width and height to this value.
+   * @param color {String?"currentColor"} TextColor of the svg icon. Default is set to currentColor.
+   * @param iconstyle {String?"regular"} Default is regular. Other allowed value is filled.
+   */
+  construct (size, color, iconstyle, title)
+  {
+   super();
+
+   if (size != null) {
+    this.setWidth(size);
+    this.setHeight(size);
+   }
+
+   if (color != null)
+    this.setTextColor(color);
+
+   if (iconstyle != null)
+    this.setIconStyle(iconstyle);
+
+   if (title != null)
+    this.setTitle(title);
+
+   var pathdregular = "M7.5 10a.5.5 0 0 1 .5.41v5.09a.5.5 0 0 1-.99.09V10.5c0-.28.22-.5.5-.5Zm-3 2a.5.5 0 0 1 .5.41v3.09a.5.5 0 0 1-1 .09V12.5c0-.28.22-.5.5-.5Zm6-4a.5.5 0 0 1 .5.4v7.1a.5.5 0 0 1-1 .09V8.5c0-.28.22-.5.5-.5Zm3-2a.5.5 0 0 1 .5.41v9.09a.5.5 0 0 1-1 .09V6.5c0-.27.22-.5.5-.5Z";
+   var pathdfilled = "M4.75 12c.38 0 .69.28.74.64l.01.11v2.5a.75.75 0 0 1-1.5.1v-2.6c0-.41.34-.75.75-.75Zm3-2c.38 0 .69.28.74.64l.01.11v4.5a.75.75 0 0 1-1.5.1v-4.6c0-.41.34-.75.75-.75Zm3-2c.38 0 .69.28.74.64v6.61a.75.75 0 0 1-1.48.11l-.01-.11v-6.5c0-.41.34-.75.75-.75Zm3-2c.38 0 .69.28.74.64v8.61a.75.75 0 0 1-1.48.11l-.01-.11v-8.5c0-.41.34-.75.75-.75Z";
+   
+   //prep regular
+   this._htmlregular = this.svgit(this.pathit(pathdregular));
+   //prep filled
+   this._htmlfilled = this.svgit(this.pathit(pathdfilled));
+   
+   if (this.getIconStyle() == "filled")
+     this.setHtml(this._htmlfilled);
+   else 
+     this.setHtml(this._htmlregular);
+ }
+});

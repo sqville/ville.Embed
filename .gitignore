@@ -2,3 +2,6 @@
 /compiled
 /qx_packages
 .package-cache.json
+node_modules
+package-lock.json
+package.json

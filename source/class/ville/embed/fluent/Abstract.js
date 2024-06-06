@@ -1,22 +1,11 @@
 /* ************************************************************************
-
-   Ville Software (SQville)
-
-   Copyright: 2021 sqville
-
    License:
      MIT: https://opensource.org/licenses/MIT
      See the LICENSE file in the project's top-level directory for details.
 
    Authors:
-     * Chris Eskew (sqville) chris.eskew@sqville.com
-
+     * Chris Eskew (sqville) sqville@gmail.com
 ************************************************************************ */
-
-/**
- * NOTE: None
- *
- */
  qx.Class.define("ville.embed.fluent.Abstract",
  {
   type: "abstract", 
@@ -26,17 +15,12 @@
   construct ()
   {
     super();
+    this.setAllowStretchX(false);
+    this.setAllowStretchY(false);
   },
 
   properties :
   {
-    // overridden
-    appearance: 
-    {
-      refine: true,
-      init: "icon"
-    },
-    
     viewBox :
     {
       check : "String",
@@ -53,7 +37,14 @@
       nullable : true,
       themeable : true
     },
-  	
+
+    title :
+    {
+      check : "String",
+      init : "",
+      transform: "_transformTitle",
+      themeable : true
+    }
   },
 
    members :
@@ -65,14 +56,15 @@
     pathit (pathd)
     {
       return `
-       <path d="${pathd}"></path>`
+       <path d="${pathd}"/>`
     },
 
     svgit (pathtags)
     {
       var viewbox = this.getViewBox();
+      var title = this.getTitle();
       return `
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="${viewbox}" fill="currentColor">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="${viewbox}" fill="currentColor">${title}
        ${pathtags}
       </svg>`
     },
@@ -85,6 +77,12 @@
         else if (value == "filled" & this._htmlfilled != null)
           this.setHtml(this._htmlfilled);
       }
+    },
+
+    // property apply
+    _transformTitle(value, old) {
+      value = `<title>${value}</title>`;   
+      return value;
     }
    }
  });

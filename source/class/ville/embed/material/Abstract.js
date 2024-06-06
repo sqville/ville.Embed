@@ -1,22 +1,10 @@
 /* ************************************************************************
-
-   Ville Software (SQville)
-
-   Copyright: 2021 sqville
-
    License:
      MIT: https://opensource.org/licenses/MIT
      See the LICENSE file in the project's top-level directory for details.
-
    Authors:
      * Chris Eskew (sqville) chris.eskew@sqville.com
-
 ************************************************************************ */
-
-/**
- * NOTE: None
- *
- */
  qx.Class.define("ville.embed.material.Abstract",
  {
   type: "abstract", 
@@ -26,17 +14,12 @@
   construct ()
   {
     super();
+    this.setAllowStretchX(false);
+    this.setAllowStretchY(false);
   },
 
   properties :
   {
-    // overridden
-    appearance: 
-    {
-      refine: true,
-      init: "icon"
-    },
-    
     viewBox :
     {
       check : "String",
@@ -52,8 +35,7 @@
       event: "changeIconStyle",
       nullable : true,
       themeable : true
-    },
-  	
+    }
   },
 
    members :

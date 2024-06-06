@@ -43,7 +43,7 @@ qx.Theme.define("wax.demo.theme.Appearance",
       }
     },
 
-    "icon" :
+    /*"icon" :
     {
       include: "label",
       
@@ -55,7 +55,7 @@ qx.Theme.define("wax.demo.theme.Appearance",
           allowStretchY: false
         };
       }
-    },
+    },*/
 
      /*
     ---------------------------------------------------------------------------
