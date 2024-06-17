@@ -5438,8 +5438,8 @@ qx.Class.define("wax.demo.Application",
 
     
       // Assemble - THE STACK 
-      centerbox.add(dashboardscrollstackpage);
       centerbox.add(overviewscrollstackpage);
+      centerbox.add(dashboardscrollstackpage);
       centerbox.add(tablelistscrollstackpage);
       centerbox.add(menuscrollstackpage);
 
@@ -5463,17 +5463,17 @@ qx.Class.define("wax.demo.Application",
       atmleftnavheader.setShow("label");
       //atmleftnavheader.getChildControl("icon").set({ scale : true });
       westbox.add(atmleftnavheader);
-      var tbtndashboardpage = new wax.demo.MenuButton("iConicss", "wax/demo/Css3_logo.svg", true );
-      westbox.add(tbtndashboardpage);
-
       var tbtnSecondPage = new wax.demo.MenuButton("Fluent UI (SVG)", "wax/demo/fluent_globe.svg", true);
       westbox.add(tbtnSecondPage);
+      
+      var tbtndashboardpage = new wax.demo.MenuButton("iConicss", "wax/demo/Css3_logo.svg", true );
+      westbox.add(tbtndashboardpage);
 
       var tbtnThirdPage = new wax.demo.MenuButton("Material (SVG)", "wax/demo/material_logo.svg", true);
       westbox.add(tbtnThirdPage);
 
       var westboxbuttongroup = new qx.ui.form.RadioGroup();
-      westboxbuttongroup.add(tbtndashboardpage, tbtnSecondPage, tbtnThirdPage);
+      westboxbuttongroup.add(tbtnSecondPage, tbtndashboardpage, tbtnThirdPage);
       
       // CLONE the above controls
       var atmmenuleftnavheader = atmleftnavheader.clone();
@@ -5487,14 +5487,14 @@ qx.Class.define("wax.demo.Application",
 
       // Add the clones to the Main Menu Popup
       mainmenupopup.add(atmmenuleftnavheader);
-      mainmenupopup.add(tbtnmenudashboardpage);
       mainmenupopup.add(tbtnmenuSecondPage);
+      mainmenupopup.add(tbtnmenudashboardpage);
       mainmenupopup.add(tbtnmenuThirdPage);
 
 
       // Assign all the clones their own RadioGroup
       var mainmenubuttongroup = new qx.ui.form.RadioGroup();
-      mainmenubuttongroup.add(tbtnmenudashboardpage, tbtnmenuSecondPage, tbtnmenuThirdPage);
+      mainmenubuttongroup.add(tbtnmenuSecondPage, tbtnmenudashboardpage, tbtnmenuThirdPage);
       
       //***  CODE for applying popup fading in and out  ***//
       var fadeinleft = {duration: 300, timing: "ease-out", origin: "left top", keyFrames : {
@@ -5517,8 +5517,8 @@ qx.Class.define("wax.demo.Application",
       var tbtnoverviewpagehym = new wax.demo.MenuButton("Fluent UI", "wax/demo/fluent_globe.svg", true).set({appearance: "mainmenubutton-hym", iconPosition: "top"});
       var tbtnlistofitemspagehym = new wax.demo.MenuButton("Material", "wax/demo/material_logo.svg", true).set({appearance: "mainmenubutton-hym", iconPosition: "top"});
       var tbtnmenuhym = new wax.demo.MenuButton("Menu", menuimage, true).set({appearance: "mainmenubutton-hym", iconPosition: "top"});
-      southbox.add(tbtndashboardpagehym, {flex: 1});
       southbox.add(tbtnoverviewpagehym, {flex: 1});
+      southbox.add(tbtndashboardpagehym, {flex: 1});
       southbox.add(tbtnlistofitemspagehym, {flex: 1});
       southbox.add(tbtnmenuhym, {flex: 1});
 
@@ -5526,7 +5526,7 @@ qx.Class.define("wax.demo.Application",
 
       // Assign all the clones their own RadioGroup
       var mainmenubuttongrouphym = new qx.ui.form.RadioGroup();
-      mainmenubuttongrouphym.add(tbtndashboardpagehym, tbtnoverviewpagehym, tbtnlistofitemspagehym, tbtnmenuhym);
+      mainmenubuttongrouphym.add(tbtnoverviewpagehym, tbtndashboardpagehym, tbtnlistofitemspagehym, tbtnmenuhym);
 
       // <<< END of Hybrid Mobil (hym) Main Menu and Main Menu Popup <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 

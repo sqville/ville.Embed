@@ -8,6 +8,12 @@ qx.Class.define("ville.embed.fluent.UsbStick",
 {
   extend : ville.embed.fluent.Abstract,
 
+  statics :
+  {
+    REGULAR : "M7.5 2h5c.28 0 .5.22.5.5V6a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V8c0-1.1.9-2 2-2V2.5c0-.28.22-.5.5-.5ZM12 6V3H8v3h4ZM7 7a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V8a1 1 0 0 0-1-1H7Z",
+    FILLED : "M7 2.5c0-.28.22-.5.5-.5h5c.28 0 .5.22.5.5V6a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V8c0-1.1.9-2 2-2V2.5ZM8 6h4V3H8v3Z"
+  },
+
   /*
   *****************************************************************************
      CONSTRUCTOR
@@ -18,6 +24,7 @@ qx.Class.define("ville.embed.fluent.UsbStick",
    * @param size {Integer} The size of the icon in px. Sets width and height to this value.
    * @param color {String?"currentColor"} TextColor of the svg icon. Default is set to currentColor.
    * @param iconstyle {String?"regular"} Default is regular. Other allowed value is filled.
+   * @param title {String} If included, adds a title tag to the svg root tag. 
    */
   construct (size, color, iconstyle, title)
   {
@@ -36,14 +43,11 @@ qx.Class.define("ville.embed.fluent.UsbStick",
 
    if (title != null)
     this.setTitle(title);
-
-   var pathdregular = "M7.5 2h5c.28 0 .5.22.5.5V6a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V8c0-1.1.9-2 2-2V2.5c0-.28.22-.5.5-.5ZM12 6V3H8v3h4ZM7 7a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V8a1 1 0 0 0-1-1H7Z";
-   var pathdfilled = "M7 2.5c0-.28.22-.5.5-.5h5c.28 0 .5.22.5.5V6a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V8c0-1.1.9-2 2-2V2.5ZM8 6h4V3H8v3Z";
    
    //prep regular
-   this._htmlregular = this.svgit(this.pathit(pathdregular));
+   this._htmlregular = this._svgit(this._pathit(this.constructor.REGULAR));
    //prep filled
-   this._htmlfilled = this.svgit(this.pathit(pathdfilled));
+   this._htmlfilled = this._svgit(this._pathit(this.constructor.FILLED));
    
    if (this.getIconStyle() == "filled")
      this.setHtml(this._htmlfilled);

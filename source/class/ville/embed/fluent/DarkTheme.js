@@ -8,6 +8,12 @@ qx.Class.define("ville.embed.fluent.DarkTheme",
 {
   extend : ville.embed.fluent.Abstract,
 
+  statics :
+  {
+    REGULAR : "M10 3a7 7 0 1 1 0 14V3Zm0-1a8 8 0 1 0 0 16 8 8 0 0 0 0-16Z",
+    FILLED : "M10 3.5a6.5 6.5 0 1 1 0 13v-13ZM10 2a8 8 0 1 0 0 16 8 8 0 0 0 0-16Z"
+  },
+
   /*
   *****************************************************************************
      CONSTRUCTOR
@@ -18,6 +24,7 @@ qx.Class.define("ville.embed.fluent.DarkTheme",
    * @param size {Integer} The size of the icon in px. Sets width and height to this value.
    * @param color {String?"currentColor"} TextColor of the svg icon. Default is set to currentColor.
    * @param iconstyle {String?"regular"} Default is regular. Other allowed value is filled.
+   * @param title {String} If included, adds a title tag to the svg root tag. 
    */
   construct (size, color, iconstyle, title)
   {
@@ -36,14 +43,11 @@ qx.Class.define("ville.embed.fluent.DarkTheme",
 
    if (title != null)
     this.setTitle(title);
-
-   var pathdregular = "M10 3a7 7 0 1 1 0 14V3Zm0-1a8 8 0 1 0 0 16 8 8 0 0 0 0-16Z";
-   var pathdfilled = "M10 3.5a6.5 6.5 0 1 1 0 13v-13ZM10 2a8 8 0 1 0 0 16 8 8 0 0 0 0-16Z";
    
    //prep regular
-   this._htmlregular = this.svgit(this.pathit(pathdregular));
+   this._htmlregular = this._svgit(this._pathit(this.constructor.REGULAR));
    //prep filled
-   this._htmlfilled = this.svgit(this.pathit(pathdfilled));
+   this._htmlfilled = this._svgit(this._pathit(this.constructor.FILLED));
    
    if (this.getIconStyle() == "filled")
      this.setHtml(this._htmlfilled);

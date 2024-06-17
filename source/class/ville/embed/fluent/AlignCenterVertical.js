@@ -8,6 +8,12 @@ qx.Class.define("ville.embed.fluent.AlignCenterVertical",
 {
   extend : ville.embed.fluent.Abstract,
 
+  statics :
+  {
+    REGULAR : "M10.5 18a.5.5 0 0 1-.5-.5V16H8a2 2 0 0 1-2-2v-1c0-1.1.9-2 2-2h2V9H6a2 2 0 0 1-2-2V6c0-1.1.9-2 2-2h4V2.5a.5.5 0 0 1 1 0V4h4a2 2 0 0 1 2 2v1a2 2 0 0 1-2 2h-4v2h2a2 2 0 0 1 2 2v1a2 2 0 0 1-2 2h-2v1.5a.5.5 0 0 1-.5.5ZM6 5a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1h9a1 1 0 0 0 1-1V6a1 1 0 0 0-1-1H6Zm2 7a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1h5a1 1 0 0 0 1-1v-1a1 1 0 0 0-1-1H8Z",
+    FILLED : "M10.5 18a.5.5 0 0 1-.5-.5V16H8a2 2 0 0 1-2-2v-1c0-1.1.9-2 2-2h2V9H6a2 2 0 0 1-2-2V6c0-1.1.9-2 2-2h4V2.5a.5.5 0 0 1 1 0V4h4a2 2 0 0 1 2 2v1a2 2 0 0 1-2 2h-4v2h2a2 2 0 0 1 2 2v1a2 2 0 0 1-2 2h-2v1.5a.5.5 0 0 1-.5.5Z"
+  },
+
   /*
   *****************************************************************************
      CONSTRUCTOR
@@ -18,6 +24,7 @@ qx.Class.define("ville.embed.fluent.AlignCenterVertical",
    * @param size {Integer} The size of the icon in px. Sets width and height to this value.
    * @param color {String?"currentColor"} TextColor of the svg icon. Default is set to currentColor.
    * @param iconstyle {String?"regular"} Default is regular. Other allowed value is filled.
+   * @param title {String} If included, adds a title tag to the svg root tag. 
    */
   construct (size, color, iconstyle, title)
   {
@@ -36,14 +43,11 @@ qx.Class.define("ville.embed.fluent.AlignCenterVertical",
 
    if (title != null)
     this.setTitle(title);
-
-   var pathdregular = "M10.5 18a.5.5 0 0 1-.5-.5V16H8a2 2 0 0 1-2-2v-1c0-1.1.9-2 2-2h2V9H6a2 2 0 0 1-2-2V6c0-1.1.9-2 2-2h4V2.5a.5.5 0 0 1 1 0V4h4a2 2 0 0 1 2 2v1a2 2 0 0 1-2 2h-4v2h2a2 2 0 0 1 2 2v1a2 2 0 0 1-2 2h-2v1.5a.5.5 0 0 1-.5.5ZM6 5a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1h9a1 1 0 0 0 1-1V6a1 1 0 0 0-1-1H6Zm2 7a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1h5a1 1 0 0 0 1-1v-1a1 1 0 0 0-1-1H8Z";
-   var pathdfilled = "M10.5 18a.5.5 0 0 1-.5-.5V16H8a2 2 0 0 1-2-2v-1c0-1.1.9-2 2-2h2V9H6a2 2 0 0 1-2-2V6c0-1.1.9-2 2-2h4V2.5a.5.5 0 0 1 1 0V4h4a2 2 0 0 1 2 2v1a2 2 0 0 1-2 2h-4v2h2a2 2 0 0 1 2 2v1a2 2 0 0 1-2 2h-2v1.5a.5.5 0 0 1-.5.5Z";
    
    //prep regular
-   this._htmlregular = this.svgit(this.pathit(pathdregular));
+   this._htmlregular = this._svgit(this._pathit(this.constructor.REGULAR));
    //prep filled
-   this._htmlfilled = this.svgit(this.pathit(pathdfilled));
+   this._htmlfilled = this._svgit(this._pathit(this.constructor.FILLED));
    
    if (this.getIconStyle() == "filled")
      this.setHtml(this._htmlfilled);

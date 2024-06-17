@@ -8,6 +8,12 @@ qx.Class.define("ville.embed.fluent.FormMultiple",
 {
   extend : ville.embed.fluent.Abstract,
 
+  statics :
+  {
+    REGULAR : "M5.5 6a.5.5 0 0 0 0 1h7a.5.5 0 0 0 0-1h-7Z",
+    FILLED : "M6.5 11a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1Z"
+  },
+
   /*
   *****************************************************************************
      CONSTRUCTOR
@@ -18,6 +24,7 @@ qx.Class.define("ville.embed.fluent.FormMultiple",
    * @param size {Integer} The size of the icon in px. Sets width and height to this value.
    * @param color {String?"currentColor"} TextColor of the svg icon. Default is set to currentColor.
    * @param iconstyle {String?"regular"} Default is regular. Other allowed value is filled.
+   * @param title {String} If included, adds a title tag to the svg root tag. 
    */
   construct (size, color, iconstyle, title)
   {
@@ -36,14 +43,11 @@ qx.Class.define("ville.embed.fluent.FormMultiple",
 
    if (title != null)
     this.setTitle(title);
-
-   var pathdregular = "M5.5 6a.5.5 0 0 0 0 1h7a.5.5 0 0 0 0-1h-7Z";
-   var pathdfilled = "M6.5 11a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1Z";
    
    //prep regular
-   this._htmlregular = this.svgit(this.pathit(pathdregular));
+   this._htmlregular = this._svgit(this._pathit(this.constructor.REGULAR));
    //prep filled
-   this._htmlfilled = this.svgit(this.pathit(pathdfilled));
+   this._htmlfilled = this._svgit(this._pathit(this.constructor.FILLED));
    
    if (this.getIconStyle() == "filled")
      this.setHtml(this._htmlfilled);

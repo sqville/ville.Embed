@@ -27,15 +27,15 @@ $ qx package install sqville/ville.Embed
   var btnFormButton = new qx.ui.form.Button('Embeded Cube').set({ embed : cubeoicon });
 ```
 
-To create an icon using an SVG based icon set just create the icon's named object giving it a width (required), height (required) and color (optional):
+To create an icon using an SVG based icon set just create the icon's named object giving it a size (in px) and color (optional):
 ```js
-  var airticketsicon = new ville.embed.fluent.AirTickets().set({ width: 40, height: 40 });
+  var airplanetakeofficon = new ville.embed.fluent.AirplaneTakeOff(40);
   // Placed one-time at the top of your applicaition code
   qx.Class.include(qx.ui.basic.Atom, ville.embed.MEmbed); 
-  var btnFormButton = new qx.ui.form.Button('Embeded SVG').set({ embed : airticketsicon });
+  var btnFormButton = new qx.ui.form.Button('Embeded SVG').set({ embed : airplanetakeofficon });
 ```
 
-## Approach 2 - Enable qx.ui.basic.Image, Qooxdoo object to accept HTML/SVG markup and Clip-path values.
+## Approach 2 - Enable qx.ui.basic.Image, Qooxdoo object to accept HTML/SVG markup and Clip-path values as a string.
 ```js
   // Placed one-time at the top of your applicaition code
   qx.Class.include(qx.ui.basic.Image, ville.embed.MImage); 
@@ -56,14 +56,15 @@ To create an icon using an SVG based icon set just create the icon's named objec
     	style : function(states)
     	{        
         
-        // To use CSS clip-path, comment-out "html" and uncomment "clipPath"  
+        // To use CSS clip-path, comment-out "html" and uncomment "clipPath." 
+        // Set the clipPath property to the static member of the class.
         
         return {
           html : wax.demo.theme.Image.ChevronDownRegular,
           width : 16,
           height : 16,
           backgroundColor : "transparent",
-          // clipPath : "polygon(40% 0%, 40% 20%, 100% 20%, 100% 80%, 40% 80%, 40% 100%, 0% 50%)"
+          //clipPath : ville.embed.fluent.ChevronDown.REGULAR
     		};
     	}
     },

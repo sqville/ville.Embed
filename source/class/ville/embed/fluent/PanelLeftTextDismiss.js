@@ -8,6 +8,12 @@ qx.Class.define("ville.embed.fluent.PanelLeftTextDismiss",
 {
   extend : ville.embed.fluent.Abstract,
 
+  statics :
+  {
+    REGULAR : "M6.59 7a.5.5 0 0 0-.09-1H4.41a.5.5 0 0 0 .09 1h2.09Zm0 3a.5.5 0 0 0-.09-1H4.41a.5.5 0 0 0 .09 1h2.09ZM7 12.5a.5.5 0 0 1-.41.5H4.5a.5.5 0 0 1-.09-1H6.5c.28 0 .5.22.5.5ZM5 3a3 3 0 0 0-3 3v7a3 3 0 0 0 3 3h4.2c-.08-.32-.15-.66-.18-1H9V4h6a2 2 0 0 1 2 2v3.6c.36.18.7.4 1 .66V6a3 3 0 0 0-3-3H5Zm0 1h3v11H5a2 2 0 0 1-2-2V6c0-1.1.9-2 2-2Zm14 10.5a4.5 4.5 0 1 1-9 0 4.5 4.5 0 0 1 9 0Zm-3.8 0 1.15-1.15a.5.5 0 0 0-.7-.7l-1.15 1.14-1.15-1.14a.5.5 0 0 0-.7.7l1.14 1.15-1.14 1.15a.5.5 0 0 0 .7.7l1.15-1.14 1.15 1.14a.5.5 0 0 0 .7-.7l-1.14-1.15Z",
+    FILLED : "M2 6a3 3 0 0 1 3-3h10a3 3 0 0 1 3 3v4.26a5.5 5.5 0 0 0-1-.66V6a2 2 0 0 0-2-2H9v11h.02c.03.34.1.68.19 1H5a3 3 0 0 1-3-3V6Zm4.59 1a.5.5 0 0 0-.09-1H4.41a.5.5 0 0 0 .09 1h2.09Zm0 3a.5.5 0 0 0-.09-1H4.41a.5.5 0 0 0 .09 1h2.09ZM7 12.5a.5.5 0 0 0-.5-.5H4.41a.5.5 0 0 0 .09 1h2.09a.5.5 0 0 0 .41-.5Zm12 2a4.5 4.5 0 1 1-9 0 4.5 4.5 0 0 1 9 0Zm-3.8 0 1.15-1.15a.5.5 0 0 0-.7-.7l-1.15 1.14-1.15-1.14a.5.5 0 0 0-.7.7l1.14 1.15-1.14 1.15a.5.5 0 0 0 .7.7l1.15-1.14 1.15 1.14a.5.5 0 0 0 .7-.7l-1.14-1.15Z"
+  },
+
   /*
   *****************************************************************************
      CONSTRUCTOR
@@ -18,6 +24,7 @@ qx.Class.define("ville.embed.fluent.PanelLeftTextDismiss",
    * @param size {Integer} The size of the icon in px. Sets width and height to this value.
    * @param color {String?"currentColor"} TextColor of the svg icon. Default is set to currentColor.
    * @param iconstyle {String?"regular"} Default is regular. Other allowed value is filled.
+   * @param title {String} If included, adds a title tag to the svg root tag. 
    */
   construct (size, color, iconstyle, title)
   {
@@ -36,14 +43,11 @@ qx.Class.define("ville.embed.fluent.PanelLeftTextDismiss",
 
    if (title != null)
     this.setTitle(title);
-
-   var pathdregular = "M6.59 7a.5.5 0 0 0-.09-1H4.41a.5.5 0 0 0 .09 1h2.09Zm0 3a.5.5 0 0 0-.09-1H4.41a.5.5 0 0 0 .09 1h2.09ZM7 12.5a.5.5 0 0 1-.41.5H4.5a.5.5 0 0 1-.09-1H6.5c.28 0 .5.22.5.5ZM5 3a3 3 0 0 0-3 3v7a3 3 0 0 0 3 3h4.2c-.08-.32-.15-.66-.18-1H9V4h6a2 2 0 0 1 2 2v3.6c.36.18.7.4 1 .66V6a3 3 0 0 0-3-3H5Zm0 1h3v11H5a2 2 0 0 1-2-2V6c0-1.1.9-2 2-2Zm14 10.5a4.5 4.5 0 1 1-9 0 4.5 4.5 0 0 1 9 0Zm-3.8 0 1.15-1.15a.5.5 0 0 0-.7-.7l-1.15 1.14-1.15-1.14a.5.5 0 0 0-.7.7l1.14 1.15-1.14 1.15a.5.5 0 0 0 .7.7l1.15-1.14 1.15 1.14a.5.5 0 0 0 .7-.7l-1.14-1.15Z";
-   var pathdfilled = "M2 6a3 3 0 0 1 3-3h10a3 3 0 0 1 3 3v4.26a5.5 5.5 0 0 0-1-.66V6a2 2 0 0 0-2-2H9v11h.02c.03.34.1.68.19 1H5a3 3 0 0 1-3-3V6Zm4.59 1a.5.5 0 0 0-.09-1H4.41a.5.5 0 0 0 .09 1h2.09Zm0 3a.5.5 0 0 0-.09-1H4.41a.5.5 0 0 0 .09 1h2.09ZM7 12.5a.5.5 0 0 0-.5-.5H4.41a.5.5 0 0 0 .09 1h2.09a.5.5 0 0 0 .41-.5Zm12 2a4.5 4.5 0 1 1-9 0 4.5 4.5 0 0 1 9 0Zm-3.8 0 1.15-1.15a.5.5 0 0 0-.7-.7l-1.15 1.14-1.15-1.14a.5.5 0 0 0-.7.7l1.14 1.15-1.14 1.15a.5.5 0 0 0 .7.7l1.15-1.14 1.15 1.14a.5.5 0 0 0 .7-.7l-1.14-1.15Z";
    
    //prep regular
-   this._htmlregular = this.svgit(this.pathit(pathdregular));
+   this._htmlregular = this._svgit(this._pathit(this.constructor.REGULAR));
    //prep filled
-   this._htmlfilled = this.svgit(this.pathit(pathdfilled));
+   this._htmlfilled = this._svgit(this._pathit(this.constructor.FILLED));
    
    if (this.getIconStyle() == "filled")
      this.setHtml(this._htmlfilled);

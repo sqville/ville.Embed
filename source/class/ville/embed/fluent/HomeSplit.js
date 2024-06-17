@@ -8,6 +8,12 @@ qx.Class.define("ville.embed.fluent.HomeSplit",
 {
   extend : ville.embed.fluent.Abstract,
 
+  statics :
+  {
+    REGULAR : "M11 2.38a1.5 1.5 0 0 0-2 0L3.5 7.33c-.32.29-.5.7-.5 1.12v7.05c0 .83.67 1.5 1.5 1.5h11c.83 0 1.5-.67 1.5-1.5V8.45c0-.43-.18-.83-.5-1.12L11 2.38Zm-1.33.74a.5.5 0 0 1 .66 0l5.5 4.95c.11.1.17.23.17.38v7.05a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5V8.45a.5.5 0 0 1 .17-.38l5.5-4.95Zm.83 10.38a.5.5 0 1 0-1 0v1a.5.5 0 0 0 1 0v-1ZM10 9c.28 0 .5.22.5.5v1a.5.5 0 0 1-1 0v-1c0-.28.22-.5.5-.5Zm.5-3.5a.5.5 0 0 0-1 0v1a.5.5 0 0 0 1 0v-1Z",
+    FILLED : "M11 2.38a1.5 1.5 0 0 0-2 0L3.5 7.33c-.32.29-.5.7-.5 1.12v7.05c0 .83.67 1.5 1.5 1.5h11c.83 0 1.5-.67 1.5-1.5V8.45c0-.43-.18-.83-.5-1.12L11 2.38Zm-.5 11.12v1a.5.5 0 0 1-1 0v-1a.5.5 0 1 1 1 0ZM10 9c.28 0 .5.22.5.5v1a.5.5 0 0 1-1 0v-1c0-.28.22-.5.5-.5Zm.5-3.5v1a.5.5 0 0 1-1 0v-1a.5.5 0 0 1 1 0Z"
+  },
+
   /*
   *****************************************************************************
      CONSTRUCTOR
@@ -18,6 +24,7 @@ qx.Class.define("ville.embed.fluent.HomeSplit",
    * @param size {Integer} The size of the icon in px. Sets width and height to this value.
    * @param color {String?"currentColor"} TextColor of the svg icon. Default is set to currentColor.
    * @param iconstyle {String?"regular"} Default is regular. Other allowed value is filled.
+   * @param title {String} If included, adds a title tag to the svg root tag. 
    */
   construct (size, color, iconstyle, title)
   {
@@ -36,14 +43,11 @@ qx.Class.define("ville.embed.fluent.HomeSplit",
 
    if (title != null)
     this.setTitle(title);
-
-   var pathdregular = "M11 2.38a1.5 1.5 0 0 0-2 0L3.5 7.33c-.32.29-.5.7-.5 1.12v7.05c0 .83.67 1.5 1.5 1.5h11c.83 0 1.5-.67 1.5-1.5V8.45c0-.43-.18-.83-.5-1.12L11 2.38Zm-1.33.74a.5.5 0 0 1 .66 0l5.5 4.95c.11.1.17.23.17.38v7.05a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5V8.45a.5.5 0 0 1 .17-.38l5.5-4.95Zm.83 10.38a.5.5 0 1 0-1 0v1a.5.5 0 0 0 1 0v-1ZM10 9c.28 0 .5.22.5.5v1a.5.5 0 0 1-1 0v-1c0-.28.22-.5.5-.5Zm.5-3.5a.5.5 0 0 0-1 0v1a.5.5 0 0 0 1 0v-1Z";
-   var pathdfilled = "M11 2.38a1.5 1.5 0 0 0-2 0L3.5 7.33c-.32.29-.5.7-.5 1.12v7.05c0 .83.67 1.5 1.5 1.5h11c.83 0 1.5-.67 1.5-1.5V8.45c0-.43-.18-.83-.5-1.12L11 2.38Zm-.5 11.12v1a.5.5 0 0 1-1 0v-1a.5.5 0 1 1 1 0ZM10 9c.28 0 .5.22.5.5v1a.5.5 0 0 1-1 0v-1c0-.28.22-.5.5-.5Zm.5-3.5v1a.5.5 0 0 1-1 0v-1a.5.5 0 0 1 1 0Z";
    
    //prep regular
-   this._htmlregular = this.svgit(this.pathit(pathdregular));
+   this._htmlregular = this._svgit(this._pathit(this.constructor.REGULAR));
    //prep filled
-   this._htmlfilled = this.svgit(this.pathit(pathdfilled));
+   this._htmlfilled = this._svgit(this._pathit(this.constructor.FILLED));
    
    if (this.getIconStyle() == "filled")
      this.setHtml(this._htmlfilled);

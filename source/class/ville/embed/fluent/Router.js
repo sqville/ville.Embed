@@ -8,6 +8,12 @@ qx.Class.define("ville.embed.fluent.Router",
 {
   extend : ville.embed.fluent.Abstract,
 
+  statics :
+  {
+    REGULAR : "M3.5 9.5a6.5 6.5 0 0 1 13 0 .5.5 0 0 0 1 0 7.5 7.5 0 0 0-15 0 .5.5 0 0 0 1 0Zm6.5-4a4 4 0 0 0-4 4 .5.5 0 0 1-1 0 5 5 0 0 1 10 0 .5.5 0 0 1-1 0 4 4 0 0 0-4-4ZM7.75 9.25a2.25 2.25 0 1 1 2.75 2.2V13h4a2.5 2.5 0 0 1 0 5h-9a2.5 2.5 0 0 1 0-5h4v-1.56a2.25 2.25 0 0 1-1.75-2.19ZM10 8a1.25 1.25 0 1 0 0 2.5A1.25 1.25 0 0 0 10 8Zm-4.5 6a1.5 1.5 0 0 0 0 3h9a1.5 1.5 0 0 0 0-3h-9Z",
+    FILLED : "M3.5 9.5a6.5 6.5 0 0 1 13 0 .5.5 0 0 0 1 0 7.5 7.5 0 0 0-15 0 .5.5 0 0 0 1 0Zm6.5-4a4 4 0 0 0-4 4 .5.5 0 0 1-1 0 5 5 0 0 1 10 0 .5.5 0 0 1-1 0 4 4 0 0 0-4-4ZM7.75 9.25a2.25 2.25 0 1 1 2.75 2.2V13h4a2.5 2.5 0 0 1 0 5h-9a2.5 2.5 0 0 1 0-5h4v-1.56a2.25 2.25 0 0 1-1.75-2.19Z"
+  },
+
   /*
   *****************************************************************************
      CONSTRUCTOR
@@ -18,6 +24,7 @@ qx.Class.define("ville.embed.fluent.Router",
    * @param size {Integer} The size of the icon in px. Sets width and height to this value.
    * @param color {String?"currentColor"} TextColor of the svg icon. Default is set to currentColor.
    * @param iconstyle {String?"regular"} Default is regular. Other allowed value is filled.
+   * @param title {String} If included, adds a title tag to the svg root tag. 
    */
   construct (size, color, iconstyle, title)
   {
@@ -36,14 +43,11 @@ qx.Class.define("ville.embed.fluent.Router",
 
    if (title != null)
     this.setTitle(title);
-
-   var pathdregular = "M3.5 9.5a6.5 6.5 0 0 1 13 0 .5.5 0 0 0 1 0 7.5 7.5 0 0 0-15 0 .5.5 0 0 0 1 0Zm6.5-4a4 4 0 0 0-4 4 .5.5 0 0 1-1 0 5 5 0 0 1 10 0 .5.5 0 0 1-1 0 4 4 0 0 0-4-4ZM7.75 9.25a2.25 2.25 0 1 1 2.75 2.2V13h4a2.5 2.5 0 0 1 0 5h-9a2.5 2.5 0 0 1 0-5h4v-1.56a2.25 2.25 0 0 1-1.75-2.19ZM10 8a1.25 1.25 0 1 0 0 2.5A1.25 1.25 0 0 0 10 8Zm-4.5 6a1.5 1.5 0 0 0 0 3h9a1.5 1.5 0 0 0 0-3h-9Z";
-   var pathdfilled = "M3.5 9.5a6.5 6.5 0 0 1 13 0 .5.5 0 0 0 1 0 7.5 7.5 0 0 0-15 0 .5.5 0 0 0 1 0Zm6.5-4a4 4 0 0 0-4 4 .5.5 0 0 1-1 0 5 5 0 0 1 10 0 .5.5 0 0 1-1 0 4 4 0 0 0-4-4ZM7.75 9.25a2.25 2.25 0 1 1 2.75 2.2V13h4a2.5 2.5 0 0 1 0 5h-9a2.5 2.5 0 0 1 0-5h4v-1.56a2.25 2.25 0 0 1-1.75-2.19Z";
    
    //prep regular
-   this._htmlregular = this.svgit(this.pathit(pathdregular));
+   this._htmlregular = this._svgit(this._pathit(this.constructor.REGULAR));
    //prep filled
-   this._htmlfilled = this.svgit(this.pathit(pathdfilled));
+   this._htmlfilled = this._svgit(this._pathit(this.constructor.FILLED));
    
    if (this.getIconStyle() == "filled")
      this.setHtml(this._htmlfilled);

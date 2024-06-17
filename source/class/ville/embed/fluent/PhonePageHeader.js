@@ -8,6 +8,12 @@ qx.Class.define("ville.embed.fluent.PhonePageHeader",
 {
   extend : ville.embed.fluent.Abstract,
 
+  statics :
+  {
+    REGULAR : "M7 2a2 2 0 0 0-2 2v12c0 1.1.9 2 2 2h6a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H7ZM6 5h8v11a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V5Z",
+    FILLED : "M5 4c0-1.1.9-2 2-2h6a2 2 0 0 1 2 2v1H5V4Zm0 2v10c0 1.1.9 2 2 2h6a2 2 0 0 0 2-2V6H5Z"
+  },
+
   /*
   *****************************************************************************
      CONSTRUCTOR
@@ -18,6 +24,7 @@ qx.Class.define("ville.embed.fluent.PhonePageHeader",
    * @param size {Integer} The size of the icon in px. Sets width and height to this value.
    * @param color {String?"currentColor"} TextColor of the svg icon. Default is set to currentColor.
    * @param iconstyle {String?"regular"} Default is regular. Other allowed value is filled.
+   * @param title {String} If included, adds a title tag to the svg root tag. 
    */
   construct (size, color, iconstyle, title)
   {
@@ -36,14 +43,11 @@ qx.Class.define("ville.embed.fluent.PhonePageHeader",
 
    if (title != null)
     this.setTitle(title);
-
-   var pathdregular = "M7 2a2 2 0 0 0-2 2v12c0 1.1.9 2 2 2h6a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H7ZM6 5h8v11a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V5Z";
-   var pathdfilled = "M5 4c0-1.1.9-2 2-2h6a2 2 0 0 1 2 2v1H5V4Zm0 2v10c0 1.1.9 2 2 2h6a2 2 0 0 0 2-2V6H5Z";
    
    //prep regular
-   this._htmlregular = this.svgit(this.pathit(pathdregular));
+   this._htmlregular = this._svgit(this._pathit(this.constructor.REGULAR));
    //prep filled
-   this._htmlfilled = this.svgit(this.pathit(pathdfilled));
+   this._htmlfilled = this._svgit(this._pathit(this.constructor.FILLED));
    
    if (this.getIconStyle() == "filled")
      this.setHtml(this._htmlfilled);

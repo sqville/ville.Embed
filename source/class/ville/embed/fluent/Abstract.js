@@ -53,13 +53,13 @@
 
     _htmlfilled : null,
     
-    pathit (pathd)
+    _pathit (pathd)
     {
       return `
        <path d="${pathd}"/>`
     },
 
-    svgit (pathtags)
+    _svgit (pathtags)
     {
       var viewbox = this.getViewBox();
       var title = this.getTitle();

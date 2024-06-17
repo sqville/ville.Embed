@@ -8,6 +8,12 @@ qx.Class.define("ville.embed.fluent.Orientation",
 {
   extend : ville.embed.fluent.Abstract,
 
+  statics :
+  {
+    REGULAR : "M3.25 5a.25.25 0 0 0-.25.25v.25a.5.5 0 0 1-1 0v-.25C2 4.56 2.56 4 3.25 4h.25a.5.5 0 0 1 0 1h-.25Z",
+    FILLED : "M3.25 5a.25.25 0 0 0-.25.25v.25a.5.5 0 0 1-1 0v-.25C2 4.56 2.56 4 3.25 4h.25a.5.5 0 0 1 0 1h-.25Z"
+  },
+
   /*
   *****************************************************************************
      CONSTRUCTOR
@@ -18,6 +24,7 @@ qx.Class.define("ville.embed.fluent.Orientation",
    * @param size {Integer} The size of the icon in px. Sets width and height to this value.
    * @param color {String?"currentColor"} TextColor of the svg icon. Default is set to currentColor.
    * @param iconstyle {String?"regular"} Default is regular. Other allowed value is filled.
+   * @param title {String} If included, adds a title tag to the svg root tag. 
    */
   construct (size, color, iconstyle, title)
   {
@@ -36,14 +43,11 @@ qx.Class.define("ville.embed.fluent.Orientation",
 
    if (title != null)
     this.setTitle(title);
-
-   var pathdregular = "M3.25 5a.25.25 0 0 0-.25.25v.25a.5.5 0 0 1-1 0v-.25C2 4.56 2.56 4 3.25 4h.25a.5.5 0 0 1 0 1h-.25Z";
-   var pathdfilled = "M3.25 5a.25.25 0 0 0-.25.25v.25a.5.5 0 0 1-1 0v-.25C2 4.56 2.56 4 3.25 4h.25a.5.5 0 0 1 0 1h-.25Z";
    
    //prep regular
-   this._htmlregular = this.svgit(this.pathit(pathdregular));
+   this._htmlregular = this._svgit(this._pathit(this.constructor.REGULAR));
    //prep filled
-   this._htmlfilled = this.svgit(this.pathit(pathdfilled));
+   this._htmlfilled = this._svgit(this._pathit(this.constructor.FILLED));
    
    if (this.getIconStyle() == "filled")
      this.setHtml(this._htmlfilled);

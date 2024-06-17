@@ -102,7 +102,6 @@ foreach (scandir($directory) as $file) {
             } else {
                 $classtemplate = str_replace('${{pathdfilled}}', '', $classtemplate);
             }
-            //var_dump($classtemplate);
 
             // write file
             $outputFile = 'source/class/ville/embed/fluent/'.$classname.'.js';
@@ -119,16 +118,19 @@ foreach (scandir($directory) as $file) {
     }
 }
 
+// Update the Application.js with demos of each icon
 //read the entire string
-$apptxtstr = file_get_contents($apptxtfile);
+// $apptxtstr = file_get_contents($apptxtfile);
 
 //replace something in the file string - this is a VERY simple example
-$appcodefileloc = 'source/class/wax/demo/Application.js';
-$appcodefile = file_get_contents($appcodefileloc);
-$appcodefile = str_replace('//${{phpgenerated}}', $apptxtstr, $appcodefile);
+// $appcodefileloc = 'source/class/wax/demo/Application.js';
+// $appcodefile = file_get_contents($appcodefileloc);
+// $appcodefile = str_replace('//${{phpgenerated}}', $apptxtstr, $appcodefile);
 
 //write the entire string
-file_put_contents($appcodefileloc, $appcodefile);
+// file_put_contents($appcodefileloc, $appcodefile);
+
+// END of Application.js file update
 
 //var_dump($files);
 //var_dump(count($files));
