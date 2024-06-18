@@ -56,15 +56,14 @@ To create an icon using an SVG based icon set just create the icon's named objec
     	style : function(states)
     	{        
         
-        // To use CSS clip-path, comment-out "html" and uncomment "clipPath." 
-        // Set the clipPath property to the static member of the class.
+        // To use static SVG values, comment-out "clipPath" and uncomment "html"
         
         return {
-          html : wax.demo.theme.Image.ChevronDownRegular,
+          clipPath : ville.embed.fluent.ChevronDown.REGULAR,
+          // html : wax.demo.theme.Image.ChevronDownRegular,
           width : 16,
           height : 16,
-          backgroundColor : "transparent",
-          //clipPath : ville.embed.fluent.ChevronDown.REGULAR
+          backgroundColor : "transparent"
     		};
     	}
     },
