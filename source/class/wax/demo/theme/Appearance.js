@@ -129,6 +129,16 @@ qx.Theme.define("wax.demo.theme.Appearance",
       }
     },
 
+    "testembedapp" :
+    {
+      style : function(states)
+      {
+        return {
+          iconStyle: "outlined"
+        }
+      }
+    },
+
      /*
     ---------------------------------------------------------------------------
       wax.demo.ComboBox

@@ -5389,7 +5389,7 @@ qx.Class.define("wax.demo.Application",
       var materialiconflowlayout = new qx.ui.layout.Flow(16,20,"left");
       materialiconflow.setLayout(materialiconflowlayout);
       
-      var embedmuiacctcircle = new ville.embed.material.AccountCircle().set({ width: 40, height: 40 });
+      var embedmuiacctcircle = new ville.embed.material.AccountCircle(40);
       var atmacctcircle = new qx.ui.basic.Atom("Account Circle").set({ iconPosition: "top", appearance: "icss-atom", embed: embedmuiacctcircle });
       /*
      

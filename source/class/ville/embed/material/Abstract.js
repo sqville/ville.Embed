@@ -29,8 +29,8 @@
 
     iconStyle :
     {
-      check : ["regular", "filled"],
-      init: "regular",
+      check : ["filled", "outlined", "round", "twotone", "sharp"],
+      init: "filled",
       apply: "_applyIconStyle",
       event: "changeIconStyle",
       nullable : true,
@@ -40,17 +40,26 @@
 
    members :
    {
-    _htmlregular : null,
-
+ 
     _htmlfilled : null,
-    
-    pathit (pathd)
+
+    _htmloutlined : null,
+
+    _htmlround : null,
+
+    _htmltwotone : null,
+
+    _htmlsharp : null,
+
+    _pathit (pathd)
     {
-      return `
-       <path d="${pathd}"></path>`
+      if (Array.isArray(pathd))
+        return pathd.map(this.__pathit).join("")
+      else
+        return this.__pathit(pathd)
     },
 
-    svgit (pathtags)
+    _svgit (pathtags)
     {
       var viewbox = this.getViewBox();
       return `
@@ -59,14 +68,38 @@
       </svg>`
     },
 
+    __pathit (pathd)
+    {
+      return `
+       <path d="${pathd}"></path>`
+    },
+
     // property apply
     _applyIconStyle(value, old) {
-      if (this._htmlregular != null) {
+      switch (value) {
+        case 'outlined':
+          this.setHtml(this._htmloutlined);
+          break;
+        case 'round':
+          this.setHtml(this._htmlround);
+          break;
+        case 'twotone':
+          this.setHtml(this._htmltwotone);
+          break;
+        case 'sharp':
+          this.setHtml(this._htmlsharp);
+          break;
+        case 'filled':
+          this.setHtml(this._htmlfilled);
+          break;
+      }
+      
+      /*if (this._htmlregular != null) {
         if (value == "regular")
           this.setHtml(this._htmlregular);
         else if (value == "filled" & this._htmlfilled != null)
           this.setHtml(this._htmlfilled);
-      }
+      }*/
     }
    }
  });

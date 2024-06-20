@@ -4,6 +4,7 @@
     {
       "type": "source",
       "outputPath": "compiled/source",
+      "typescript": false,
       "bundle": {
         "include": "qx.*"
       }

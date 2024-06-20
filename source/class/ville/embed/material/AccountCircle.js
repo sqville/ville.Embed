@@ -8,24 +8,49 @@ qx.Class.define("ville.embed.material.AccountCircle",
 {
   extend : ville.embed.material.Abstract,
 
-  construct (iconstyle)
+  statics :
+  {
+    FILLED : "M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 4c1.93 0 3.5 1.57 3.5 3.5S13.93 13 12 13s-3.5-1.57-3.5-3.5S10.07 6 12 6zm0 14c-2.03 0-4.43-.82-6.14-2.88a9.947 9.947 0 0 1 12.28 0C16.43 19.18 14.03 20 12 20z",
+    ROUND : "M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 4c1.93 0 3.5 1.57 3.5 3.5S13.93 13 12 13s-3.5-1.57-3.5-3.5S10.07 6 12 6zm0 14c-2.03 0-4.43-.82-6.14-2.88a9.947 9.947 0 0 1 12.28 0C16.43 19.18 14.03 20 12 20z",
+    SHARP : "M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 4c1.93 0 3.5 1.57 3.5 3.5S13.93 13 12 13s-3.5-1.57-3.5-3.5S10.07 6 12 6zm0 14c-2.03 0-4.43-.82-6.14-2.88a9.947 9.947 0 0 1 12.28 0C16.43 19.18 14.03 20 12 20z"
+  },
+
+  /**
+   * @param size {Integer} The size of the icon in px. Sets width and height to this value.
+   * @param color {String?"currentColor"} TextColor of the svg icon. Default is set to currentColor.
+   * @param iconstyle {String?"filled"} Default is regular. Other allowed value is filled.
+   */
+  construct (size, color, iconstyle)
   {
    super();
 
-   if (iconstyle != null)
-     this.setIconStyle(iconstyle);
+   if (size != null) {
+    this.setWidth(size);
+    this.setHeight(size);
+   }
 
-   var pathdregular = "M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z";
-   var pathdfilled = "m11.68 5.16-.38.33c-.23.21-.48.38-.74.46L4.76 7.9l-.6-1.23a1.19 1.19 0 0 0-.24-.34c-.62-.6-1.74-.27-1.9.62L2 7.16v2.99c0 1.2 1.18 2.04 2.32 1.65l3.02-1.04-.3 1.46c-.3 1.56 1.7 2.47 2.66 1.21l3.1-4 4.18-1.35c.84-.27 1.33-1.28.74-2.1-.52-.7-1.43-1.68-2.67-1.92a2.98 2.98 0 0 0-.88-.04 4.9 4.9 0 0 0-2.5 1.14Zm-2.57.22L5.38 6.62l-.04-.05a1.6 1.6 0 0 1 2.17-2.29l1.6 1.1ZM2.5 17a.5.5 0 0 0 0 1h15a.5.5 0 0 0 0-1h-15Z";
+   if (color != null)
+    this.setTextColor(color);
    
-   //prep regular
-   this._htmlregular = this.svgit(this.pathit(pathdregular));
-   //prep filled
-   this._htmlfilled = this.svgit(this.pathit(pathdfilled));
+   //prep filled (default)
+   this._htmlfilled = this._svgit(this._pathit(this.constructor.FILLED));
    
-   if (this.getIconStyle() == "filled")
-     this.setHtml(this._htmlfilled);
-   else 
-     this.setHtml(this._htmlregular);
+   //prep outlined
+   var outlinedpaths = [
+    "M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zM7.35 18.5C8.66 17.56 10.26 17 12 17s3.34.56 4.65 1.5c-1.31.94-2.91 1.5-4.65 1.5s-3.34-.56-4.65-1.5zm10.79-1.38a9.947 9.947 0 0 0-12.28 0A7.957 7.957 0 0 1 4 12c0-4.42 3.58-8 8-8s8 3.58 8 8c0 1.95-.7 3.73-1.86 5.12z", 
+    "M12 6c-1.93 0-3.5 1.57-3.5 3.5S10.07 13 12 13s3.5-1.57 3.5-3.5S13.93 6 12 6zm0 5c-.83 0-1.5-.67-1.5-1.5S11.17 8 12 8s1.5.67 1.5 1.5S12.83 11 12 11z"
+   ];
+   this._htmloutlined = this._svgit(this._pathit(outlinedpaths));
+   
+   //prep rounded
+   this._htmlround = this._svgit(this._pathit(this.constructor.ROUND));
+   
+   //prep sharp
+   this._htmlsharp = this._svgit(this._pathit(this.constructor.SHARP));
+
+   if (iconstyle != null)
+    this.setIconStyle(iconstyle);
+   else
+    this.initIconStyle();
  }
 });
