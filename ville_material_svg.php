@@ -1,7 +1,8 @@
 <?php
 
-$topdirectory = 'node_modules/@material-design-icons/svg';
-$directory = 'node_modules/@material-design-icons/svg/filled';
+$topdirectory = 'node_modules/@mdi/svg/svg';
+$directory = 'node_modules/@mdi/svg/svg';
+//$directory = 'node_modules/@material-design-icons/svg/filled';
 $templatedirectory = 'templates/';
 $templatefile = file_get_contents('templates/material.icon.tmpl.js');
 $templatefilecode = file_get_contents('templates/material.appcode.tmpl');
@@ -14,7 +15,14 @@ if (!is_dir($directory)) {
 $limitcount = 0;
 $totalcount = 0;
 $totalmultichildcount = 0;
+$totalsinglechildpathcount = 0;
+$totaloutlinedhasfilledcount = 0;
+$totaloutlinedwithoutfilledcount = 0;
+$totalfilledhasoutlinedcount = 0;
+$totalfilledwithoutoutlinedcount = 0;
 $totalfilledoutlinedmatchcount = 0;
+$totalfillroundmatchcount = 0;
+$totalfillsharpmatchcount = 0;
 $totalallmatchcount = 0;
 
 $files = array();
@@ -22,7 +30,9 @@ foreach (scandir($directory) as $file) {
     if ($file !== '.' && $file !== '..') {
         // get classname and remove underscore if any
         $arrnamesvg = explode(".",$file);
-        $allnames = explode("_",ucwords($arrnamesvg[0],"_"));
+        $allnamesdash = explode("-",$arrnamesvg[0]);
+        $allnames = explode("-",ucwords($arrnamesvg[0],"-"));
+        //$allnames = explode("_",ucwords($arrnamesvg[0],"_"));
         //$lastele = array_pop($allnames);
         //$lastele = array_pop($allnames);
 
@@ -34,13 +44,34 @@ foreach (scandir($directory) as $file) {
         $svgData = file_get_contents($directory.'/'.$file);
         $svgregcontents = new SimpleXMLElement($svgData);
         // $pathdregular = $svgregcontents->path->attributes()[0];
-        if ($svgregcontents->count() > 1 or $svgregcontents->path->count() == 0){
+        if ($svgregcontents->count() == 1 and $svgregcontents->path->count() == 1){
             // echo "NOPE ON THIS ONE \n";
             // ++$totalmultichildcount;
-            echo $classname. "\n";
-            continue;
+            // echo $classname. "\n";
+            ++$totalsinglechildpathcount;
         }
+
         ++$totalcount;
+
+        // get total that have both filled and outlined
+        if (str_ends_with($file,"-outline.svg")) {
+            // does it have a filled
+            if (file_exists($directory.'/'.substr($file, 0, -12).'.svg')){
+                ++$totaloutlinedhasfilledcount;
+            } else {
+                ++$totaloutlinedwithoutfilledcount;
+            }
+        } else {
+            // does filled have an outlined
+            if (file_exists($directory.'/'.substr($file, 0, -4).'-outline.svg')){
+                ++$totalfilledhasoutlinedcount;
+            } else {
+                ++$totalfilledwithoutoutlinedcount;
+            }
+        }
+
+        continue;
+        
         //echo $svgregcontents->count();
 
         /*
@@ -58,10 +89,10 @@ foreach (scandir($directory) as $file) {
             $svgfilledcontents = new SimpleXMLElement($filledfile);
             //$pathdfilled = $svgfilledcontents->path->attributes()[0];
             //$classtemplate = str_replace('${{pathdfilled}}', $pathdfilled, $classtemplate);
-            if ($svgfilledcontents->count() > 1 or $svgfilledcontents->path->count() == 0){
+            if ($svgfilledcontents->count() == 1 and $svgfilledcontents->path->count() == 1){
                 // echo "NOPE ON THIS ONE \n";
-                //++$totalfilledoutlinedmatchcount;
-                continue;
+                ++$totalfilledoutlinedmatchcount;
+                //continue;
             }
         }
 
@@ -71,10 +102,10 @@ foreach (scandir($directory) as $file) {
             $svgfilledcontents = new SimpleXMLElement($filledfile);
             //$pathdfilled = $svgfilledcontents->path->attributes()[0];
             //$classtemplate = str_replace('${{pathdfilled}}', $pathdfilled, $classtemplate);
-            if ($svgfilledcontents->count() > 1 or $svgfilledcontents->path->count() == 0){
+            if ($svgfilledcontents->count() == 1 and $svgfilledcontents->path->count() == 1){
                 // echo "NOPE ON THIS ONE \n";
-                //++$totalfilledoutlinedmatchcount;
-                continue;
+                ++$totalfillroundmatchcount;
+                //continue;
             }
         }
 
@@ -84,10 +115,10 @@ foreach (scandir($directory) as $file) {
             $svgfilledcontents = new SimpleXMLElement($filledfile);
             //$pathdfilled = $svgfilledcontents->path->attributes()[0];
             //$classtemplate = str_replace('${{pathdfilled}}', $pathdfilled, $classtemplate);
-            if ($svgfilledcontents->count() > 1 or $svgfilledcontents->path->count() == 0){
+            if ($svgfilledcontents->count() == 1 and $svgfilledcontents->path->count() == 1){
                 // echo "NOPE ON THIS ONE \n";
-                //++$totalfilledoutlinedmatchcount;
-                continue;
+                ++$totalfillsharpmatchcount;
+                //continue;
             }
         }
 
@@ -97,13 +128,13 @@ foreach (scandir($directory) as $file) {
             $svgfilledcontents = new SimpleXMLElement($filledfile);
             //$pathdfilled = $svgfilledcontents->path->attributes()[0];
             //$classtemplate = str_replace('${{pathdfilled}}', $pathdfilled, $classtemplate);
-            if ($svgfilledcontents->count() > 1 or $svgfilledcontents->path->count() == 0){
+            if ($svgfilledcontents->count() == 1 and $svgfilledcontents->path->count() == 1){
                 // echo "NOPE ON THIS ONE \n";
-                //++$totalfilledoutlinedmatchcount;
+                ++$totalfillttmatchcount;
                 continue;
             }
         }
-        ++$totalallmatchcount;
+        // ++$totalallmatchcount;
        // echo $classname. "\n";
     } 
     /*else {
@@ -147,9 +178,16 @@ foreach (scandir($directory) as $file) {
 
 echo $totalcount. "\n";
 //echo $totalmultichildcount. "\n";
+echo $totalsinglechildpathcount. "\n";
+//echo $totaloutlinedhasfilledcount. "\n";
+echo $totalfilledhasoutlinedcount. "\n";
+echo $totalfilledwithoutoutlinedcount. "\n";
+echo $totaloutlinedwithoutfilledcount. "\n";
 //echo $totalfilledoutlinedmatchcount. "\n";
+//echo $totalfillroundmatchcount. "\n";
+//echo $totalfillsharpmatchcount. "\n";
 
-echo $totalallmatchcount. "\n";
+//echo $totalallmatchcount. "\n";
 
 echo "Extraction and writing complete!\n";
 

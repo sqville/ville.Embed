@@ -71,11 +71,13 @@
 
     // property apply
     _applyIconStyle(value, old) {
-      if (this._htmlregular != null) {
-        if (value == "regular")
+      switch (value) {
+        case 'regular':
           this.setHtml(this._htmlregular);
-        else if (value == "filled" & this._htmlfilled != null)
+          break;
+        case 'filled':
           this.setHtml(this._htmlfilled);
+          break;
       }
     },
 

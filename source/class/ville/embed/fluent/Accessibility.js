@@ -49,9 +49,9 @@ qx.Class.define("ville.embed.fluent.Accessibility",
    //prep filled
    this._htmlfilled = this._svgit(this._pathit(this.constructor.FILLED));
    
-   if (this.getIconStyle() == "filled")
-     this.setHtml(this._htmlfilled);
-   else 
-     this.setHtml(this._htmlregular);
+   if (iconstyle != null)
+    this.setIconStyle(iconstyle);
+   else
+    this.initIconStyle();
  }
 });

@@ -4,14 +4,14 @@
    Authors:
      * Chris Eskew (SQville) sqville@gmail.com
 ************************************************************************ */
-qx.Class.define("ville.embed.fluent.${{classname}}",
+qx.Class.define("ville.embed.material.${{classname}}",
 {
-  extend : ville.embed.fluent.Abstract,
+  extend : ville.embed.material.Abstract,
 
   statics :
   {
-    REGULAR : "${{pathdregular}}",
-    FILLED : "${{pathdfilled}}"
+    FILLED : "${{pathdfilled}}",
+    OUTLINED : "${{pathdoutlined}}"
   },
 
   /*
@@ -44,11 +44,10 @@ qx.Class.define("ville.embed.fluent.${{classname}}",
    if (title != null)
     this.setTitle(title);
    
-   //prep regular
-   this._htmlregular = this._svgit(this._pathit(this.constructor.REGULAR));
-   //prep filled
    this._htmlfilled = this._svgit(this._pathit(this.constructor.FILLED));
 
+   this._htmloutlined = this._svgit(this._pathit(this.constructor.OUTLINED));
+   
    if (iconstyle != null)
     this.setIconStyle(iconstyle);
    else
