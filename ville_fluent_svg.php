@@ -48,10 +48,11 @@ foreach (scandir($directory) as $file) {
             file_put_contents($outputFile, $classtemplate);
 
             // code for writing app code
+            /*
             $appcodetemplate = $templatefilecode;
             $appcodetemplate = str_replace('${{iconobjname}}', $classname, $appcodetemplate);
-            //echo $appcodetemplate . "\n";
             file_put_contents($apptxtfile, $appcodetemplate . "\n", FILE_APPEND);
+            */
 
             ++$limitcount;
         }
