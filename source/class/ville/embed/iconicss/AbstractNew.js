@@ -14,8 +14,8 @@
 
   statics :
   {
-    ICONICSSNAMESPACE : "icss",
     ICONICSSICONTAG : "i",
+    ICONICSSNAMESPACE : "icss",
     ICONICSSALLSTYLERULE : "position: relative; display:inline-block; font-style: normal; background-color:currentColor; box-sizing: border-box; vertical-align: middle;",
     ICONICSSALLPSEUDOBEFORERULE : "content: ''; border-width: 0; position: absolute; box-sizing: border-box;",
     ICONICSSALLPSEUDOAFTERRULE : "content: ''; border-width: 0; position: absolute; box-sizing: border-box;"
@@ -35,16 +35,15 @@
     }
 
     // construct global rule name
-    var icsstag = this.constructor.ICONICSSICONTAG;
-    var icssns = this.constructor.ICONICSSNAMESPACE;
-    //var globalrulename = icsstag + "[class*='" + icssns + "-']";
+    var icsstag = this.constructor.superclass.ICONICSSICONTAG;
+    var icssns = this.constructor.superclass.ICONICSSNAMESPACE;
     var globalrulename = `${icsstag}[class*='${icssns}-']`;
 
     // add CSS rules to global stylesheet
     var sheet = qx.ui.style.Stylesheet.getInstance();
-    sheet.addRule(globalrulename, this.constructor.ICONICSSALLSTYLERULE);
-    sheet.addRule(globalrulename, this.constructor.ICONICSSALLPSEUDOBEFORERULE);
-    sheet.addRule(globalrulename, this.constructor.ICONICSSALLPSEUDOAFTERRULE);
+    sheet.addRule(globalrulename, this.constructor.superclass.ICONICSSALLSTYLERULE);
+    sheet.addRule(globalrulename, this.constructor.superclass.ICONICSSALLPSEUDOBEFORERULE);
+    sheet.addRule(globalrulename, this.constructor.superclass.ICONICSSALLPSEUDOAFTERRULE);
 
     // set icon specific values
     var cssclassnm = this.constructor.CSSCLASS;

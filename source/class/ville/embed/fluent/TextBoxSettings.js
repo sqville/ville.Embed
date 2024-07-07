@@ -4,7 +4,7 @@
    Authors:
      * Chris Eskew (SQville) sqville@gmail.com
 ************************************************************************ */
-qx.Class.define("ville.embed.fluent.TextboxSettings",
+qx.Class.define("ville.embed.fluent.TextBoxSettings",
 {
   extend : ville.embed.fluent.Abstract,
 

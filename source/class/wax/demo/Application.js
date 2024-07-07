@@ -5389,20 +5389,18 @@ qx.Class.define("wax.demo.Application",
       var materialiconflowlayout = new qx.ui.layout.Flow(16,20,"left");
       materialiconflow.setLayout(materialiconflowlayout);
       
-      var embedmuiacctcircle = new ville.embed.material.Accessibility(40);
-      var atmacctcircle = new qx.ui.basic.Atom("Accessibility").set({ iconPosition: "top", appearance: "icss-atom", embed: embedmuiacctcircle });
+      // var embedmuiacctcircle = new ville.embed.material.Accessibility(40);
+      // var atmacctcircle = new qx.ui.basic.Atom("Accessibility").set({ iconPosition: "top", appearance: "icss-atom", embed: embedmuiacctcircle });
       /*
-     
       var atmbusiness = new qx.ui.basic.Atom("Business", 'data:text/json;{ "name": "material-business", "width": 60, "height": 60 }').set({iconPosition: "top", appearance: "icss-atom"});
       var atmbiotech = new qx.ui.basic.Atom("Biotech", 'data:text/json;{ "name": "material-biotech", "width": 60, "height": 60 }').set({iconPosition: "top", appearance: "icss-atom"});
       var atmbolt = new qx.ui.basic.Atom("Bolt", 'data:text/json;{ "name": "material-bolt", "width": 60, "height": 60 }').set({iconPosition: "top", appearance: "icss-atom"});
-      
       
       materialiconflow.add(atmbusiness);
       materialiconflow.add(atmbiotech);
       materialiconflow.add(atmbolt);
       */
-      materialiconflow.add(atmacctcircle);
+      // materialiconflow.add(atmacctcircle);
 
       tablelistpage.add(lblmaterialheader);
       tablelistpage.add(lblmaterialsimpledesc);

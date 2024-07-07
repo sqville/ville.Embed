@@ -4,7 +4,7 @@
    Authors:
      * Chris Eskew (SQville) sqville@gmail.com
 ************************************************************************ */
-qx.Class.define("ville.embed.fluent.Reorder",
+qx.Class.define("ville.embed.fluent.ReOrder",
 {
   extend : ville.embed.fluent.Abstract,
 
