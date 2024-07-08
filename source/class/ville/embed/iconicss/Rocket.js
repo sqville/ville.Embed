@@ -8,7 +8,7 @@
 
  qx.Class.define("ville.embed.iconicss.Rocket",
  {
-   extend : ville.embed.iconicss.AbstractNew,
+   extend : ville.embed.iconicss.Abstract,
 
   statics :
   {

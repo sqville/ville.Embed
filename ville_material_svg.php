@@ -4,8 +4,8 @@ $topdirectory = 'node_modules/@mdi/svg/svg';
 $directory = 'node_modules/@mdi/svg/svg';
 //$directory = 'node_modules/@material-design-icons/svg/filled';
 $templatedirectory = 'templates/';
-$templatefile = file_get_contents('templates/material.icon.tmpl.js');
-$templatefilecode = file_get_contents('templates/material.appcode.tmpl');
+$templatefile = file_get_contents('templates/mdi.material.icon.tmpl.js');
+$templatefilecode = file_get_contents('templates/mdi.material.appcode.tmpl');
 $apptxtfile = 'material.appcode.txt';
 
 if (!is_dir($directory)) {
@@ -30,47 +30,54 @@ foreach (scandir($directory) as $file) {
     if ($file !== '.' && $file !== '..') {
         // get classname and remove underscore if any
         $arrnamesvg = explode(".",$file);
-        $allnamesdash = explode("-",$arrnamesvg[0]);
-        $allnames = explode("-",ucwords($arrnamesvg[0],"-"));
+        //$allnamesdash = explode("-",$arrnamesvg[0]);
+        //$allnames = explode("-",ucwords($arrnamesvg[0],"-"));
         //$allnames = explode("_",ucwords($arrnamesvg[0],"_"));
         //$lastele = array_pop($allnames);
         //$lastele = array_pop($allnames);
 
-        $classname = implode($allnames);
+        $classname = ucwords($arrnamesvg[0],"-");
         // echo $classname. "\n";
+
+        $outputFile = "";
+        $pathdfilled = "";
+        $pathdoutlined = "";
         
 
         // get path d value
-        $svgData = file_get_contents($directory.'/'.$file);
-        $svgregcontents = new SimpleXMLElement($svgData);
+        
         // $pathdregular = $svgregcontents->path->attributes()[0];
-        if ($svgregcontents->count() == 1 and $svgregcontents->path->count() == 1){
+        //if ($svgregcontents->count() == 1 and $svgregcontents->path->count() == 1){
             // echo "NOPE ON THIS ONE \n";
             // ++$totalmultichildcount;
             // echo $classname. "\n";
-            ++$totalsinglechildpathcount;
-        }
+            //++$totalsinglechildpathcount;
+        //}
 
-        ++$totalcount;
+        //++$totalcount;
+        $svgData = file_get_contents($directory.'/'.$file);
+        $svgfilecontents = new SimpleXMLElement($svgData);
 
         // get total that have both filled and outlined
         if (str_ends_with($file,"-outline.svg")) {
+            $pathdoutlined = $svgfilecontents->path->attributes()[0];
             // does it have a filled
             if (file_exists($directory.'/'.substr($file, 0, -12).'.svg')){
-                ++$totaloutlinedhasfilledcount;
-            } else {
-                ++$totaloutlinedwithoutfilledcount;
+                $svgData = file_get_contents($directory.'/'.substr($file, 0, -12).'.svg');
+                $svgfilecontents = new SimpleXMLElement($svgData);
+                $pathdfilled = $svgfilecontents->path->attributes()[0];
             }
         } else {
+            $pathdfilled = $svgfilecontents->path->attributes()[0];
             // does filled have an outlined
             if (file_exists($directory.'/'.substr($file, 0, -4).'-outline.svg')){
-                ++$totalfilledhasoutlinedcount;
-            } else {
-                ++$totalfilledwithoutoutlinedcount;
+                $svgData = file_get_contents($directory.'/'.substr($file, 0, -4).'-outline.svg');
+                $svgfilecontents = new SimpleXMLElement($svgData);
+                $pathdoutlined = $svgfilecontents->path->attributes()[0];
             }
         }
 
-        continue;
+        //continue;
         
         //echo $svgregcontents->count();
 
@@ -83,6 +90,7 @@ foreach (scandir($directory) as $file) {
         // check to see if there's other versions with single paths
         // $replacedfilename = str_replace("_20_regular.svg", "_20_filled.svg", $file);
         
+        /*
         // outlined
         if (file_exists($topdirectory.'/'.'outlined'.'/'.$file)){
             $filledfile = file_get_contents($topdirectory.'/'.'outlined'.'/'.$file);
@@ -134,28 +142,39 @@ foreach (scandir($directory) as $file) {
                 continue;
             }
         }
+        */
         // ++$totalallmatchcount;
        // echo $classname. "\n";
     } 
-    /*else {
-            $classtemplate = str_replace('${{pathdfilled}}', '', $classtemplate);
-        }*/
 
-        /*
+    if ($pathdfilled != "" and $pathdoutlined != "") {
+        $classname = str_replace("-Outline", "", $classname);
+        $classname = str_replace("-", "", $classname);
+    } else {
+        $classname = str_replace("-", "", $classname);
+    }
 
-        // write file
-        $outputFile = 'source/class/ville/embed/fluent/'.$classname.'.js';
+    //echo $classname."\n";
+    ++$totalcount;
+    continue;
+
+    $classtemplate = $templatefile;
+    $classtemplate = str_replace('${{classname}}', $classname, $classtemplate);
+    $classtemplate = str_replace('${{pathdfilled}}', $pathdfilled, $classtemplate);
+    $classtemplate = str_replace('${{pathdoutlined}}', $pathdoutlined, $classtemplate);
+
+    // write file
+    $outputFile = 'source/class/ville/embed/material/'.$classname.'.js';
+    if (!file_exists($outputFile)) {
         file_put_contents($outputFile, $classtemplate);
-
         // code for writing app code
         $appcodetemplate = $templatefilecode;
         $appcodetemplate = str_replace('${{iconobjname}}', $classname, $appcodetemplate);
         //echo $appcodetemplate . "\n";
         file_put_contents($apptxtfile, $appcodetemplate . "\n", FILE_APPEND);
+    }
 
-        ++$limitcount;
-        */
-        
+    ++$limitcount;
 }
 
 // START Update the Application.js with demos of each icon

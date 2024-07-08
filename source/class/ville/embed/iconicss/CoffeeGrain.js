@@ -16,7 +16,7 @@
 
  qx.Class.define("ville.embed.iconicss.CoffeeGrain",
  {
-  extend : ville.embed.iconicss.AbstractNew,
+  extend : ville.embed.iconicss.Abstract,
 
   statics :
   {

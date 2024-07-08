@@ -11,18 +11,52 @@
   type: "abstract", 
   
   extend : qx.ui.basic.Label,
+
+  statics :
+  {
+    ICONICSSICONTAG : "i",
+    ICONICSSNAMESPACE : "icss",
+    ICONICSSALLSTYLERULE : "position: relative; display:inline-block; font-style: normal; background-color:currentColor; box-sizing: border-box; vertical-align: middle;",
+    ICONICSSALLPSEUDOBEFORERULE : "content: ''; border-width: 0; position: absolute; box-sizing: border-box;",
+    ICONICSSALLPSEUDOAFTERRULE : "content: ''; border-width: 0; position: absolute; box-sizing: border-box;"
+  },
  
-   construct ()
+  construct (size, color)
    {
     super();
 
     this.setRich(true);
 
-    //add CSS rules to global stylesheet
+    if (size != null) {
+      this.setSize(size);
+    }
+    if (color != null) {
+      this.setTextColor(color);
+    }
+
+    // construct global rule name
+    var icsstag = this.constructor.superclass.ICONICSSICONTAG;
+    var icssns = this.constructor.superclass.ICONICSSNAMESPACE;
+    var globalrulename = `${icsstag}[class*='${icssns}-']`;
+
+    // add CSS rules to global stylesheet
     var sheet = qx.ui.style.Stylesheet.getInstance();
-    sheet.addRule("i[class*='icss-']", "position: relative; display:inline-block; font-style: normal; background-color:currentColor; box-sizing: border-box; vertical-align: middle;");
-    sheet.addRule("i[class*='icss-']:before", "content: ''; border-width: 0; position: absolute; box-sizing: border-box;");
-    sheet.addRule("i[class*='icss-']:after", "content: ''; border-width: 0; position: absolute; box-sizing: border-box;");
+    sheet.addRule(globalrulename, this.constructor.superclass.ICONICSSALLSTYLERULE);
+    sheet.addRule(globalrulename, this.constructor.superclass.ICONICSSALLPSEUDOBEFORERULE);
+    sheet.addRule(globalrulename, this.constructor.superclass.ICONICSSALLPSEUDOAFTERRULE);
+
+    // set icon specific values
+    var cssclassnm = this.constructor.CSSCLASS;
+    this.setCssClass(`${icssns}-${cssclassnm}`);
+    // add icon specific CSS rules to global stylesheet
+    var rulens = `${icsstag}.${icssns}-${cssclassnm}`;
+    sheet.addRule(rulens, this.constructor.STYLERULE);
+    sheet.addRule(`${rulens}:before`, this.constructor.PSEUDOBEFORERULE);
+    sheet.addRule(`${rulens}:after`, this.constructor.PSEUDOAFTERRULE);
+    
+    // set all values
+    this._addIconTag(this.getCssClass(), this.getSize(), this.getTextColor());
+  
   },
 
   properties :

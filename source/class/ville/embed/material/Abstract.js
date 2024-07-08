@@ -88,16 +88,34 @@
    members :
    {
  
+    /**
+     * @type {?string} The filly formed html or svg value of the object
+     */
     _htmlfilled : null,
 
+    /**
+     * @type {?string} The filly formed html or svg value of the object
+     */
     _htmloutlined : null,
 
+    /**
+     * Create and return the path tag for the svg embed
+     *
+     * @param {string} pathd - Path value from the embed object's static value
+     * @return {string} svg path tag with one d attribute populated
+     */
     _pathit (pathd)
     {
       return `
        <path d="${pathd}"></path>`
     },
 
+    /**
+     * Create and return the fully formed svg tag for the embed
+     *
+     * @param {string} pathtags - Path value from the embed object's static value
+     * @return {string} a fully formed svg embed
+     */
     _svgit (pathtags)
     {
       var viewbox = this.getViewBox();

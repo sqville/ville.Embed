@@ -6,7 +6,7 @@
 ************************************************************************ */
  qx.Class.define("ville.embed.iconicss.Coffee",
  {
-  extend : ville.embed.iconicss.AbstractNew,
+  extend : ville.embed.iconicss.Abstract,
 
   statics :
   {
