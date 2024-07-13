@@ -5,7 +5,7 @@
    Authors:
      * Chris Eskew (sqville) sqville@gmail.com
 ************************************************************************ */
- qx.Class.define("ville.embed.material.Abstract",
+ qx.Class.define("ville.embed.material.AbstractBundle",
  {
   type: "abstract", 
   
@@ -20,7 +20,7 @@
   /**
    * @param size {Integer} The size of the icon in px. Sets width and height to this value.
    * @param color {String?"currentColor"} TextColor of the svg icon. Default is set to currentColor.
-   * @param iconstyle {String?"filled"} Default is regular. Other allowed value is filled.
+   * @param iconstyle {String?"filled"} Default is filled. Other allowed value is outlined.
    * @param title {String} If included, adds a title tag to the svg root tag. 
    */
   construct (size, color, iconstyle, title)
@@ -37,9 +37,6 @@
 
    if (color != null)
     this.setTextColor(color);
-
-   if (iconstyle != null)
-    this.setIconStyle(iconstyle);
 
    if (title != null)
     this.setTitle(title);

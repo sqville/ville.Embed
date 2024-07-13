@@ -4,7 +4,8 @@ $topdirectory = 'node_modules/@mdi/svg/svg';
 $directory = 'node_modules/@mdi/svg/svg';
 //$directory = 'node_modules/@material-design-icons/svg/filled';
 $templatedirectory = 'templates/';
-$templatefile = file_get_contents('templates/mdi.material.icon.tmpl.js');
+$templatefilebundle = file_get_contents('templates/mdi.material.bundle.icon.tmpl.js');
+$templatefilesingle = file_get_contents('templates/mdi.material.single.icon.tmpl.js');
 $templatefilecode = file_get_contents('templates/mdi.material.appcode.tmpl');
 $apptxtfile = 'material.appcode.txt';
 
@@ -43,7 +44,6 @@ foreach (scandir($directory) as $file) {
         $pathdfilled = "";
         $pathdoutlined = "";
         
-
         // get path d value
         
         // $pathdregular = $svgregcontents->path->attributes()[0];
@@ -146,20 +146,27 @@ foreach (scandir($directory) as $file) {
         // ++$totalallmatchcount;
        // echo $classname. "\n";
     } 
+    $classname = str_replace("-", "", $classname);
 
-    if ($pathdfilled != "" and $pathdoutlined != "") {
-        $classname = str_replace("-Outline", "", $classname);
-        $classname = str_replace("-", "", $classname);
-    } else {
-        $classname = str_replace("-", "", $classname);
+    $classtemplate = $templatefilesingle;
+    $pathdval = $pathdoutlined;
+    $iconstyleparam = "";
+
+    if ($pathdfilled !== "" and $pathdoutlined !== "") {
+        $classname = str_replace("Outline", "", $classname); 
+        $classtemplate = $templatefilebundle;  
+        $iconstyleparam = "null, ";
+    } else if ($pathdfilled !== "" and $pathdoutlined == "") {
+        $classname .= "Filled";
+        $pathdval = $pathdfilled;
     }
 
     //echo $classname."\n";
     ++$totalcount;
-    continue;
+    //continue;
 
-    $classtemplate = $templatefile;
     $classtemplate = str_replace('${{classname}}', $classname, $classtemplate);
+    $classtemplate = str_replace('${{pathd}}', $pathdval, $classtemplate);
     $classtemplate = str_replace('${{pathdfilled}}', $pathdfilled, $classtemplate);
     $classtemplate = str_replace('${{pathdoutlined}}', $pathdoutlined, $classtemplate);
 
@@ -169,12 +176,17 @@ foreach (scandir($directory) as $file) {
         file_put_contents($outputFile, $classtemplate);
         // code for writing app code
         $appcodetemplate = $templatefilecode;
+        $appcodetemplate = str_replace('${{iconstyleparam}}', $iconstyleparam, $appcodetemplate);
         $appcodetemplate = str_replace('${{iconobjname}}', $classname, $appcodetemplate);
+
         //echo $appcodetemplate . "\n";
         file_put_contents($apptxtfile, $appcodetemplate . "\n", FILE_APPEND);
     }
 
     ++$limitcount;
+
+    if ($limitcount == 50)
+        break;
 }
 
 // START Update the Application.js with demos of each icon
@@ -197,11 +209,11 @@ foreach (scandir($directory) as $file) {
 
 echo $totalcount. "\n";
 //echo $totalmultichildcount. "\n";
-echo $totalsinglechildpathcount. "\n";
+//echo $totalsinglechildpathcount. "\n";
 //echo $totaloutlinedhasfilledcount. "\n";
-echo $totalfilledhasoutlinedcount. "\n";
-echo $totalfilledwithoutoutlinedcount. "\n";
-echo $totaloutlinedwithoutfilledcount. "\n";
+//echo $totalfilledhasoutlinedcount. "\n";
+//echo $totalfilledwithoutoutlinedcount. "\n";
+//echo $totaloutlinedwithoutfilledcount. "\n";
 //echo $totalfilledoutlinedmatchcount. "\n";
 //echo $totalfillroundmatchcount. "\n";
 //echo $totalfillsharpmatchcount. "\n";

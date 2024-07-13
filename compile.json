@@ -4,10 +4,7 @@
     {
       "type": "source",
       "outputPath": "compiled/source",
-      "typescript": false,
-      "bundle": {
-        "include": "qx.*"
-      }
+      "typescript": false
     },
     {
       "type": "build",
@@ -23,7 +20,10 @@
       "theme": "wax.demo.theme.Theme",
       "name": "waxdemo",
       "title": "WaxDemo",
-      "bootPath": "source/boot"
+      "bootPath": "source/boot",
+      "environment": {
+        "qx.nativeScrollBars": true
+      }
     }
   ]
 }
