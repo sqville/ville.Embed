@@ -12,7 +12,7 @@
  * This is the main application class of your custom application "wax"
  * @asset(wax/demo/*)
  */
-qx.Class.define("wax.demo.Application",
+qx.Class.define("wax.demo.ApplicationFluent",
 {
   extend : qx.application.Standalone,
 

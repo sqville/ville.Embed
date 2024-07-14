@@ -16,7 +16,7 @@
 
   "applications": [
     {
-      "class": "wax.demo.Application",
+      "class": "wax.demo.ApplicationMaterial",
       "theme": "wax.demo.theme.Theme",
       "name": "waxdemo",
       "title": "WaxDemo",
