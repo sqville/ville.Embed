@@ -28,6 +28,13 @@ qx.Theme.define("wax.demo.theme.Font",
       bold : true
     },
 
+    "findmessage" :
+    {
+      include : "default",
+      size : 12,
+      italic : true
+    },
+
     "ville-logo-font" : {
       size: 14,
       family: ["Providence","sans-serif"],
@@ -37,6 +44,11 @@ qx.Theme.define("wax.demo.theme.Font",
           source: ["ville/wax/Providence.ttf"]
         }
       ]
+    },
+
+    "ville-logo-about-font" : {
+      include: "ville-logo-font",
+      size: 28
     },
 
     //override
@@ -65,6 +77,12 @@ qx.Theme.define("wax.demo.theme.Font",
     {
       include : "default-bold",
       size : 14
+    },
+
+    "embedblurb" :
+    {
+      include : "default-bold",
+      size : 18
     },
 
     "headeratom" :

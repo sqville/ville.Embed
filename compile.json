@@ -19,7 +19,7 @@
       "class": "wax.demo.ApplicationMaterial",
       "theme": "wax.demo.theme.Theme",
       "name": "waxdemo",
-      "title": "WaxDemo",
+      "title": "Wax Demo for the ville.Embed viewer",
       "bootPath": "source/boot",
       "environment": {
         "qx.nativeScrollBars": true

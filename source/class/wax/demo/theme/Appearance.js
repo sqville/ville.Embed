@@ -47,6 +47,41 @@ qx.Theme.define("wax.demo.theme.Appearance",
       }
     },
 
+    "header-atom-about" :
+    {
+      include : "header-atom",
+
+      style : function(states)
+      {
+        return {
+          icon: "",
+          iconPosition: "top", 
+          center: true,
+          //padding: [10, 0, 20, 0],
+          padding : 0,
+          margin: 0,
+          //marginBottom: 10,
+          font : "ville-logo-about-font"
+        }
+      }
+    },
+
+    "header-atom-about/icon" :
+    {
+      include : "header-atom/icon",
+
+      style : function(states)
+      {
+        return {
+          html: '<div style="font-family: Providence, sans-serif; font-size: 48px;">&#60;E&#62;</div>',
+          //font : "ville-logo-font",
+          width : 92,
+          height : 50,
+          backgroundColor : "transparent"
+        }
+      }
+    },
+
     /*"icon" :
     {
       include: "label",
@@ -128,6 +163,41 @@ qx.Theme.define("wax.demo.theme.Appearance",
           padding : 6,
           marginBottom: 20,
           gap : 8
+        };
+      }
+    },
+
+    "mdi-toggle-button-filter" :
+    {
+      style : function(states)
+      {
+        var decorator = "mdi-toggle-button-box-round";
+        var bgcolor = "transparent";
+        var txtcolor = "black";
+
+        if (!states.disabled) {
+          if (states.hovered && !states.pressed && !states.checked) {
+            decorator = "mdi-toggle-button-box-round";
+            bgcolor = "#5f63680a";
+            txtcolor = "black";
+          } else if (states.hovered && (states.pressed || states.checked)) {
+            decorator = "mdi-toggle-button-box-round-checked";
+            bgcolor = "blue";
+            txtcolor = "white";
+          } else if (states.pressed || states.checked) {
+            decorator = "mdi-toggle-button-box-round-checked";
+            bgcolor = "blue";
+            txtcolor = "white";
+          }
+        }
+        
+        return {
+          decorator : decorator,
+          backgroundColor : bgcolor,
+          textColor: txtcolor,
+          cursor: states.disabled ? undefined : "pointer",
+          center : true,
+          padding : [6, 18]
         };
       }
     },

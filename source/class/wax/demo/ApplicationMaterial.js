@@ -143,12 +143,20 @@ qx.Class.define("wax.demo.ApplicationMaterial",
 
       winAboutWax.getLayout().set({spacing: 20});
       winAboutWax.set({ width: 430, height: 460, contentPadding: 0});
-      var txtaboutwax = 'Project Github page: <a target="_blank" href="https://github.com/sqville/ville.Embed">https://github.com/sqville/ville.Embed</a>';
+      //var txtaboutwax = 'Demo application built with ville.Wax<br><b>One code base, all platforms.</b><br>Project Github page: <a target="_blank" href="https://github.com/sqville/ville.Wax">https://github.com/sqville/ville.Wax</a>';
       //var aboutbox = new qx.ui.container.Composite(new qx.ui.layout.VBox(10));
       var aboutscroll = new qx.ui.container.Scroll().set({ allowStretchY: true, padding: 0, margin: 0, contentPadding: [0,24,0,24]});
-      var waxatom = new qx.ui.basic.Atom(txtaboutwax,"wax/demo/ville_Wax.png").set({rich: true, iconPosition: "top", gap: 30, paddingTop: 30});
-      waxatom.getChildControl("label").set({wrap: true});
-      aboutscroll.add(waxatom);
+      var waxatom = new qx.ui.basic.Atom("","wax/demo/ville_Wax.png").set({show: "icon", center: true, iconPosition: "top", gap: 30, paddingTop: 30});
+      //waxatom.getChildControl("label").set({alignX: "center", alignY: "middle"});
+      var lblbuiltwith = new qx.ui.basic.Label("Demo application built with ville.Wax.").set({font: "headeratom", alignX: "center", alignY: "middle"});
+      var lblvillewaxblurb = new qx.ui.basic.Label("One code base, all platforms.").set({font: "headeratom", alignX: "center", alignY: "middle"});
+      var lblvillewaxproj = new qx.ui.basic.Label('Project Github page: <a target="_blank" href="https://github.com/sqville/ville.Wax">https://github.com/sqville/ville.Wax</a>').set({rich: true, alignX: "center", alignY: "middle"});
+      var aboutcontainer = new qx.ui.container.Composite(new qx.ui.layout.VBox(4));
+      aboutcontainer.add(waxatom);
+      aboutcontainer.add(lblbuiltwith);
+      aboutcontainer.add(lblvillewaxblurb);
+      aboutcontainer.add(lblvillewaxproj);
+      aboutscroll.add(aboutcontainer);
 
       winAboutWax.add(aboutscroll, {flex:1});
       var btnClosewinAbout = new qx.ui.form.Button("Close Window").set({marginBottom: 18, maxWidth: 300, alignX: "center", alignY: "middle"});
@@ -272,7 +280,8 @@ qx.Class.define("wax.demo.ApplicationMaterial",
       var lblsubheadmdisimple =  new qx.ui.basic.Label("Basic usage:").set({font: "headeratom", marginTop: 40});
       var lblmdisimpleembed = new qx.ui.basic.Label("Here, at its most <u>basic</u>, is a lone Embed object, sized 40 x 40, and colored <span style='color: blue;'>blue</span>:").set({rich: true, wrap: true});
       var embedmdiacctclock = new ville.embed.material.AccountClock(40, "blue");
-      var lblsimplemdiembedcode = new qx.ui.basic.Label("var <span style='color:green;'>mdiaccountclock</span> = <span style='color:blue;'>new</span> <span style='color:green;'>ville.embed.material.AccountClock</span>(40, \"blue\"); //  Behind the scenes, the object's constructor sets initial values using - setWidth(size) setHeight(size) and setTextColor(color) ").set({rich: true, wrap: true, font: "monospace", backgroundColor: "#f2f2f2", padding: 6});
+      var lblsimplemdiembedcode = new qx.ui.basic.Label("var <span style='color:green;'>mdiaccountclock</span> = <span style='color:blue;'>new</span> <span style='color:green;'>ville.embed.material.AccountClock</span>(40, \"blue\");").set({rich: true, wrap: true, font: "monospace", backgroundColor: "#f2f2f2", padding: 6});
+      var lbllaststatement = new qx.ui.basic.Label("Behind the scenes, the object's constructor sets initial values using - setWidth(size) setHeight(size) and setTextColor(color)");
 
       // Use in a Button
       var lblsubheadmdibutton =  new qx.ui.basic.Label("Use in another widget:").set({font: "headeratom", marginTop: 40});
@@ -296,23 +305,25 @@ qx.Class.define("wax.demo.ApplicationMaterial",
       toppage.add(lblmdisimpleembed);
       toppage.add(embedmdiacctclock);
       toppage.add(lblsimplemdiembedcode);
+      toppage.add(lbllaststatement);
       toppage.add(lblsubheadmdibutton);
       toppage.add(lblmoremdiembed);
       toppage.add(btnembedmdiacctclockebutton);
       toppage.add(lblbuttonmdiembedcode);
+      
 
       // Second page marker  
       var secondpagescroll = new qx.ui.container.Scroll().set({padding: 0, margin: 0, contentPadding: [0,0,0,0]});
       secondpagescroll.add(secondpage);
 
       // List filters
-      var btnfiltershowall = new qx.ui.form.ToggleButton("All").set({allowGrowX: false});
+      var btnfiltershowall = new qx.ui.form.ToggleButton("All").set({appearance: "mdi-toggle-button-filter", allowGrowX: false, padding: [6, 22]});
       btnfiltershowall.setUserData("filterkey", "all");
-      var btnfiltershowfilledonly = new qx.ui.form.ToggleButton("Filled only").set({allowGrowX: false});
+      var btnfiltershowfilledonly = new qx.ui.form.ToggleButton("Filled only").set({appearance: "mdi-toggle-button-filter", allowGrowX: false});
       btnfiltershowfilledonly.setUserData("filterkey", "filledonly");
-      var btnfiltershowoutlineonly = new qx.ui.form.ToggleButton("Outline only").set({allowGrowX: false});
+      var btnfiltershowoutlineonly = new qx.ui.form.ToggleButton("Outline only").set({appearance: "mdi-toggle-button-filter", allowGrowX: false});
       btnfiltershowoutlineonly.setUserData("filterkey", "outlinedonly");
-      var btnfiltershowbundled = new qx.ui.form.ToggleButton("Bundled only").set({allowGrowX: false});
+      var btnfiltershowbundled = new qx.ui.form.ToggleButton("Bundled only").set({appearance: "mdi-toggle-button-filter", allowGrowX: false});
       btnfiltershowbundled.setUserData("filterkey", "bundledonly");
       
       var mdiiconflow = new qx.ui.container.Composite();
@@ -320,14 +331,13 @@ qx.Class.define("wax.demo.ApplicationMaterial",
       mdiiconflow.setLayout(mdiiconflowlayout);
 
       var filterlayout = new qx.ui.layout.HBox();
-      filterlayout.setSpacing(10);
+      filterlayout.setSpacing(6);
       var filterbox = new qx.ui.container.Composite(filterlayout);
-      //filterbox.setPadding(20);
 
       var filterbtngroup = new qx.ui.form.RadioGroup();
       filterbtngroup.add(btnfiltershowall, btnfiltershowfilledonly, btnfiltershowoutlineonly, btnfiltershowbundled);
 
-      filterbox.add(new qx.ui.basic.Label("Showing:"));
+      filterbox.add(new qx.ui.basic.Label("Filters:"));
       filterbox.add(btnfiltershowall);
       filterbox.add(btnfiltershowfilledonly);
       filterbox.add(btnfiltershowoutlineonly);
@@ -474,23 +484,49 @@ qx.Class.define("wax.demo.ApplicationMaterial",
         }
       }, this);
 
-      var lblsubheadermdicount = this._iconListCount = new qx.ui.basic.Label("Count: " + arrembeds.length).set({font: "headeratom", marginTop: 40});
-      
+      var lblsubheadermdicount = this._iconListCount = new qx.ui.basic.Label("Count: " + arrembeds.length).set({font: "headeratom", alignX: "left", alignY: "middle"});
+      var lblfindfeature = new qx.ui.basic.Label("(Use the browser's Find feature to search the list)").set({font: "findmessage", textAlign: "right", alignY: "middle"});
+      var countfind = new qx.ui.container.Composite(new qx.ui.layout.HBox(20)).set({allowGrowX: true});
+      countfind.add(lblsubheadermdicount, {flex: 1});
+      countfind.add(lblfindfeature, {flex: 1});
+
       secondpage.add(filterbox);
-      secondpage.add(lblsubheadermdicount);
-      secondpage.add(girdlist1, {flex: 2});
+      secondpage.add(countfind);
+      secondpage.add(girdlist1, {flex: 1});
       
 
 
 
       // Third page marker
-      var thirdpagevbox = new qx.ui.layout.VBox(10);
+      var thirdpagevbox = new qx.ui.layout.VBox(4);
       thirdpage.setLayout(thirdpagevbox);
 
       var thirdpagescroll = new qx.ui.container.Scroll().set({padding: 0, margin: 0, contentPadding: [0,0,0,0]});
       thirdpagescroll.add(thirdpage);
 
+      var atmthirdpageheader = new qx.ui.basic.Atom("ville.Embed").set({show: "both", appearance: "header-atom-about", anonymous: true, focusable: false, selectable: false });
+      var lblvilleembedblurb = new qx.ui.basic.Label("Making images, icons and graphics dynamic").set({font: "embedblurb", alignX: "center", alignY: "middle"});
+      var lblvilleembedproj = new qx.ui.basic.Label('Github: <a target="_blank" href="https://github.com/sqville/ville.Embed">https://github.com/sqville/ville.Embed</a>').set({rich: true, alignX: "center", alignY: "middle"});
+      var lblvilleembedsource = new qx.ui.basic.Label('SVG source by Templarian').set({font: "headeratom", paddingTop: 22, rich: true, alignX: "center", alignY: "middle"});
+      var lblvilleembedsource2 = new qx.ui.basic.Label('Github: <a href="https://github.com/Templarian/MaterialDesign-SVG" target="_blank">Material Design Icons.</a>').set({rich: true, alignX: "center", alignY: "middle"});
+      var lblvilleembedpictogrammers = new qx.ui.basic.Label("For the full list of available icons, visit the <a href='https://pictogrammers.com/library/mdi/' target='_blank'>Pictogrammers website.</a>").set({rich: true, alignX: "center", alignY: "middle"});
+      var lblvilleembedsourceversion = new qx.ui.basic.Label("ville.Embed's mdi source v7.4.47 (7/19/2024)").set({rich: true, alignX: "center", alignY: "middle"});
+      var lblvillewaxdemoembedvr = new qx.ui.basic.Label('Wax Demo for ville.Embed').set({font: "headeratom", paddingTop: 22, rich: true, alignX: "center", alignY: "middle"});
+      var lblvillewaxdemoembedcurrentvr = new qx.ui.basic.Label('Current - v0.9.0').set({rich: true, alignX: "center", alignY: "middle"});
+      var lblvillewaxdemoembednextvr = new qx.ui.basic.Label('Next - v1.0.0 - to include:').set({rich: true, alignX: "center", alignY: "middle"});
+      var lblvillewaxdemoembednextvr2 = new qx.ui.basic.Label('- Dark/Light theme switching<br> - Icon detail popup').set({rich: true, alignX: "center", alignY: "middle"});
 
+      thirdpage.add(atmthirdpageheader);
+      thirdpage.add(lblvilleembedblurb);
+      thirdpage.add(lblvilleembedproj);
+      thirdpage.add(lblvilleembedsource);
+      thirdpage.add(lblvilleembedsource2);
+      thirdpage.add(lblvilleembedpictogrammers);
+      thirdpage.add(lblvilleembedsourceversion);
+      thirdpage.add(lblvillewaxdemoembedvr);
+      thirdpage.add(lblvillewaxdemoembedcurrentvr);
+      thirdpage.add(lblvillewaxdemoembednextvr);
+      thirdpage.add(lblvillewaxdemoembednextvr2);
 
 
       // Menu Page for phonegap only

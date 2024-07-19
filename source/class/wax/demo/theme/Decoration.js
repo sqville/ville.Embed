@@ -152,6 +152,25 @@ qx.Theme.define("wax.demo.theme.Decoration",
      }
    },
 
+   "mdi-toggle-button-box-round" :
+   {
+     style :
+     {
+       radius : 1000,
+       width : 1,
+       color : "button-border"
+     }
+   },
+
+   "mdi-toggle-button-box-round-checked" :
+   {
+    include : "mdi-toggle-button-box-round", 
+    style :
+     {
+       color : "blue"
+     }
+   },
+
    "mainmenubutton-box" :
    {
      style :
