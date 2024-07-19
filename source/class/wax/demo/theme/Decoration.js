@@ -129,11 +129,29 @@ qx.Theme.define("wax.demo.theme.Decoration",
       }
     },
 
+    "westboxbg" :
+    {
+      style: {
+        orientation: "vertical",
+        gradientStart: ["#6991d614", 0],
+        gradientEnd: ["white", 100]
+      }
+    },
+
     /*
     ---------------------------------------------------------------------------
       BUTTON
     ---------------------------------------------------------------------------
     */
+    "mdi-button-box-round" :
+   {
+     style :
+     {
+       radius : 1000,
+       width : 0
+     }
+   },
+
    "mainmenubutton-box" :
    {
      style :
@@ -150,10 +168,9 @@ qx.Theme.define("wax.demo.theme.Decoration",
 
      style :
      {
-      width : [0,0,0,5],
-      radius : [1,0,0,1],
-      color : ["button-box-bright-pressed","button-box-bright-pressed","button-box-bright-pressed","blue"],
-      backgroundColor : "white" 
+      widthLeft : 4,
+      radius : 0,
+      color : ["button-box-bright-pressed","button-box-bright-pressed","button-box-bright-pressed","blue"]
      }
    },
 
@@ -177,6 +194,17 @@ qx.Theme.define("wax.demo.theme.Decoration",
       backgroundColor : "white"
      }
    },
+
+   "testbutton-common" :
+    {
+      style : {
+        radius : 3,
+        width : 1,
+        transitionProperty: ['all'],
+        transitionDuration: "150ms",
+        transitionTimingFunction : 'cubic-bezier(0.33,0,0.67,1)'
+      }
+    },
 
    "mainmenuindicator" :
    {
@@ -255,42 +283,6 @@ qx.Theme.define("wax.demo.theme.Decoration",
        clipPath : "polygon(40% 0%, 40% 20%, 100% 20%, 100% 80%, 40% 80%, 40% 100%, 0% 50%)"
      }
    }
-
-   /*
-    ---------------------------------------------------------------------------
-      FreeStyleCss tests
-
-
-      { 		
-          before : 
-          {
-            "width" : "3px",
-            "height" : "13px",
-            "left" : "5px",
-            "transform" : "rotate(45deg)",
-            "transition" : "background-color .8s ease",
-            "position" : "absolute",
-            "top" : "0px",
-            "background-color" : "gray",
-            "content" : "''"
-          },
-          after :
-          {
-            "width" : "3px",
-            "height" : "13px",
-            "left" : "5px",
-            "transform" : "rotate(-45deg)",
-            "transition" : "background-color .8s ease",
-            "position" : "absolute",
-            "top" : "0px",
-            "background-color" : "gray",
-            "content" : "''"
-          }
-        }
-    ---------------------------------------------------------------------------
-    */
-
-    
 
   }
 });

@@ -21,11 +21,12 @@ qx.Theme.define("wax.demo.theme.Appearance",
       style : function(states)
       {
         return {
+          icon: "",
           iconPosition: "top", 
           center: true,
           padding: [10, 6, 20, 6],
           marginBottom: 10,
-          font : "headeratom"
+          font : "ville-logo-font"
         }
       }
     },
@@ -37,8 +38,11 @@ qx.Theme.define("wax.demo.theme.Appearance",
       style : function(states)
       {
         return {
-          width: 120,
-          height: 94
+          html: '<div style="font-family: Providence, sans-serif; font-size: 20px;">&#60;E&#62;</div>',
+          font : "ville-logo-font",
+          width : 40,
+          height : 20,
+          backgroundColor : "transparent"
         }
       }
     },
@@ -62,6 +66,71 @@ qx.Theme.define("wax.demo.theme.Appearance",
       wax.demo.Button
     ---------------------------------------------------------------------------
     */
+    "mid-button-frame" :
+    {
+      alias : "atom",
+
+      style : function(states)
+      {
+        var decorator = "mdi-button-box-round";
+        var bgcolor = "transparent";
+
+        if (!states.disabled) {
+          if (states.hovered && !states.pressed && !states.checked) {
+            bgcolor = "#5f63680a";
+            //decorator = "button-box-hovered";
+          } else if (states.hovered && (states.pressed || states.checked)) {
+            //bgcolor = "Background1Pressed";
+            //decorator = "button-box-pressed";
+          } else if (states.pressed || states.checked) {
+            //bgcolor = "Background1Pressed";
+          }
+        }
+
+        if (states.invalid && !states.disabled) {
+          decorator += "-invalid";
+        } /*else if (states.focused) {
+          decorator += "-focused";
+        }*/
+
+        return {
+          decorator : decorator,
+          cursor: states.disabled ? undefined : "pointer",
+          backgroundColor : bgcolor,
+          font : "default"
+        };
+      }
+    },
+    
+    "mdi-button-frame/label" : {
+      alias : "atom/label",
+
+      style : function(states)
+      {
+        return {
+          textColor : states.disabled ? "text-disabled" : "black",
+          font : "default"
+        };
+      }
+    },
+
+    "mdi-button-theme-toggle" :
+    {
+      style : function(states)
+      {
+        return {
+          icon : states.checked ? "wax/demo/light_mode_24.svg" : "wax/demo/dark_mode_24.svg",
+          decorator : "mdi-button-box-round",
+          backgroundColor : states.hovered ? "#5f63680a" : "transparent",
+          cursor: states.disabled ? undefined : "pointer",
+          center : true,
+          width: 30,
+          padding : 6,
+          marginBottom: 20,
+          gap : 8
+        };
+      }
+    },
 
     "testiconicssbutton" :
     {
@@ -91,7 +160,7 @@ qx.Theme.define("wax.demo.theme.Appearance",
         if (states.hovered)
           iprops = { iconStyle : "filled" };
         else
-        iprops = { iconStyle : "outlined" };
+          iprops = { iconStyle : "outlined" };
         
         return {
           embedProps : iprops
@@ -225,36 +294,37 @@ qx.Theme.define("wax.demo.theme.Appearance",
      style : function(states)
      {
        var decorator = "mainmenubutton-box";
-       var padding = [14, 3, 14, 22];
+       var padding = [12, 3, 10, 4];
        //var textcolor = "#606060";
        var textcolor = "black";
-       var opacity = .85;
+       var opacity = 1;
 
        if (!states.disabled) {
          if (states.hovered && !states.pressed && !states.checked) {
            decorator = "mainmenubutton-box-hovered";
-           padding = [14,3,14,17];
+           padding = [12,3,10,0];
            textcolor = "black";
            opacity = 1;
          } /*else if (states.hovered && (states.pressed || states.checked)) {
            decorator = "mainmenubutton-box-pressed-hovered";
          }*/ else if (states.pressed || states.checked) {
            decorator = "mainmenubutton-box-pressed";
-           padding = [14,3,14,17];
+           padding = [12,3,10,0];
            textcolor = "black";
            opacity = 1;
          }
        }
 
        return {
-         decorator : decorator,
-         padding : padding,
-         cursor: states.disabled ? undefined : "pointer",
-         minWidth: 5,
-         minHeight: 5,
-         textColor: textcolor,
-         font : "mainmenubutton",
-         opacity : opacity
+        backgroundColor: "transparent", 
+        decorator : decorator,
+        padding : padding,
+        cursor: states.disabled ? undefined : "pointer",
+        minWidth: 5,
+        minHeight: 5,
+        textColor: textcolor,
+        font : "mainmenubutton",
+        opacity : opacity
        };
      }
    },
@@ -278,9 +348,9 @@ qx.Theme.define("wax.demo.theme.Appearance",
      style : function(states)
      {
        return {
-         center : false,
-         minWidth : 200,
-         gap : 14
+         center : true,
+         minWidth : 70,
+         gap : 10
        };
      }
    },

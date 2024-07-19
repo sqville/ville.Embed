@@ -28,6 +28,17 @@ qx.Theme.define("wax.demo.theme.Font",
       bold : true
     },
 
+    "ville-logo-font" : {
+      size: 14,
+      family: ["Providence","sans-serif"],
+      sources: [
+        {
+          family: "Providence",
+          source: ["ville/wax/Providence.ttf"]
+        }
+      ]
+    },
+
     //override
     "monospace" :
     {
@@ -40,7 +51,7 @@ qx.Theme.define("wax.demo.theme.Font",
     "mainmenubutton" :
     {
       include : "default",
-      size : 16
+      size : 12
     },
 
     "mainmenubutton-hym" :
@@ -65,7 +76,7 @@ qx.Theme.define("wax.demo.theme.Font",
     "control-header" :
     {
     	include : "default",
-    	size : 32
+    	size : 21
     },
 
     "area-header" :

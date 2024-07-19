@@ -11,6 +11,7 @@
 /**
  * This is the main application class of your custom application "wax"
  * @asset(wax/demo/*)
+ * @usefont(Providence)
  */
 qx.Class.define("wax.demo.ApplicationMaterial",
 {
@@ -44,6 +45,10 @@ qx.Class.define("wax.demo.ApplicationMaterial",
     _northBox : null,
     
     _westBox : null,
+
+    _iconListItems : [],
+
+    _iconListCount : "",
     
     /**
      * This method contains the initial application code and gets called 
@@ -65,8 +70,11 @@ qx.Class.define("wax.demo.ApplicationMaterial",
         qx.log.appender.Console;
       }
 
+      qx.Class.include(qx.ui.core.Widget, wax.demo.MWidget);
+
       // *** Mixins to enable embed features
       qx.Class.include(qx.ui.basic.Atom, ville.embed.MEmbed);
+      qx.Class.include(qx.ui.basic.Image, ville.embed.MImage);
 
       // *** Icons using CSS clip-path
       //qx.Class.include(qx.ui.decoration.Decorator, ville.embed.MClipPath);
@@ -82,30 +90,30 @@ qx.Class.define("wax.demo.ApplicationMaterial",
       this._blocker = new qx.ui.core.Blocker(approot).set({color: "black", opacity: .08});
       
       // App's main Container (Composite) with Dock Layout 
-      var appcompdock = new qx.ui.container.Composite(new qx.ui.layout.Dock(0, 0)).set({backgroundColor: "transparent"});
+      var appcompdocklayout = new qx.ui.layout.Dock().set({sort: "x"});
+      var appcompdock = new qx.ui.container.Composite(appcompdocklayout).set({backgroundColor: "transparent"});
+      //dock.setSort("x");
       
       // Dock's North section (Canvas)
       var northhbox = this._northBox = new qx.ui.container.Composite(new qx.ui.layout.Canvas()).set({backgroundColor: "white", decorator : "topheader"});
 
       // Dock's West section (VBox)
-      var westbox = this._westBox = new qx.ui.container.Composite(new qx.ui.layout.VBox(0)).set({backgroundColor: "white", padding: [10,0,10,0], decorator : "leftside"});
+      var westbox = this._westBox = new qx.ui.container.Composite(new qx.ui.layout.VBox(0)).set({padding: [10,0,10,0], decorator : "leftside"});
 
       // Dock's Center section (Stack) === THE STACK ===
       var centerbox = new qx.ui.container.Stack().set({backgroundColor: "white", padding: 0});
 
-      // phone/phonegap
-      //if (qx.core.Environment.get("phonegap")) {
+      // phone
       var southbox = new qx.ui.container.Composite(new qx.ui.layout.HBox(4)).set({alignY: "middle", padding: [0,4,0,4], decorator: "bottombar"});
-      //}
 
       // West Scroll area to fit all menu items
-      var scrollwest = new qx.ui.container.Scroll().set({scrollbarX: "off", minWidth: 220, padding: 0, margin: 0, contentPadding: [0,0,0,10]});
+      var scrollwest = new qx.ui.container.Scroll().set({decorator: "westboxbg", scrollbarX: "off", minWidth: 120, padding: 0, margin: 0, contentPadding: [0,0,0,6]});
 
       // Center Scroll area to fit all content
       var scroll = new qx.ui.container.Scroll().set({padding: 0, margin: 0, contentPadding: [0,0,0,0]});
 
       // === North Toolbar, Parts and Buttons ===
-      var northtoolbar = new qx.ui.toolbar.ToolBar().set({backgroundColor: "white"});
+      var northtoolbar = new qx.ui.toolbar.ToolBar().set({backgroundColor : "white"});
       var mainmenupart = new qx.ui.toolbar.Part(); //Top-Left of the screen 
       var profilepart = new qx.ui.toolbar.Part(); // Top-Right of the screen
 
@@ -192,16 +200,20 @@ qx.Class.define("wax.demo.ApplicationMaterial",
       atmlogocurrentpage.getChildControl("icon").set({ scale: true, width: 48, height: 38 });
       mainmenupart.add(mainmenubtnbutton);
       profilepart.add(profilemenubutton);
+
+      var atmtopmdiheader = new qx.ui.basic.Atom("Material Design Icons (MDI)").set({font: "control-header"});
       
       northtoolbar.add(mainmenupart);
       northtoolbar.addSpacer();
-      northtoolbar.add(atmlogocurrentpage);
+      northtoolbar.add(atmtopmdiheader);
       northtoolbar.addSpacer();
+      //northtoolbar.add(atmlogocurrentpage);
+      //northtoolbar.addSpacer();
       northtoolbar.add(profilepart);
 
       northhbox.add(northtoolbar, {left: 0, right: 0});
 
-      appcompdock.add(southbox, {edge: "south"});
+      //appcompdock.add(southbox, {edge: "south"});
 
       // <<< END of Base Scaffolding <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
       // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
@@ -222,24 +234,22 @@ qx.Class.define("wax.demo.ApplicationMaterial",
 
 
       // >>> Populate THE STACK >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-      // Four page stack EXAMPLE
-       // Dashboard Page with Flow layout
-       // Overview Page with links to a Detail Page
-       // Table to List Page - shows how the Table Widget converts to a List Widget for smaller screens
+      // Three page stack
+       // Top Page
+       // Second Page
+       // Third Page
       // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-      var dashboardpage = new qx.ui.container.Composite().set({padding: [20,30]});
-      var overviewpage = new qx.ui.container.Composite(new qx.ui.layout.VBox(10)).set({padding: [20,30]});
-      var tablelistpage = new qx.ui.container.Composite().set({padding: [20,30]});
+      var toppage = new qx.ui.container.Composite().set({padding: [20,30]});
+      var secondpage = new qx.ui.container.Composite(new qx.ui.layout.VBox(10)).set({padding: [20,30]});
+      var thirdpage = new qx.ui.container.Composite().set({padding: [20,30]});
 
       //more structure
-      dashboardpage.setLayout(new qx.ui.layout.VBox(10).set({alignX: "left"}));
+      toppage.setLayout(new qx.ui.layout.VBox(10).set({alignX: "left"}));
       
-      var dashboardscrollstackpage = new wax.demo.scroll.Scroll().set({padding: 0, margin: 0, contentPadding: [0,0,0,0]});
+      var toppagescroll = new wax.demo.scroll.Scroll().set({overflow: ["hidden", "auto"], padding: 0, margin: 0, contentPadding: [0,0,0,0]});
 
-      dashboardscrollstackpage.add(dashboardpage);
+      toppagescroll.add(toppage);
 
-      // iConicss Icons
- 
       var animationGrow = {
         duration: 150,
         keyFrames : 
@@ -251,210 +261,236 @@ qx.Class.define("wax.demo.ApplicationMaterial",
         timing: "ease-out"
       };
 
+      // Third page marker  
+      //var lblmdiheader = new qx.ui.basic.Label("Material Design Icons (SVG)").set({font: "control-header"});
+            
+      //simple description
+      var lblsubheadmdistart =  new qx.ui.basic.Label("Source project:").set({font: "headeratom", marginTop: 10});
+      var lblmdisimpledesc = new qx.ui.basic.Label("Material design icons, SVG source by Templarian - <a href='https://github.com/Templarian/MaterialDesign-SVG' target='_blank'>Material Design Icons.</a> For the full list of available icons see the <a href='https://pictogrammers.com/library/mdi/' target='_blank'>Pictogrammers website.</a>").set({rich: true, wrap: true});
+
+      // Basic usage
+      var lblsubheadmdisimple =  new qx.ui.basic.Label("Basic usage:").set({font: "headeratom", marginTop: 40});
+      var lblmdisimpleembed = new qx.ui.basic.Label("Here, at its most <u>basic</u>, is a lone Embed object, sized 40 x 40, and colored <span style='color: blue;'>blue</span>:").set({rich: true, wrap: true});
+      var embedmdiacctclock = new ville.embed.material.AccountClock(40, "blue");
+      var lblsimplemdiembedcode = new qx.ui.basic.Label("var <span style='color:green;'>mdiaccountclock</span> = <span style='color:blue;'>new</span> <span style='color:green;'>ville.embed.material.AccountClock</span>(40, \"blue\"); //  Behind the scenes, the object's constructor sets initial values using - setWidth(size) setHeight(size) and setTextColor(color) ").set({rich: true, wrap: true, font: "monospace", backgroundColor: "#f2f2f2", padding: 6});
+
+      // Use in a Button
+      var lblsubheadmdibutton =  new qx.ui.basic.Label("Use in another widget:").set({font: "headeratom", marginTop: 40});
+      var lblmoremdiembed = new qx.ui.basic.Label("To use the new widget in a Button <b>(qx.ui.form.Button)</b>, you need to first enhance the Button's underlying Atom <b>(qx.ui.basic.Atom)</b>. Once enhanced, add the icon object to the Atom based control:").set({rich: true, wrap: true});
+      var embedmdiacctclock2 = new ville.embed.material.AccountClock(30, "blue", "outlined");
+      var btnembedmdiacctclockebutton = new qx.ui.form.Button('Click Me').set({appearance: "testbutton", embed: embedmdiacctclock2, allowGrowX: false, padding: [10, 14], gap: 10, alignX: "left", alignY: "middle"});
+      var lblbuttonmdiembedcode = new qx.ui.basic.Label("<span style='color:green;'>/* Include the Embed Mixin before creating the Button */</span><br>qx.Class.include(<span style='color:green;'>qx.ui.basic.Atom, ville.embed.MEmbed</span>);<br><span style='color:blue;'>new</span> <span style='color:green;'>qx.ui.form.Button(</span><span style='color:maroon;'>'Click Me'</span>).set({ embed : <span style='color:green;'>mdiaccountclock</span> });").set({rich: true, wrap: true, font: "monospace", backgroundColor: "#f2f2f2", padding: 6});
+
+      btnembedmdiacctclockebutton.addListener("mouseover",function(e) {
+        var icondom = embedmdiacctclock2.getContentElement().getDomElement();
+        qx.bom.element.AnimationCss.animate(icondom, animationGrow, undefined);
+      });      
+      btnembedmdiacctclockebutton.addListener("mouseout",function(e) {
+        var icondom = embedmdiacctclock2.getContentElement().getDomElement();
+        qx.bom.element.AnimationCss.animateReverse(icondom, animationGrow, undefined);
+      });
+
+      toppage.add(lblsubheadmdistart);
+      toppage.add(lblmdisimpledesc);
+      toppage.add(lblsubheadmdisimple);
+      toppage.add(lblmdisimpleembed);
+      toppage.add(embedmdiacctclock);
+      toppage.add(lblsimplemdiembedcode);
+      toppage.add(lblsubheadmdibutton);
+      toppage.add(lblmoremdiembed);
+      toppage.add(btnembedmdiacctclockebutton);
+      toppage.add(lblbuttonmdiembedcode);
+
       // Second page marker  
-      var overviewscrollstackpage = new qx.ui.container.Scroll().set({padding: 0, margin: 0, contentPadding: [0,0,0,0]});
-      overviewscrollstackpage.add(overviewpage);
+      var secondpagescroll = new qx.ui.container.Scroll().set({padding: 0, margin: 0, contentPadding: [0,0,0,0]});
+      secondpagescroll.add(secondpage);
 
-      var lblfluentuiheader = new qx.ui.basic.Label("Fluent UI Web Icons (SVG)").set({font: "control-header"});
+      // List filters
+      var btnfiltershowall = new qx.ui.form.ToggleButton("All").set({allowGrowX: false});
+      btnfiltershowall.setUserData("filterkey", "all");
+      var btnfiltershowfilledonly = new qx.ui.form.ToggleButton("Filled only").set({allowGrowX: false});
+      btnfiltershowfilledonly.setUserData("filterkey", "filledonly");
+      var btnfiltershowoutlineonly = new qx.ui.form.ToggleButton("Outline only").set({allowGrowX: false});
+      btnfiltershowoutlineonly.setUserData("filterkey", "outlinedonly");
+      var btnfiltershowbundled = new qx.ui.form.ToggleButton("Bundled only").set({allowGrowX: false});
+      btnfiltershowbundled.setUserData("filterkey", "bundledonly");
       
-       //simple description
-       var lblfluentsimpledesc = new qx.ui.basic.Label("Microsoft's Fluent UI web icons: <b><a href='https://react.fluentui.dev/?path=/docs/icons-overview--default' target='_blank'>Fluent UI Web Icons</a></b> for the full list of available icons.").set({rich: true, wrap: true});
+      var mdiiconflow = new qx.ui.container.Composite();
+      var mdiiconflowlayout = new qx.ui.layout.Flow(16,20,"left");
+      mdiiconflow.setLayout(mdiiconflowlayout);
 
-       // Basic usage
-       var lblsubheadfuisimple =  new qx.ui.basic.Label("Basic usage:").set({font: "headeratom", marginTop: 40});
-       var lblfuisimpleembed = new qx.ui.basic.Label("Here, at its most <u>basic</u>, is a lone Embed object, sized 40 x 40, and colored <span style='color: blue;'>blue</span>:").set({rich: true, wrap: true});
-       var embedfuiairplanetakeoffalone = new ville.embed.fluent.AirplaneTakeOff(40, "blue");
-       var lblsimplefuiembedcode = new qx.ui.basic.Label("var <span style='color:green;'>fuiairplanetakeoff</span> = <span style='color:blue;'>new</span> <span style='color:green;'>ville.embed.fluent.AirplaneTakeOff</span>(40, \"blue\"); //  Behind the scenes, the object's constructor sets initial values using - setWidth(size) setHeight(size) and setTextColor(color) ").set({rich: true, wrap: true, font: "monospace", backgroundColor: "#f2f2f2", padding: 6});
- 
-       // Use in a Button
-       var lblsubheadfuibutton =  new qx.ui.basic.Label("Use in another widget:").set({font: "headeratom", marginTop: 40});
-       var lblmorefuiembed = new qx.ui.basic.Label("To use the new widget in a Button <b>(qx.ui.form.Button)</b>, you need to first enhance the Button's underlying Atom <b>(qx.ui.basic.Atom)</b>. Once enhanced, add the icon object to the Atom based control:").set({rich: true, wrap: true});
-       var embedfuiairplanetakeoff = new ville.embed.fluent.AirplaneTakeOff(30, "blue");
-       var btnembedfuiairplanebutton = new qx.ui.form.Button('Click Me').set({appearance: "testbutton", embed: embedfuiairplanetakeoff, allowGrowX: false, padding: [10, 14], gap: 10, alignX: "left", alignY: "middle"});
-       var lblbuttonfuiembedcode = new qx.ui.basic.Label("<span style='color:green;'>/* Include the Embed Mixin before creating the Button */</span><br>qx.Class.include(<span style='color:green;'>qx.ui.basic.Atom, ville.embed.MEmbed</span>);<br><span style='color:blue;'>new</span> <span style='color:green;'>qx.ui.form.Button(</span><span style='color:maroon;'>'Click Me'</span>).set({ embed : <span style='color:green;'>fuiairplanetakeoff</span> });").set({rich: true, wrap: true, font: "monospace", backgroundColor: "#f2f2f2", padding: 6});
-       
-       
-       btnembedfuiairplanebutton.addListener("mouseover",function(e) {
-         var icondom = embedfuiairplanetakeoff.getContentElement().getDomElement();
-         qx.bom.element.AnimationCss.animate(icondom, animationGrow, undefined);
-       });      
-       btnembedfuiairplanebutton.addListener("mouseout",function(e) {
-         var icondom = embedfuiairplanetakeoff.getContentElement().getDomElement();
-         qx.bom.element.AnimationCss.animateReverse(icondom, animationGrow, undefined);
-       });
-       
-      // Some of my Favorite Icons
-      var lblsubheaderfuiFavs =  new qx.ui.basic.Label("2,479 icons available:").set({font: "headeratom", marginTop: 40});
-      var fuiiconflow = new qx.ui.container.Composite();
-      var fuiiconflowlayout = new qx.ui.layout.Flow(16,20,"left");
-      fuiiconflow.setLayout(fuiiconflowlayout);
+      var filterlayout = new qx.ui.layout.HBox();
+      filterlayout.setSpacing(10);
+      var filterbox = new qx.ui.container.Composite(filterlayout);
+      //filterbox.setPadding(20);
+
+      var filterbtngroup = new qx.ui.form.RadioGroup();
+      filterbtngroup.add(btnfiltershowall, btnfiltershowfilledonly, btnfiltershowoutlineonly, btnfiltershowbundled);
+
+      filterbox.add(new qx.ui.basic.Label("Showing:"));
+      filterbox.add(btnfiltershowall);
+      filterbox.add(btnfiltershowfilledonly);
+      filterbox.add(btnfiltershowoutlineonly);
+      filterbox.add(btnfiltershowbundled);
+      
+      
+
 
       // common props
       var svgsize = 40;
       var atmprops = { iconPosition: "top", appearance: "icss-atom"};
       var arrembeds = [];
 
+      // php generated
+      var memdAbTestingFilled = new ville.embed.material.AbTestingFilled(svgsize, null, "AbTestingFilled");
+      arrembeds.push(memdAbTestingFilled);
+      var memdAbacusFilled = new ville.embed.material.AbacusFilled(svgsize, null, "AbacusFilled");
+      arrembeds.push(memdAbacusFilled);
+      var memdAbjadArabicFilled = new ville.embed.material.AbjadArabicFilled(svgsize, null, "AbjadArabicFilled");
+      arrembeds.push(memdAbjadArabicFilled);
+      var memdAbjadHebrewFilled = new ville.embed.material.AbjadHebrewFilled(svgsize, null, "AbjadHebrewFilled");
+      arrembeds.push(memdAbjadHebrewFilled);
+      var memdAbugidaDevanagariFilled = new ville.embed.material.AbugidaDevanagariFilled(svgsize, null, "AbugidaDevanagariFilled");
+      arrembeds.push(memdAbugidaDevanagariFilled);
+      var memdAbugidaThaiFilled = new ville.embed.material.AbugidaThaiFilled(svgsize, null, "AbugidaThaiFilled");
+      arrembeds.push(memdAbugidaThaiFilled);
+      var memdAccessPointCheckFilled = new ville.embed.material.AccessPointCheckFilled(svgsize, null, "AccessPointCheckFilled");
+      arrembeds.push(memdAccessPointCheckFilled);
+      var memdAccessPointMinusFilled = new ville.embed.material.AccessPointMinusFilled(svgsize, null, "AccessPointMinusFilled");
+      arrembeds.push(memdAccessPointMinusFilled);
+      var memdAccessPointNetworkOffFilled = new ville.embed.material.AccessPointNetworkOffFilled(svgsize, null, "AccessPointNetworkOffFilled");
+      arrembeds.push(memdAccessPointNetworkOffFilled);
+      var memdAccessPointNetworkFilled = new ville.embed.material.AccessPointNetworkFilled(svgsize, null, "AccessPointNetworkFilled");
+      arrembeds.push(memdAccessPointNetworkFilled);
+      var memdAccessPointOffFilled = new ville.embed.material.AccessPointOffFilled(svgsize, null, "AccessPointOffFilled");
+      arrembeds.push(memdAccessPointOffFilled);
+      var memdAccessPointPlusFilled = new ville.embed.material.AccessPointPlusFilled(svgsize, null, "AccessPointPlusFilled");
+      arrembeds.push(memdAccessPointPlusFilled);
+      var memdAccessPointRemoveFilled = new ville.embed.material.AccessPointRemoveFilled(svgsize, null, "AccessPointRemoveFilled");
+      arrembeds.push(memdAccessPointRemoveFilled);
+      var memdAccessPointFilled = new ville.embed.material.AccessPointFilled(svgsize, null, "AccessPointFilled");
+      arrembeds.push(memdAccessPointFilled);
+      var memdAccountAlert = new ville.embed.material.AccountAlert(svgsize, null, null, "AccountAlert");
+      arrembeds.push(memdAccountAlert);
+      var memdAccountArrowDown = new ville.embed.material.AccountArrowDown(svgsize, null, null, "AccountArrowDown");
+      arrembeds.push(memdAccountArrowDown);
+      var memdAccountArrowLeft = new ville.embed.material.AccountArrowLeft(svgsize, null, null, "AccountArrowLeft");
+      arrembeds.push(memdAccountArrowLeft);
+      var memdAccountArrowRight = new ville.embed.material.AccountArrowRight(svgsize, null, null, "AccountArrowRight");
+      arrembeds.push(memdAccountArrowRight);
+      var memdAccountArrowUp = new ville.embed.material.AccountArrowUp(svgsize, null, null, "AccountArrowUp");
+      arrembeds.push(memdAccountArrowUp);
+      var memdAccountBadge = new ville.embed.material.AccountBadge(svgsize, null, null, "AccountBadge");
+      arrembeds.push(memdAccountBadge);
+      var memdAccountBoxEditOutline = new ville.embed.material.AccountBoxEditOutline(svgsize, null, "AccountBoxEditOutline");
+      arrembeds.push(memdAccountBoxEditOutline);
+      var memdAccountBoxMinusOutline = new ville.embed.material.AccountBoxMinusOutline(svgsize, null, "AccountBoxMinusOutline");
+      arrembeds.push(memdAccountBoxMinusOutline);
+      var memdAccountBoxMultiple = new ville.embed.material.AccountBoxMultiple(svgsize, null, null, "AccountBoxMultiple");
+      arrembeds.push(memdAccountBoxMultiple);
+      var memdAccountBox = new ville.embed.material.AccountBox(svgsize, null, null, "AccountBox");
+      arrembeds.push(memdAccountBox);
+      var memdAccountBoxPlusOutline = new ville.embed.material.AccountBoxPlusOutline(svgsize, null, "AccountBoxPlusOutline");
+      arrembeds.push(memdAccountBoxPlusOutline);
+      var memdAccountCancel = new ville.embed.material.AccountCancel(svgsize, null, null, "AccountCancel");
+      arrembeds.push(memdAccountCancel);
+      var memdAccountCard = new ville.embed.material.AccountCard(svgsize, null, null, "AccountCard");
+      arrembeds.push(memdAccountCard);
+      var memdAccountCash = new ville.embed.material.AccountCash(svgsize, null, null, "AccountCash");
+      arrembeds.push(memdAccountCash);
+      var memdAccountCheck = new ville.embed.material.AccountCheck(svgsize, null, null, "AccountCheck");
+      arrembeds.push(memdAccountCheck);
+      var memdAccountChildCircleFilled = new ville.embed.material.AccountChildCircleFilled(svgsize, null, "AccountChildCircleFilled");
+      arrembeds.push(memdAccountChildCircleFilled);
+      var memdAccountChild = new ville.embed.material.AccountChild(svgsize, null, null, "AccountChild");
+      arrembeds.push(memdAccountChild);
+      var memdAccountCircle = new ville.embed.material.AccountCircle(svgsize, null, null, "AccountCircle");
+      arrembeds.push(memdAccountCircle);
+      var memdAccountClock = new ville.embed.material.AccountClock(svgsize, null, null, "AccountClock");
+      arrembeds.push(memdAccountClock);
 
+      // GridList container
+      var girdlist1 = new wax.demo.GridList().set({
+        allowStretchX: true, 
+        allowStretchY: true,
+        selectionMode: "single", 
+        enableInlineFind: true
+      });
 
+      // loop
+      arrembeds.forEach((embed) => {
+        var atmlabel = embed.getTitle().replace("<title>","").replace("</title>","");
+        // var atmembed = new qx.ui.basic.Atom(atmlabel).set(atmprops);
+        var liembed = new qx.ui.form.ListItem(atmlabel).set(atmprops);
+        liembed.setEmbed(embed);
+        // regular flow container
+        // mdiiconflow.add(atmembed);
+        girdlist1.add(liembed);
+      });
+
+      this._iconListItems = girdlist1.getChildren();
+
+      filterbtngroup.addListener("changeValue", function (e) {
+        var filtercount = 0;
+        switch (e.getData().getUserData("filterkey")) {
+          case "all":
+            this._iconListItems.forEach((iconli) => iconli.setVisibility("visible"));
+            this._iconListCount.setValue("Count: " + this._iconListItems.length);
+            break;
+          case "outlinedonly":
+            this._iconListItems.forEach((iconli) => {
+              if(iconli.getLabel().endsWith('Outline')) {
+                iconli.setVisibility("visible");
+                ++filtercount;
+              }
+              else
+                iconli.setVisibility("excluded");
+            });  
+            this._iconListCount.setValue("Count: " + filtercount);
+            break;
+          case "filledonly":
+            this._iconListItems.forEach((iconli) => {
+              if(iconli.getLabel().endsWith('Filled')) {
+                iconli.setVisibility("visible");
+                ++filtercount;
+              }
+              else
+                iconli.setVisibility("excluded");
+            }); 
+            this._iconListCount.setValue("Count: " + filtercount); 
+            break;
+          case "bundledonly":
+            this._iconListItems.forEach((iconli) => {
+              var iconliembd = iconli.getEmbed();
+              if (iconliembd.constructor.PATH)
+                iconli.setVisibility("excluded");
+              else {
+                iconli.setVisibility("visible");
+                ++filtercount;
+              }
+            });  
+            this._iconListCount.setValue("Count: " + filtercount);
+            break;
+        }
+      }, this);
+
+      var lblsubheadermdicount = this._iconListCount = new qx.ui.basic.Label("Count: " + arrembeds.length).set({font: "headeratom", marginTop: 40});
       
+      secondpage.add(filterbox);
+      secondpage.add(lblsubheadermdicount);
+      secondpage.add(girdlist1, {flex: 2});
       
-      
-     
+
 
 
       // Third page marker
-      var tablelistvbox = new qx.ui.layout.VBox(10);
-      tablelistpage.setLayout(tablelistvbox);
+      var thirdpagevbox = new qx.ui.layout.VBox(10);
+      thirdpage.setLayout(thirdpagevbox);
 
-      var tablelistscrollstackpage = new qx.ui.container.Scroll().set({padding: 0, margin: 0, contentPadding: [0,0,0,0]});
-      tablelistscrollstackpage.add(tablelistpage);
-
-      // Third page marker  
-      var lblmaterialheader = new qx.ui.basic.Label("Material Design Icons (SVG)").set({font: "control-header"});
-            
-      //simple description
-      var lblmaterialsimpledesc = new qx.ui.basic.Label("Material Design icons: <b><a href='https://material.io/resources/icons/?style=baseline' target='_blank'>Material Design Icons</a></b> for the full list of available icons.").set({rich: true, wrap: true});
-
-      // Basic usage
-      //var lblsubheadmaterialsimple =  new qx.ui.basic.Label("Basic usage:").set({font: "headeratom", marginTop: 40});
-      var lblmaterialsimpleembed = new qx.ui.basic.Label("Same as Fluent UI Web Icons, just with different named embeds.").set({rich: true, wrap: true});
-
-      // Basic usage
-      var lblsubheadmaterialsimple =  new qx.ui.basic.Label("Basic usage:").set({font: "headeratom", marginTop: 40});
-      var lblmaterialsimpleembed = new qx.ui.basic.Label("Here, at its most <u>basic</u>, is a lone Embed object, sized 40 x 40, and colored <span style='color: blue;'>blue</span>:").set({rich: true, wrap: true});
-      var embedmdiacctcircle = new ville.embed.material.AccountCircle(40, "blue");
-      var lblsimplemdiembedcode = new qx.ui.basic.Label("var <span style='color:green;'>fuiairplanetakeoff</span> = <span style='color:blue;'>new</span> <span style='color:green;'>ville.embed.material.AccountCircle</span>(40, \"blue\"); //  Behind the scenes, the object's constructor sets initial values using - setWidth(size) setHeight(size) and setTextColor(color) ").set({rich: true, wrap: true, font: "monospace", backgroundColor: "#f2f2f2", padding: 6});
-
-      // Use in a Button
-      var lblsubheadmaterialbutton =  new qx.ui.basic.Label("Use in another widget:").set({font: "headeratom", marginTop: 40});
-      var lblmorematerialembed = new qx.ui.basic.Label("To use the new widget in a Button <b>(qx.ui.form.Button)</b>, you need to first enhance the Button's underlying Atom <b>(qx.ui.basic.Atom)</b>. Once enhanced, add the icon object to the Atom based control:").set({rich: true, wrap: true});
-      var embedmaterialacctcircle = new ville.embed.material.AccountCircle(30, "blue", "outlined");
-      var btnembedmdiacctcirclebutton = new qx.ui.form.Button('Click Me').set({appearance: "testbutton", embed: embedmaterialacctcircle, allowGrowX: false, padding: [10, 14], gap: 10, alignX: "left", alignY: "middle"});
-      var lblbuttonmdiembedcode = new qx.ui.basic.Label("<span style='color:green;'>/* Include the Embed Mixin before creating the Button */</span><br>qx.Class.include(<span style='color:green;'>qx.ui.basic.Atom, ville.embed.MEmbed</span>);<br><span style='color:blue;'>new</span> <span style='color:green;'>qx.ui.form.Button(</span><span style='color:maroon;'>'Click Me'</span>).set({ embed : <span style='color:green;'>fuiairplanetakeoff</span> });").set({rich: true, wrap: true, font: "monospace", backgroundColor: "#f2f2f2", padding: 6});
-
-      btnembedmdiacctcirclebutton.addListener("mouseover",function(e) {
-        var icondom = embedmaterialacctcircle.getContentElement().getDomElement();
-        qx.bom.element.AnimationCss.animate(icondom, animationGrow, undefined);
-      });      
-      btnembedmdiacctcirclebutton.addListener("mouseout",function(e) {
-        var icondom = embedmaterialacctcircle.getContentElement().getDomElement();
-        qx.bom.element.AnimationCss.animateReverse(icondom, animationGrow, undefined);
-      });
-
-      // Some of my Favorite Icons
-      var lblsubheadermaterialFavs =  new qx.ui.basic.Label("A few examples:").set({font: "headeratom", marginTop: 40});
-      var materialiconflow = new qx.ui.container.Composite();
-      var materialiconflowlayout = new qx.ui.layout.Flow(16,20,"left");
-      materialiconflow.setLayout(materialiconflowlayout);
-      
-      // var embedmuiacctcircle = new ville.embed.material.Accessibility(40);
-      // var atmacctcircle = new qx.ui.basic.Atom("Accessibility").set({ iconPosition: "top", appearance: "icss-atom", embed: embedmuiacctcircle });
-      /*
-      var atmbusiness = new qx.ui.basic.Atom("Business", 'data:text/json;{ "name": "material-business", "width": 60, "height": 60 }').set({iconPosition: "top", appearance: "icss-atom"});
-      var atmbiotech = new qx.ui.basic.Atom("Biotech", 'data:text/json;{ "name": "material-biotech", "width": 60, "height": 60 }').set({iconPosition: "top", appearance: "icss-atom"});
-      var atmbolt = new qx.ui.basic.Atom("Bolt", 'data:text/json;{ "name": "material-bolt", "width": 60, "height": 60 }').set({iconPosition: "top", appearance: "icss-atom"});
-      
-      materialiconflow.add(atmbusiness);
-      materialiconflow.add(atmbiotech);
-      materialiconflow.add(atmbolt);
-      */
-      // materialiconflow.add(atmacctcircle);
-
-      // common props
-      //var svgsize = 40;
-      //var atmprops = { iconPosition: "top", appearance: "icss-atom"};
-      var arrmembeds = [];
-
-      // php generated
-      var memdAbTestingFilled = new ville.embed.material.AbTestingFilled(svgsize, null, "AbTestingFilled");
-      arrmembeds.push(memdAbTestingFilled);
-      var memdAbacusFilled = new ville.embed.material.AbacusFilled(svgsize, null, "AbacusFilled");
-      arrmembeds.push(memdAbacusFilled);
-      var memdAbjadArabicFilled = new ville.embed.material.AbjadArabicFilled(svgsize, null, "AbjadArabicFilled");
-      arrmembeds.push(memdAbjadArabicFilled);
-      var memdAbjadHebrewFilled = new ville.embed.material.AbjadHebrewFilled(svgsize, null, "AbjadHebrewFilled");
-      arrmembeds.push(memdAbjadHebrewFilled);
-      var memdAbugidaDevanagariFilled = new ville.embed.material.AbugidaDevanagariFilled(svgsize, null, "AbugidaDevanagariFilled");
-      arrmembeds.push(memdAbugidaDevanagariFilled);
-      var memdAbugidaThaiFilled = new ville.embed.material.AbugidaThaiFilled(svgsize, null, "AbugidaThaiFilled");
-      arrmembeds.push(memdAbugidaThaiFilled);
-      var memdAccessPointCheckFilled = new ville.embed.material.AccessPointCheckFilled(svgsize, null, "AccessPointCheckFilled");
-      arrmembeds.push(memdAccessPointCheckFilled);
-      var memdAccessPointMinusFilled = new ville.embed.material.AccessPointMinusFilled(svgsize, null, "AccessPointMinusFilled");
-      arrmembeds.push(memdAccessPointMinusFilled);
-      var memdAccessPointNetworkOffFilled = new ville.embed.material.AccessPointNetworkOffFilled(svgsize, null, "AccessPointNetworkOffFilled");
-      arrmembeds.push(memdAccessPointNetworkOffFilled);
-      var memdAccessPointNetworkFilled = new ville.embed.material.AccessPointNetworkFilled(svgsize, null, "AccessPointNetworkFilled");
-      arrmembeds.push(memdAccessPointNetworkFilled);
-      var memdAccessPointOffFilled = new ville.embed.material.AccessPointOffFilled(svgsize, null, "AccessPointOffFilled");
-      arrmembeds.push(memdAccessPointOffFilled);
-      var memdAccessPointPlusFilled = new ville.embed.material.AccessPointPlusFilled(svgsize, null, "AccessPointPlusFilled");
-      arrmembeds.push(memdAccessPointPlusFilled);
-      var memdAccessPointRemoveFilled = new ville.embed.material.AccessPointRemoveFilled(svgsize, null, "AccessPointRemoveFilled");
-      arrmembeds.push(memdAccessPointRemoveFilled);
-      var memdAccessPointFilled = new ville.embed.material.AccessPointFilled(svgsize, null, "AccessPointFilled");
-      arrmembeds.push(memdAccessPointFilled);
-      var memdAccountAlert = new ville.embed.material.AccountAlert(svgsize, null, null, "AccountAlert");
-      arrmembeds.push(memdAccountAlert);
-      var memdAccountArrowDown = new ville.embed.material.AccountArrowDown(svgsize, null, null, "AccountArrowDown");
-      arrmembeds.push(memdAccountArrowDown);
-      var memdAccountArrowLeft = new ville.embed.material.AccountArrowLeft(svgsize, null, null, "AccountArrowLeft");
-      arrmembeds.push(memdAccountArrowLeft);
-      var memdAccountArrowRight = new ville.embed.material.AccountArrowRight(svgsize, null, null, "AccountArrowRight");
-      arrmembeds.push(memdAccountArrowRight);
-      var memdAccountArrowUp = new ville.embed.material.AccountArrowUp(svgsize, null, null, "AccountArrowUp");
-      arrmembeds.push(memdAccountArrowUp);
-      var memdAccountBadge = new ville.embed.material.AccountBadge(svgsize, null, null, "AccountBadge");
-      arrmembeds.push(memdAccountBadge);
-      var memdAccountBoxEditOutline = new ville.embed.material.AccountBoxEditOutline(svgsize, null, "AccountBoxEditOutline");
-      arrmembeds.push(memdAccountBoxEditOutline);
-      var memdAccountBoxMinusOutline = new ville.embed.material.AccountBoxMinusOutline(svgsize, null, "AccountBoxMinusOutline");
-      arrmembeds.push(memdAccountBoxMinusOutline);
-      var memdAccountBoxMultiple = new ville.embed.material.AccountBoxMultiple(svgsize, null, null, "AccountBoxMultiple");
-      arrmembeds.push(memdAccountBoxMultiple);
-      var memdAccountBox = new ville.embed.material.AccountBox(svgsize, null, null, "AccountBox");
-      arrmembeds.push(memdAccountBox);
-      var memdAccountBoxPlusOutline = new ville.embed.material.AccountBoxPlusOutline(svgsize, null, "AccountBoxPlusOutline");
-      arrmembeds.push(memdAccountBoxPlusOutline);
-      var memdAccountCancel = new ville.embed.material.AccountCancel(svgsize, null, null, "AccountCancel");
-      arrmembeds.push(memdAccountCancel);
-      var memdAccountCard = new ville.embed.material.AccountCard(svgsize, null, null, "AccountCard");
-      arrmembeds.push(memdAccountCard);
-      var memdAccountCash = new ville.embed.material.AccountCash(svgsize, null, null, "AccountCash");
-      arrmembeds.push(memdAccountCash);
-      var memdAccountCheck = new ville.embed.material.AccountCheck(svgsize, null, null, "AccountCheck");
-      arrmembeds.push(memdAccountCheck);
-      var memdAccountChildCircleFilled = new ville.embed.material.AccountChildCircleFilled(svgsize, null, "AccountChildCircleFilled");
-      arrmembeds.push(memdAccountChildCircleFilled);
-      var memdAccountChild = new ville.embed.material.AccountChild(svgsize, null, null, "AccountChild");
-      arrmembeds.push(memdAccountChild);
-      var memdAccountCircle = new ville.embed.material.AccountCircle(svgsize, null, null, "AccountCircle");
-      arrmembeds.push(memdAccountCircle);
-      var memdAccountClock = new ville.embed.material.AccountClock(svgsize, null, null, "AccountClock");
-      arrmembeds.push(memdAccountClock);
+      var thirdpagescroll = new qx.ui.container.Scroll().set({padding: 0, margin: 0, contentPadding: [0,0,0,0]});
+      thirdpagescroll.add(thirdpage);
 
 
-      // loop
-      arrmembeds.forEach((embed) => {
-        var atmlabel = embed.getTitle().replace("<title>","").replace("</title>","");
-        var atmembed = new qx.ui.basic.Atom(atmlabel).set(atmprops);
-        atmembed.setEmbed(embed);
-        materialiconflow.add(atmembed);
-      });
-
-
-      tablelistpage.add(lblmaterialheader);
-      tablelistpage.add(lblmaterialsimpledesc);
-      tablelistpage.add(lblsubheadmaterialsimple);
-      tablelistpage.add(lblmaterialsimpleembed);
-      tablelistpage.add(embedmdiacctcircle);
-      tablelistpage.add(lblsimplemdiembedcode);
-      tablelistpage.add(lblsubheadmaterialbutton);
-      tablelistpage.add(lblmorematerialembed);
-      tablelistpage.add(btnembedmdiacctcirclebutton);
-      tablelistpage.add(lblbuttonmdiembedcode);
-      tablelistpage.add(lblsubheadermaterialFavs);
-      tablelistpage.add(materialiconflow);
 
 
       // Menu Page for phonegap only
@@ -473,19 +509,19 @@ qx.Class.define("wax.demo.ApplicationMaterial",
       menupage.add(btnSettings);
       menupage.add(btnLogout);
 
-      var menuscrollstackpage = new qx.ui.container.Scroll().set({padding: 0, margin: 0, contentPadding: [0,0,0,0]});
+      var menupagescroll = new qx.ui.container.Scroll().set({padding: 0, margin: 0, contentPadding: [0,0,0,0]});
 
-      menuscrollstackpage.add(menupage);
+      menupagescroll.add(menupage);
 
     
       // Assemble - THE STACK 
-      centerbox.add(overviewscrollstackpage);
-      centerbox.add(dashboardscrollstackpage);
-      centerbox.add(tablelistscrollstackpage);
-      centerbox.add(menuscrollstackpage);
+      centerbox.add(toppagescroll);
+      centerbox.add(secondpagescroll);
+      centerbox.add(thirdpagescroll);
+      //centerbox.add(menupagescroll);
 
       // Show the default page
-      centerbox.setSelection([overviewscrollstackpage]);
+      centerbox.setSelection([toppagescroll]);
 
       btnAbout.addListener("execute", function(e) {
         winAboutWax.restore();
@@ -500,42 +536,47 @@ qx.Class.define("wax.demo.ApplicationMaterial",
       // Create Menu Buttons that will navigate the user through THE STACK Pages 
       // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
       // Populate westBox with content
-      var atmleftnavheader = new qx.ui.basic.Atom("Wax Demo", "wax/demo/Wax_demo_logo.png").set({appearance: "header-atom", anonymous: true, focusable: false, selectable: false });
-      atmleftnavheader.setShow("label");
+      var atmleftnavheader = new qx.ui.basic.Atom("ville.Embed").set({appearance: "header-atom", anonymous: true, focusable: false, selectable: false });
+      atmleftnavheader.setShow("both");
       //atmleftnavheader.getChildControl("icon").set({ scale : true });
       westbox.add(atmleftnavheader);
-      var tbtnSecondPage = new wax.demo.MenuButton("Fluent UI (SVG)", "wax/demo/fluent_globe.svg", true);
-      westbox.add(tbtnSecondPage);
+      var tbtntoppage = new wax.demo.MenuButton("Usage", "wax/demo/sdk_24.svg", true).set({iconPosition: "top"});
+      westbox.add(tbtntoppage);
       
-      var tbtndashboardpage = new wax.demo.MenuButton("iConicss", "wax/demo/Css3_logo.svg", true );
-      westbox.add(tbtndashboardpage);
+      var tbtnsecondpage = new wax.demo.MenuButton("Icons", "wax/demo/shapes_24.svg", true ).set({iconPosition: "top"});
+      westbox.add(tbtnsecondpage);
 
-      var tbtnThirdPage = new wax.demo.MenuButton("Material (SVG)", "wax/demo/material_logo.svg", true);
-      westbox.add(tbtnThirdPage);
+      var tbtnthirdpage = new wax.demo.MenuButton("About", "wax/demo/award_star_24.svg", true).set({iconPosition: "top"});
+      westbox.add(tbtnthirdpage);
+
+      westbox.add(new qx.ui.core.Spacer(), {flex: 1});
+      var btntheme = new qx.ui.form.ToggleButton().set({appearance: "mdi-button-theme-toggle", show: "icon"});
+      westbox.add(btntheme);
 
       var westboxbuttongroup = new qx.ui.form.RadioGroup();
-      westboxbuttongroup.add(tbtnSecondPage, tbtndashboardpage, tbtnThirdPage);
+      westboxbuttongroup.add(tbtntoppage, tbtnsecondpage, tbtnthirdpage);
+
       
       // CLONE the above controls
       var atmmenuleftnavheader = atmleftnavheader.clone();
       //atmmenuleftnavheader.getChildControl("icon").set({ scale : true });
-      var tbtnmenudashboardpage = tbtndashboardpage.clone();
-      tbtnmenudashboardpage.getChildControl("icon").set({ scale : true });
-      var tbtnmenuSecondPage = tbtnSecondPage.clone();
-      tbtnmenuSecondPage.getChildControl("icon").set({ scale : true });
-      var tbtnmenuThirdPage = tbtnThirdPage.clone();
-      tbtnmenuThirdPage.getChildControl("icon").set({ scale : true });
+      var tbtnmenutoppage = tbtntoppage.clone();
+      tbtnmenutoppage.getChildControl("icon").set({ scale : true });
+      var tbtnmenusecondpage = tbtnsecondpage.clone();
+      tbtnmenusecondpage.getChildControl("icon").set({ scale : true });
+      var tbtnmenuthirdpage = tbtnthirdpage.clone();
+      tbtnmenuthirdpage.getChildControl("icon").set({ scale : true });
 
       // Add the clones to the Main Menu Popup
       mainmenupopup.add(atmmenuleftnavheader);
-      mainmenupopup.add(tbtnmenuSecondPage);
-      mainmenupopup.add(tbtnmenudashboardpage);
-      mainmenupopup.add(tbtnmenuThirdPage);
+      mainmenupopup.add(tbtnmenutoppage);
+      mainmenupopup.add(tbtnmenusecondpage);
+      mainmenupopup.add(tbtnmenuthirdpage);
 
 
       // Assign all the clones their own RadioGroup
       var mainmenubuttongroup = new qx.ui.form.RadioGroup();
-      mainmenubuttongroup.add(tbtnmenuSecondPage, tbtnmenudashboardpage, tbtnmenuThirdPage);
+      mainmenubuttongroup.add(tbtnmenutoppage, tbtnmenusecondpage, tbtnmenuthirdpage);
       
       //***  CODE for applying popup fading in and out  ***//
       var fadeinleft = {duration: 300, timing: "ease-out", origin: "left top", keyFrames : {
@@ -554,106 +595,100 @@ qx.Class.define("wax.demo.ApplicationMaterial",
       // Create Menu Buttons that will navigate the user through THE STACK Pages 
       // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
       // Populate southbox with content
-      var tbtndashboardpagehym = new wax.demo.MenuButton("iConicss", "wax/demo/Css3_logo.svg", true ).set({appearance: "mainmenubutton-hym", iconPosition: "top"});
-      var tbtnoverviewpagehym = new wax.demo.MenuButton("Fluent UI", "wax/demo/fluent_globe.svg", true).set({appearance: "mainmenubutton-hym", iconPosition: "top"});
-      var tbtnlistofitemspagehym = new wax.demo.MenuButton("Material", "wax/demo/material_logo.svg", true).set({appearance: "mainmenubutton-hym", iconPosition: "top"});
+      var tbtntoppagehym = new wax.demo.MenuButton("iConicss", "wax/demo/Css3_logo.svg", true ).set({appearance: "mainmenubutton-hym", iconPosition: "top"});
+      var tbtnsecondpagehym = new wax.demo.MenuButton("Fluent UI", "wax/demo/fluent_globe.svg", true).set({appearance: "mainmenubutton-hym", iconPosition: "top"});
+      var tbtnthirdpagehym = new wax.demo.MenuButton("Material", "wax/demo/material_logo.svg", true).set({appearance: "mainmenubutton-hym", iconPosition: "top"});
       var tbtnmenuhym = new wax.demo.MenuButton("Menu", menuimage, true).set({appearance: "mainmenubutton-hym", iconPosition: "top"});
-      southbox.add(tbtnoverviewpagehym, {flex: 1});
-      southbox.add(tbtndashboardpagehym, {flex: 1});
-      southbox.add(tbtnlistofitemspagehym, {flex: 1});
-      southbox.add(tbtnmenuhym, {flex: 1});
+      southbox.add(tbtntoppagehym, {flex: 1});
+      southbox.add(tbtnsecondpagehym, {flex: 1});
+      southbox.add(tbtnthirdpagehym, {flex: 1});
+      //southbox.add(tbtnmenuhym, {flex: 1});
 
       southbox.setVisibility("excluded");
 
       // Assign all the clones their own RadioGroup
       var mainmenubuttongrouphym = new qx.ui.form.RadioGroup();
-      mainmenubuttongrouphym.add(tbtnoverviewpagehym, tbtndashboardpagehym, tbtnlistofitemspagehym, tbtnmenuhym);
+      mainmenubuttongrouphym.add(tbtntoppagehym, tbtnsecondpagehym, tbtnthirdpagehym);
 
       // <<< END of Hybrid Mobil (hym) Main Menu and Main Menu Popup <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 
       // >>> Wire all the Main Menu Buttons to THE STACK Pages (via Listeners) >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
       // Turn on all wax.demo.MenuButton listeners
-      tbtndashboardpage.addListener("changeValue", function(e) {
+      tbtntoppage.addListener("changeValue", function(e) {
         if (e.getData()) {
-          centerbox.setSelection([dashboardscrollstackpage]);
-          mainmenubuttongroup.setSelection([tbtnmenudashboardpage]);
+          centerbox.setSelection([toppagescroll]);
+          mainmenubuttongroup.setSelection([tbtnmenutoppage]);
         }
       }, this);
 
-      tbtnSecondPage.addListener("changeValue", function(e) {
+      tbtnsecondpage.addListener("changeValue", function(e) {
         if (e.getData()) {
-          centerbox.setSelection([overviewscrollstackpage]);
-          mainmenubuttongroup.setSelection([tbtnmenuSecondPage]);
+          centerbox.setSelection([secondpagescroll]);
+          mainmenubuttongroup.setSelection([tbtnmenusecondpage]);
         }
       }, this);
 
-      tbtnThirdPage.addListener("changeValue", function(e) {
+      tbtnthirdpage.addListener("changeValue", function(e) {
         if (e.getData()) {
-          centerbox.setSelection([tablelistscrollstackpage]);
-          mainmenubuttongroup.setSelection([tbtnmenuThirdPage]);
+          centerbox.setSelection([thirdpagescroll]); 
+          mainmenubuttongroup.setSelection([tbtnmenuthirdpage]); 
         }
       }, this);
 
       // Popup menu buttons
-      tbtnmenudashboardpage.addListener("changeValue", function(e) {
+      tbtnmenutoppage.addListener("changeValue", function(e) {
         if (e.getData()) {
-          centerbox.setSelection([dashboardscrollstackpage]);
-          westboxbuttongroup.setSelection([tbtndashboardpage]);
+          centerbox.setSelection([toppagescroll]);
+          westboxbuttongroup.setSelection([tbtntoppage]);
           mainmenupopup.hide();
         }
       }, this);
 
-      tbtnmenuSecondPage.addListener("changeValue", function(e) {
+      tbtnmenusecondpage.addListener("changeValue", function(e) {
         if (e.getData()) {
-          centerbox.setSelection([overviewscrollstackpage]);
-          westboxbuttongroup.setSelection([tbtnSecondPage]);
-
-          //dashboardpage.setVisibility("excluded");
-
+          centerbox.setSelection([secondpagescroll]);
+          westboxbuttongroup.setSelection([tbtnsecondpage]);
           mainmenupopup.hide();
         }
       }, this);
 
-      tbtnmenuThirdPage.addListener("changeValue", function(e) {
+      tbtnmenuthirdpage.addListener("changeValue", function(e) {
         if (e.getData()) {
-          centerbox.setSelection([tablelistscrollstackpage]);
-          westboxbuttongroup.setSelection([tbtnThirdPage]);
-
-          //dashboardpage.setVisibility("excluded");
-
+          centerbox.setSelection([thirdpagescroll]);
+          westboxbuttongroup.setSelection([tbtnthirdpage]);
           mainmenupopup.hide();
         }
       }, this);
 
       // if Hybrid Mobile
-      tbtndashboardpagehym.addListener("changeValue", function(e) {
+      tbtntoppagehym.addListener("changeValue", function(e) {
         if (e.getData()) {
-          centerbox.setSelection([dashboardscrollstackpage]);
+          centerbox.setSelection([toppagescroll]);
           atmlogocurrentpage.set({show: "both", label:"iConicss"});
         }
       }, this);
 
-      tbtnoverviewpagehym.addListener("changeValue", function(e) {
+      tbtnsecondpagehym.addListener("changeValue", function(e) {
         if (e.getData()) {
-          centerbox.setSelection([overviewscrollstackpage]);
+          centerbox.setSelection([secondpagescroll]);
           atmlogocurrentpage.set({show: "both", label:"Fluent UI"});
         }
       }, this);
 
-      tbtnlistofitemspagehym.addListener("changeValue", function(e) {
+      tbtnthirdpagehym.addListener("changeValue", function(e) {
         if (e.getData()) {
-          centerbox.setSelection([tablelistscrollstackpage]);
+          centerbox.setSelection([thirdpagescroll]);
           atmlogocurrentpage.set({show: "both", label:"Material"});
         }
       }, this);
 
-      tbtnmenuhym.addListener("changeValue", function(e) {
+      /*tbtnmenuhym.addListener("changeValue", function(e) {
         if (e.getData()) {
           centerbox.setSelection([menupage]);
           atmlogocurrentpage.set({show: "both", label:"Menu"});
         }
-      }, this);
+      }, this);*/
 
       // Demo mode switching to Mobile
       switchmenubutton1.addListener("execute", function(e){
@@ -662,7 +697,7 @@ qx.Class.define("wax.demo.ApplicationMaterial",
         scrollwest.setVisibility("excluded");
         profilemenubutton.setVisibility("hidden");
         mainmenupart.setVisibility("hidden");
-        centerbox.setSelection([menuscrollstackpage]);
+        centerbox.setSelection([menupagescroll]);
         atmlogocurrentpage.set({visibility: "visible", label:"Menu"});
         mainmenubuttongrouphym.setSelection([tbtnmenuhym]);
       }, this);
@@ -674,9 +709,9 @@ qx.Class.define("wax.demo.ApplicationMaterial",
         profilemenubutton.setVisibility("visible");
         atmlogocurrentpage.setVisibility("hidden");
         mainmenupart.setVisibility("visible");
-        centerbox.setSelection([dashboardscrollstackpage]);
-        mainmenubuttongroup.setSelection([tbtnmenudashboardpage]);
-        westboxbuttongroup.setSelection([tbtndashboardpage]);
+        centerbox.setSelection([toppagescroll]);
+        mainmenubuttongroup.setSelection([tbtnmenutoppage]);
+        westboxbuttongroup.setSelection([tbtntoppage]);
       }, this);
 
 

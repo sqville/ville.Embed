@@ -19,7 +19,19 @@
     "encoding": "utf-8",
     "class": "source/class",
     "resource": "source/resource",
-    "translation": "source/translation"
+    "translation": "source/translation",
+    "fonts": {
+      "Providence": {
+        "fontFaces": [
+          {
+            "fontFamily": "Providence",
+            "fontStyle": "normal",
+            "fontWeight": "normal",
+            "paths": ["wax/demo/Providence.ttf"]
+          }
+        ]
+      }
+    }
   },
   "requires": {
     "@qooxdoo/framework": "^7.4.2"
