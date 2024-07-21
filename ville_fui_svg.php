@@ -70,7 +70,7 @@ echo "Extraction and writing complete!\n";
 function createIconObjFile(string $file, ?string $fromdirname): void {
     global $directory, $outputbasedir, $templatefile;
 
-    echo "Hello: ".$file."\n";
+    
     $curdirectory = $directory;
     if ($fromdirname)
         $curdirectory = $curdirectory.'/'.$fromdirname;
@@ -101,6 +101,8 @@ function createIconObjFile(string $file, ?string $fromdirname): void {
     } else {
         $classtemplate = str_replace('${{pathdfilled}}', '', $classtemplate);
     }
+
+    echo "Hello: ".$classtemplate."\n";
 
     // write file
     if ($fromdirname)
