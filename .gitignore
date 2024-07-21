@@ -1,6 +1,5 @@
 # .gitignore template for skeleton-based apps
 /compiled
-/material-icons
 /qx_packages
 .package-cache.json
 node_modules

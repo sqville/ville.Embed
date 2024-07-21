@@ -70,10 +70,12 @@ echo "Extraction and writing complete!\n";
 function createIconObjFile(string $file, ?string $fromdirname): void {
     global $directory, $outputbasedir, $templatefile;
 
-    
+    $subfolderns = "";
     $curdirectory = $directory;
-    if ($fromdirname)
+    if ($fromdirname) {
         $curdirectory = $curdirectory.'/'.$fromdirname;
+        $subfolderns = $fromdirname.'.';
+    }
     
     // get classname and remove underscore if any
     $allnames = explode("_",ucwords($file,"_"));
@@ -87,6 +89,7 @@ function createIconObjFile(string $file, ?string $fromdirname): void {
     $pathdregular = $svgregcontents->path->attributes()[0];
 
     $classtemplate = $templatefile;
+    $classtemplate = str_replace('${{subfolderns}}', $subfolderns, $classtemplate);
     $classtemplate = str_replace('${{classname}}', $classname, $classtemplate);
     $classtemplate = str_replace('${{pathdregular}}', $pathdregular, $classtemplate);
 
@@ -102,7 +105,7 @@ function createIconObjFile(string $file, ?string $fromdirname): void {
         $classtemplate = str_replace('${{pathdfilled}}', '', $classtemplate);
     }
 
-    echo "Hello: ".$classtemplate."\n";
+    //echo "Hello: ".$classtemplate."\n";
 
     // write file
     if ($fromdirname)

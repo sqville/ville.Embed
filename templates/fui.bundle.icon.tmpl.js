@@ -4,7 +4,7 @@
    Authors:
      * Chris Eskew (SQville) sqville@gmail.com
 ************************************************************************ */
-qx.Class.define("ville.embed.fluent.${{classname}}",
+qx.Class.define("ville.embed.fluent.${{subfolderns}}${{classname}}",
 {
   extend : ville.embed.fluent.Abstract,
 
