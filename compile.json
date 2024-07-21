@@ -11,12 +11,12 @@
       "outputPath": "compiled/build"
     }
   ],
-  "defaultTarget": "source",
+  "defaultTarget": "build",
   "locales": ["en"],
 
   "applications": [
     {
-      "class": "wax.demo.ApplicationMaterial",
+      "class": "wax.demo.ApplicationMdi",
       "theme": "wax.demo.theme.Theme",
       "name": "waxdemo",
       "title": "Wax Demo for the ville.Embed viewer",
