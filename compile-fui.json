@@ -8,10 +8,11 @@
     },
     {
       "type": "build",
-      "outputPath": "compiled/build"
+      "outputPath": "compiled/build",
+      "deployPath": "published/WaxDemoFluentUI"
     }
   ],
-  "defaultTarget": "source",
+  "defaultTarget": "build",
   "locales": ["en"],
 
   "applications": [
