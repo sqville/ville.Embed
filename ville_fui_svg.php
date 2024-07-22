@@ -6,6 +6,7 @@ $endswithbasestr = "_regular.svg";
 $templatedirectory = 'templates/';
 $templatefile = file_get_contents('templates/fui.bundle.icon.tmpl.js');
 $templatefilecode = file_get_contents('templates/fui.appcode.tmpl');
+$templateprepcode = file_get_contents('templates/fui.appcode.gb.tmpl');
 $apptxtfile = 'fui.appcode.txt';
 
 if (!is_dir($directory)) {
@@ -17,9 +18,14 @@ $limitcount = 0;
 foreach (scandir($directory) as $file) {
     if ($file !== '.' && $file !== '..') {
         if (is_dir($directory.'/'.$file)) {
+            
+            // directory prep code
             //mkdir($outputbasedir.$file);
+            //$file = str_replace('-', '', $file);
+            //writePrepCodetoFile($file);
+
             $endswithstr = $endswithbasestr;
-            if ($file == "ar")
+            if ($file == "ar" or $file == "he")
                 $endswithstr = "_24".$endswithstr;
             else
                 $endswithstr = "_20".$endswithstr;
@@ -30,7 +36,7 @@ foreach (scandir($directory) as $file) {
                     createIconObjFile($subfile, $file);
                 }
             }
-            //++$limitcount;
+            ++$limitcount;
         } else {
             if (str_ends_with($file, "_20".$endswithbasestr)) {
                 createIconObjFile($file, null);
@@ -39,9 +45,8 @@ foreach (scandir($directory) as $file) {
         ++$limitcount;
     }
     
-    //echo "Hello: ".$file."\n";
-    if ($limitcount >= 5)
-        break;
+    //if ($limitcount >= 6)
+      //  break;
 }
 
 // START Update the Application.js with demos of each icon
@@ -71,10 +76,12 @@ function createIconObjFile(string $file, ?string $fromdirname): void {
     global $directory, $outputbasedir, $templatefile;
 
     $subfolderns = "";
+    $dotnotation = "";
     $curdirectory = $directory;
     if ($fromdirname) {
         $curdirectory = $curdirectory.'/'.$fromdirname;
-        $subfolderns = $fromdirname.'.';
+        $subfolderns = str_replace('-', '', $fromdirname);
+        $dotnotation = ".";
     }
     
     // get classname and remove underscore if any
@@ -90,6 +97,7 @@ function createIconObjFile(string $file, ?string $fromdirname): void {
 
     $classtemplate = $templatefile;
     $classtemplate = str_replace('${{subfolderns}}', $subfolderns, $classtemplate);
+    $classtemplate = str_replace('${{dotnotation}}', $dotnotation, $classtemplate);
     $classtemplate = str_replace('${{classname}}', $classname, $classtemplate);
     $classtemplate = str_replace('${{pathdregular}}', $pathdregular, $classtemplate);
 
@@ -108,24 +116,41 @@ function createIconObjFile(string $file, ?string $fromdirname): void {
     //echo "Hello: ".$classtemplate."\n";
 
     // write file
-    if ($fromdirname)
-        $outputFile = $outputbasedir.$classname.'.js';
-    else
+    if ($fromdirname) {
+        $fromdirname = str_replace('-', '', $fromdirname);
         $outputFile = $outputbasedir.$fromdirname.'/'.$classname.'.js';
+    } else
+        $outputFile = $outputbasedir.$classname.'.js';
 
     if (!file_exists($outputFile)) {
         file_put_contents($outputFile, $classtemplate);
-        addToAppCodeFile($classname);
+        addToAppCodeFile($classname, $subfolderns);
     }
 }
 
-function addToAppCodeFile(string $classname): void {
+function addToAppCodeFile(string $classname, string $subfolderns): void {
     global $templatefilecode, $apptxtfile;
 
+    $strdot = "";
+    if ($subfolderns !== "")
+        $strdot = "."; 
+
     $appcodetemplate = $templatefilecode;
+    $appcodetemplate = str_replace('${{subfolderns}}', $subfolderns, $appcodetemplate);
+    $appcodetemplate = str_replace('${{dotnotation}}', $strdot, $appcodetemplate);
     $appcodetemplate = str_replace('${{iconobjname}}', $classname, $appcodetemplate);
     file_put_contents($apptxtfile, $appcodetemplate . "\n", FILE_APPEND);
-    echo "addToAppCodeFile: ".$classname."\n";
+    //echo "addToAppCodeFile: ".$classname."\n";
+}
+
+function writePrepCodetoFile(string $subfolderns): void {
+    global $templateprepcode, $apptxtfile;
+
+    $appcodetemplate = $templateprepcode;
+    $appcodetemplate = str_replace('${{subfolderns}}', $subfolderns, $appcodetemplate);
+    //$appcodetemplate = str_replace('${{iconobjname}}', $classname, $appcodetemplate);
+    file_put_contents($apptxtfile, $appcodetemplate . "\n", FILE_APPEND);
+    //echo "addToAppCodeFile: ".$classname."\n";
 }
 
 ?>

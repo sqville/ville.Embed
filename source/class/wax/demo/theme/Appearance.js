@@ -14,6 +14,20 @@ qx.Theme.define("wax.demo.theme.Appearance",
 
   appearances :
   {
+    "topnav-atom" :
+    {
+      alias : "atom",
+
+      style : function(states)
+      {
+        return {
+          center: true,
+          paddingLeft: 30,
+          font : "ville-logo-font"
+        }
+      }
+    },
+    
     "header-atom" :
     {
       alias : "atom",
@@ -213,6 +227,24 @@ qx.Theme.define("wax.demo.theme.Appearance",
           iprops = { textColor : "blue" };
         else
         iprops = { textColor : "black" };
+        
+        return {
+          embedProps : iprops
+        }
+      }
+    },
+
+    "testbutton-fui" :
+    {
+      include : "button",
+
+      style : function(states)
+      {
+        var iprops;
+        if (states.hovered)
+          iprops = { iconStyle : "filled" };
+        else
+          iprops = { iconStyle : "regular" };
         
         return {
           embedProps : iprops
