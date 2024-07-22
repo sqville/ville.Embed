@@ -1,8 +1,7 @@
 # .gitignore template for skeleton-based apps
 /compiled
 /qx_packages
-/source/class/ville/embed/carbon
-/source/class/ville/embed/iconicss
+/tempexclude
 .package-cache.json
 node_modules
 package-lock.json
