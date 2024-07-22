@@ -1,9 +1,0 @@
-var ${{subfolderns}}gb = new wax.demo.groupbox.GroupBox("${{subfolderns}}", null, true, true, false).set({appearance: "ville-groupbox-connected", allowShrinkX: true, allowShrinkY: true, allowGrowX: true, allowGrowY: true});
-${{subfolderns}}gb.setLayout(new qx.ui.layout.Flow(6,6,"center"));
-arr${{subfolderns}}embeds.forEach((embed) => {
-var atmlabel = embed.getTitle().replace("<title>","").replace("</title>","");
-var atmembed = new qx.ui.basic.Atom(atmlabel).set(atmprops);
-atmembed.setEmbed(embed);
-${{subfolderns}}gb.add(atmembed);
-});
-fuiiconflow.add(${{subfolderns}}gb);

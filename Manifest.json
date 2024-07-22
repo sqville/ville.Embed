@@ -2,9 +2,9 @@
   "$schema": "https://qooxdoo.org/schema/Manifest-2-0-0.json",
   "info": {
     "name": "ville.Embed",
-    "summary": "A new desktop ui control for the Qooxdoo JavaScript Framework",
-    "description": "",
-    "homepage": "",
+    "summary": "Embeded icons for the Qooxdoo JavaScript Framework",
+    "description": "Use SVG/HTML/CSS instead of static images. Add Embed objects to other controls.",
+    "homepage": "https://github.com/sqville/ville.Embed",
     "license": "MIT license",
     "authors": [
       {
@@ -19,19 +19,7 @@
     "encoding": "utf-8",
     "class": "source/class",
     "resource": "source/resource",
-    "translation": "source/translation",
-    "fonts": {
-      "Providence": {
-        "fontFaces": [
-          {
-            "fontFamily": "Providence",
-            "fontStyle": "normal",
-            "fontWeight": "normal",
-            "paths": ["wax/demo/Providence.ttf"]
-          }
-        ]
-      }
-    }
+    "translation": "source/translation"
   },
   "requires": {
     "@qooxdoo/framework": "^7.4.2"
