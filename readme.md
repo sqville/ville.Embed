@@ -5,7 +5,7 @@
 
 ## Benefits
 
-* Use pure CSS icons in your project using the amazing [iConicss](https://github.com/Viglino/iconicss) icon set.
+* Use pure CSS icons in your project using the amazing [iConicss](https://github.com/Viglino/iconicss) icon set. small change
 * Embed SVG icons in your project using code, and make them themable.
 * Use ville.embed.MImage Mixin to make any qx.ui.basic.Image object accept SVG/HTML content. Use themes to define the SVG/HTML/Clip-path values.
 
