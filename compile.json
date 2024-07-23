@@ -9,7 +9,7 @@
     {
       "type": "build",
       "outputPath": "compiled/build",
-      "deployPath": "published/WaxDemoFluentUI"
+      "deployPath": "published/waxdemomdi"
     }
   ],
   "defaultTarget": "build",
@@ -17,7 +17,7 @@
 
   "applications": [
     {
-      "class": "wax.demo.ApplicationFluent",
+      "class": "wax.demo.ApplicationMdi",
       "theme": "wax.demo.theme.Theme",
       "name": "waxdemo",
       "title": "Wax Demo for the ville.Embed viewer",
