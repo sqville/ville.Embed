@@ -79,9 +79,9 @@ To create an icon using an SVG based icon set just create the icon's named objec
 <!-- DEMO -->
 ## Demos
 
-[Fluent UI](https://sqville.github.io/ville.Embed/published/webdemofui/)
+[Fluent UI](https://sqville.github.io/ville.Embed/published/waxdemofui/)
 
-[Material Design Icons (MDI)](https://sqville.github.io/ville.Embed/published/webdemomdi/)
+[Material Design Icons (MDI)](https://sqville.github.io/ville.Embed/published/waxdemomdi/)
 
 <!-- LICENSE -->
 ## License
