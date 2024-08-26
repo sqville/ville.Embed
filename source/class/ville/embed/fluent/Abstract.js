@@ -59,7 +59,7 @@
 
     iconStyle :
     {
-      check : ["regular", "filled"],
+      check : ["regular", "filled", "outlined"],
       init: "regular",
       apply: "_applyIconStyle",
       event: "changeIconStyle",
@@ -106,6 +106,9 @@
           break;
         case 'filled':
           this.setHtml(this._htmlfilled);
+          break;
+        case 'outlined':
+          this.setHtml(this._htmlregular);
           break;
       }
     },

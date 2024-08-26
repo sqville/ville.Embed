@@ -2,6 +2,7 @@
 /compiled
 /qx_packages
 /tempexclude
+/published
 .package-cache.json
 node_modules
 package-lock.json

@@ -65,7 +65,7 @@
 
     iconStyle :
     {
-      check : ["filled", "outlined"],
+      check : ["filled", "outlined", "regular"],
       init: "filled",
       apply: "_applyIconStyle",
       event: "changeIconStyle",
@@ -130,6 +130,9 @@
           this.setHtml(this._htmlfilled);
           break;
         case 'outlined':
+          this.setHtml(this._htmloutlined);
+          break;
+        case 'regular':
           this.setHtml(this._htmloutlined);
           break;
       }

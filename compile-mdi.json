@@ -8,16 +8,15 @@
     },
     {
       "type": "build",
-      "outputPath": "compiled/build",
-      "deployPath": "published/waxdemofui"
+      "outputPath": "compiled/build"
     }
   ],
-  "defaultTarget": "build",
+  "defaultTarget": "source",
   "locales": ["en"],
 
   "applications": [
     {
-      "class": "wax.demo.ApplicationFluent",
+      "class": "wax.demo.ApplicationMdi",
       "theme": "wax.demo.theme.Theme",
       "name": "waxdemo",
       "title": "Wax Demo for the ville.Embed viewer",
