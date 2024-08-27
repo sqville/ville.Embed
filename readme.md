@@ -1,5 +1,5 @@
 <!-- ABOUT THE PROJECT -->
-# Ville.Embed
+# ville.Embed
 
 **ville.Embed** is a [Qooxdoo](https://qooxdoo.org/) control designed to make images, icons and graphics more dynamic.
 
@@ -40,7 +40,7 @@ To create an icon using an SVG based icon set just create the icon's named objec
   var btnFormButton = new qx.ui.form.Button('Embeded SVG').set({ embed : airplanetakeofficon });
 ```
 
-## Approach 2 - Enable qx.ui.basic.Image, Qooxdoo object to accept HTML/SVG markup and Clip-path values as a string.
+## Approach 2 - Enable qx.ui.basic.Image, Qooxdoo object to accept HTML/SVG markup and Clip-path values as a string
 
 ```js
   // Placed one-time at the top of your applicaition code
